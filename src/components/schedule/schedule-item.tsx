@@ -10,22 +10,20 @@ interface Props {
   location?: string;
 }
 
-export function ScheduleItems({
-  title,
-  time,
-  dresscode,
-  location,
-  description,
-}: Props) {
+export function ScheduleItems({ title, description }: Props) {
   return (
-    <div className="flex flex-col items-center gap-4 ">
-      <div className="text-center text-stone-800 text-2xl md:text-3xl font-normal font-['Lustria'] leading-8 md:leading-10">
-        {title}
+    <div className="flex flex-col items-center gap-2 py-1 w-full">
+      <div className="w-full max-w-xl px-2">
+        <Typography
+          variant="h5"
+          className="text-white font-bold text-lg md:text-xl text-center"
+        >
+          {title}
+        </Typography>
+        <Typography className="text-white text-sm md:text-base text-center mt-1">
+          {description}
+        </Typography>
       </div>
-
-      <Typography variant="paragraph" className="text-center">
-        {description}
-      </Typography>
     </div>
   );
 }
