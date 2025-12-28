@@ -56,19 +56,25 @@ export function Schedule({ items, customStyle }: Props) {
       >
         <Typography
           variant="h2"
-          className="mb-8 font-normal font-Bellefair text-4xl md:text-5xl text-white"
+          className="mb-10 font-normal font-Bellefair text-4xl md:text-5xl text-white"
         >
           Plan uroczystości
         </Typography>
-        <div className="flex flex-col items-center gap-8 w-full">
-          <div className="flex flex-col gap-8 text-center md:gap-12">
+        <div className="flex flex-col items-center gap-3 w-full px-2 md:px-0">
+          <div className="flex flex-col gap-3 w-full">
             {items.map((item, index) => (
-              <ScheduleItem
+              <div
                 key={index}
-                type={item.type}
-                title={item.title}
-                description={item.description}
-              />
+                className={`w-full max-w-xl mx-auto py-2 md:py-2 border-b border-white/20 last:border-b-0 transition-colors duration-300 text-white/80`}
+                style={{ textAlign: "center" }}
+              >
+                <div className="flex flex-col items-center justify-center w-full text-center">
+                  <ScheduleItem
+                    title={item.title}
+                    description={item.description}
+                  />
+                </div>
+              </div>
             ))}
           </div>
         </div>
