@@ -7,9 +7,14 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import React, { useContext } from "react";
+
+type SupportedLang = "pl" | "de";
 import { LanguageContext } from "@/app/provider";
 
-const NAV_TRANSLATIONS = {
+const NAV_TRANSLATIONS: Record<
+  SupportedLang,
+  { brand: string; menu: { name: string; href: string }[] }
+> = {
   pl: {
     brand: "Claudia & Niklas",
     menu: [
@@ -35,8 +40,8 @@ interface NavItemProps {
 
 export function Navbar() {
   const [open, setOpen] = React.useState(false);
-  const { lang } = useContext(LanguageContext);
-  const nav = NAV_TRANSLATIONS[lang] || NAV_TRANSLATIONS.pl;
+  const { lang } = useContext(LanguageContext) as { lang: SupportedLang };
+  const nav = NAV_TRANSLATIONS[lang as SupportedLang] || NAV_TRANSLATIONS.pl;
 
   function handleOpen() {
     setOpen((cur) => !cur);
