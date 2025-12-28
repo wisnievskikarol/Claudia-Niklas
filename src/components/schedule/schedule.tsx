@@ -3,34 +3,64 @@
 import { ScheduleProps } from "@/app/types";
 import { Typography } from "@material-tailwind/react";
 import ScheduleItem from "./schedule-item";
+import Image from "next/image";
 
-export function Schedule({ items }: ScheduleProps) {
+interface CustomStyleProps {
+  sectionClass?: string;
+  overlayClass?: string;
+  contentClass?: string;
+  backgroundImage?: string;
+}
+
+type Props = ScheduleProps & { customStyle?: CustomStyleProps };
+
+export function Schedule({ items, customStyle }: Props) {
   return (
     <section
       id="harmonogram"
-      className="bg-primary py-16 px-4 text-secondary scroll-mt-24 md:px-8"
+      className={customStyle?.sectionClass || "relative w-full py-0 px-0"}
+      style={{ position: "relative", width: "100%", overflow: "hidden" }}
     >
-      <div className="container mx-auto text-center">
-        <div className="flex flex-col items-center gap-12 px-4 md:px-16">
-          <div className="flex flex-col items-center gap-4">
-            <Typography
-              variant="h2"
-              className="mb-4 font-normal font-Bellefair"
-            >
-              Plan uroczystości
-            </Typography>
-          </div>
-          <div className="flex flex-col items-center gap-8 w-full">
-            <div className="flex flex-col gap-8 text-center md:gap-12">
-              {items.map((item, index) => (
-                <ScheduleItem
-                  key={index}
-                  type={item.type}
-                  title={item.title}
-                  description={item.description}
-                />
-              ))}
-            </div>
+      {/* Background image */}
+      {customStyle?.backgroundImage && (
+        <Image
+          src={customStyle.backgroundImage}
+          alt="tło harmonogramu"
+          fill
+          style={{ objectFit: "cover", zIndex: 1, opacity: 0.35 }}
+          priority
+        />
+      )}
+      {/* Black translucent overlay */}
+      <div
+        className={
+          customStyle?.overlayClass ||
+          "absolute inset-0 w-full h-full bg-black bg-opacity-70 z-10"
+        }
+      />
+      {/* Content */}
+      <div
+        className={
+          customStyle?.contentClass ||
+          "relative z-20 flex flex-col items-center justify-center min-h-[700px] py-20"
+        }
+      >
+        <Typography
+          variant="h2"
+          className="mb-8 font-normal font-Bellefair text-4xl md:text-5xl text-white"
+        >
+          Plan uroczystości
+        </Typography>
+        <div className="flex flex-col items-center gap-8 w-full">
+          <div className="flex flex-col gap-8 text-center md:gap-12">
+            {items.map((item, index) => (
+              <ScheduleItem
+                key={index}
+                type={item.type}
+                title={item.title}
+                description={item.description}
+              />
+            ))}
           </div>
         </div>
       </div>
