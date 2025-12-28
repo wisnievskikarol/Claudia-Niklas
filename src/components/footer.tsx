@@ -10,7 +10,10 @@ export function Footer() {
       <div className="container mx-auto">
         <div className="flex w-full  py-10 justify-center gap-8 ">
           <a href="https://www.gowedding.online/" target="_blank">
-            <img className="w-12" src="./image/logo-white.svg" />
+            <img
+              className="w-12 filter grayscale brightness-75"
+              src="./image/logo-white.svg"
+            />
           </a>
         </div>
       </div>

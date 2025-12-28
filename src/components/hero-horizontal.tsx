@@ -35,7 +35,7 @@ function HeroContent({
 function HeroImage({ imageSrc, altText }: HeroImageProps) {
   return (
     <motion.div
-      className="z-10 w-full relative flex justify-center items-center"
+      className="z-10 w-full relative flex justify-center items-center xl:min-h-[1000px] 2xl:min-h-[1200px]"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
@@ -46,7 +46,6 @@ function HeroImage({ imageSrc, altText }: HeroImageProps) {
         borderRadius: "32px",
         /* Responsive: even taller on large screens */
       }}
-      className="z-10 w-full relative flex justify-center items-center xl:min-h-[1000px] 2xl:min-h-[1200px]"
     >
       <Image
         src={imageSrc}
