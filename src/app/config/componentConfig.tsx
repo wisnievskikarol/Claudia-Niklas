@@ -86,7 +86,6 @@ export const componentConfig: ComponentConfig<any>[] = [
           description: "Zabawa do białego rana",
         },
       ],
-      // Custom style props for full-width, black translucent background, and background image
       customStyle: {
         sectionClass: "relative w-full py-0 px-0",
         overlayClass:
@@ -98,14 +97,49 @@ export const componentConfig: ComponentConfig<any>[] = [
       },
     },
   },
+  {
+    component: require("@/components/hotels/hotels").Hotels,
+    props: {
+      hotels: [
+        {
+          title: "Hotel Belwederski",
+          phone: "+48 22 123 45 67",
+          description:
+            "Hotel położony 5 minut spacerem od miejsca uroczystości.",
+          reservationLink: "https://hotel-belwederski.pl/",
+        },
+        {
+          title: "Hotel Royal",
+          phone: "+48 22 987 65 43",
+          description: "Komfortowe pokoje i śniadanie w cenie.",
+          reservationLink: "https://hotelroyal.pl/",
+        },
+        {
+          title: "Hotel City Center",
+          phone: "+48 22 555 66 77",
+          description: "W samym centrum Warszawy, dogodny dojazd komunikacją.",
+          reservationLink: "https://hotelcitycenter.pl/",
+        },
+      ],
+    },
+  },
+  {
+    component: require("@/components/spotify").Spotify,
+    props: {
+      player: {
+        playlistUrl:
+          "https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator",
+      },
+      button: {
+        buttonText: "Dodaj swoją piosenkę do playlisty!",
+      },
+    },
+  },
   // {
   //   component: Spotify,
   //   props: { ... },
   // } ,
-  // {
-  //   component: Hotels,
-  //   props: { ... },
-  // } ,
+
   {
     component: Rsvp,
     props: {

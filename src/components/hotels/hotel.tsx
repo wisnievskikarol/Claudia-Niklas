@@ -12,22 +12,22 @@ interface props {
 function Hotel({ title, phone, description, reservationLink }: props) {
   return (
     <div className={styles.container}>
-      <div className="self-stretch text-center text-2xl font-['Lustria'] ">
+      <div className="self-stretch text-center text-xl sm:text-2xl font-['Lustria'] mb-2">
         {title}
       </div>
-      <div className="self-stretch text-base font-normal font-['Roboto'] my-1 leading-normal">
+      <div className="self-stretch text-base sm:text-lg font-normal font-['Roboto'] my-2 leading-normal">
         <a href={`tel:${phone}`}>{phone}</a>
       </div>
       <div
-        className={`self-stretch text-lg font-normal font-['Roboto'] leading-normal ${styles.description}`}
+        className={`self-stretch text-base sm:text-lg font-normal font-['Roboto'] leading-normal mb-4 ${styles.description}`}
       >
         {description}
       </div>
-      <div className="px-7 py-2 bg-zinc-100 rounded-lg justify-center items-center gap-2.5 inline-flex">
+      <div className="px-8 py-3 bg-zinc-100 rounded-lg justify-center items-center gap-2.5 inline-flex">
         <a href={reservationLink}>
           <Button
             variant="outlined"
-            className="rounded-full border-secondary text-secondary"
+            className="rounded-full border-secondary text-secondary text-base sm:text-lg px-6 py-2"
           >
             Zarezerwuj
           </Button>

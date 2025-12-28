@@ -14,20 +14,20 @@ export function Hotels({ hotels }: HotelsProps) {
             <div className="text-center">
               <Typography
                 variant="h2"
-                className="mb-4 font-normal font-Bellefair"
+                className="mb-4 font-normal font-Bellefair text-2xl sm:text-4xl"
               >
                 Polecane hotele
               </Typography>
               <Typography
                 variant="lead"
-                className="mx-auto mb-10 md:mb-24 max-w-2xl"
+                className="mx-auto mb-4 md:mb-8 max-w-2xl text-base sm:text-lg"
               >
                 Poniżej znajduje się lista polecanych przez nas hoteli
               </Typography>
             </div>
             <div className={styles.items}>
               {hotels.map((hotel) => (
-                <div key={hotel.title} className="mb-8">
+                <div key={hotel.title} className="mb-14 md:mb-20">
                   <Hotel
                     title={hotel.title}
                     phone={hotel.phone}
