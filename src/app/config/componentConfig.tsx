@@ -33,6 +33,15 @@ export const componentConfig: ComponentConfig<any>[] = [
         address: "ul. Belwederskiej 54/56 w Warszawie",
         date: new Date(2026, 7, 8),
         time: "12:00",
+        translations: {
+          de: {
+            title: "Claudia & Niklas",
+            subtitle:
+              "Wir können es kaum erwarten, unsere Liebe gemeinsam mit euch zu feiern!",
+            address: "Belwederska-Straße 54/56, Warschau",
+            // date and time remain the same
+          },
+        },
       },
       heroImage: {
         imageSrc: "/image/hero/WhatsApp-Image-2025-12-13-at-18.33.59.webp",
@@ -66,6 +75,13 @@ export const componentConfig: ComponentConfig<any>[] = [
         title: "Prosimy o potwierdzenie przybycia",
         description:
           "Cieszymy się, że będziemy mogli Was gościć na naszym wydarzeniu! Abyśmy mogli odpowiednio przygotować się na Wasze przybycie, prosimy o potwierdzenie swojej obecności.",
+        translations: {
+          de: {
+            title: "Bitte um Rückmeldung",
+            description:
+              "Wir freuen uns, euch bei unserer Veranstaltung begrüßen zu dürfen! Damit wir uns gut auf eure Ankunft vorbereiten können, bitten wir um eure Rückmeldung.",
+          },
+        },
       },
       button: {
         url: "https://rsvp.gowedding.online/",
@@ -79,15 +95,33 @@ export const componentConfig: ComponentConfig<any>[] = [
         {
           title: "Jak dojechać na miejsce uroczystości?",
           desc: "Odpowiedzi będą dodane później...",
+          translations: {
+            de: {
+              title: "Wie kommt man zum Veranstaltungsort?",
+              desc: "Antworten werden später hinzugefügt...",
+            },
+          },
         },
         {
           title: "Czy na miejscu będzie zapewniony parking dla gości?",
           desc: "Odpowiedzi będą dodane później...",
+          translations: {
+            de: {
+              title: "Gibt es Parkplätze für Gäste vor Ort?",
+              desc: "Antworten werden später hinzugefügt...",
+            },
+          },
         },
         {
           title:
             "Czy istnieje możliwość zakwaterowania dla gości spoza miasta?",
           desc: "Odpowiedzi będą dodane później...",
+          translations: {
+            de: {
+              title: "Gibt es Übernachtungsmöglichkeiten für auswärtige Gäste?",
+              desc: "Antworten werden später hinzugefügt...",
+            },
+          },
         },
       ],
     } satisfies FaqProps,

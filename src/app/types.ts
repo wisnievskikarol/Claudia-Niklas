@@ -43,6 +43,9 @@ export type HeroContentProps = {
   address: string;
   date: Date;
   time: string;
+  translations?: {
+    [lang: string]: Partial<Omit<HeroContentProps, "translations">>;
+  };
 };
 
 export type HeroImageProps = {
@@ -63,6 +66,9 @@ export type HeroHorizontalProps = {
 export type FaqItem = {
   title: string;
   desc: string;
+  translations?: {
+    [lang: string]: Partial<Omit<FaqItem, "translations">>;
+  };
 };
 
 export type FaqProps = {
@@ -86,6 +92,9 @@ export type ContactProps = {
 export type RsvpHeaderProps = {
   title: string;
   description: string;
+  translations?: {
+    [lang: string]: Partial<Omit<RsvpHeaderProps, "translations">>;
+  };
 };
 
 export type RsvpButtonProps = {

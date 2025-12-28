@@ -6,7 +6,8 @@ import {
   Navbar as MTNavbar,
   Typography,
 } from "@material-tailwind/react";
-import React from "react";
+import React, { useContext } from "react";
+import { LanguageContext } from "@/app/provider";
 
 const NAV_MENU = [
   { name: "Miejsce", href: "#miejsce" },
@@ -65,14 +66,7 @@ export function Navbar() {
           ))}
         </ul>
         {/* Language Switcher */}
-        <div className="hidden items-center gap-4 lg:flex ml-6">
-          <button className="px-2 py-1 rounded hover:bg-secondary/10 text-secondary font-semibold">
-            PL
-          </button>
-          <button className="px-2 py-1 rounded hover:bg-secondary/10 text-secondary font-semibold">
-            DE
-          </button>
-        </div>
+        <LanguageSwitcher />
         <IconButton
           variant="text"
           onClick={handleOpen}
@@ -95,16 +89,39 @@ export function Navbar() {
             ))}
           </ul>
           {/* Language Switcher for mobile */}
-          <div className="mt-6 mb-4 flex items-center justify-center gap-4">
-            <button className="px-2 py-1 rounded hover:bg-secondary/10 text-secondary font-semibold">
-              PL
-            </button>
-            <button className="px-2 py-1 rounded hover:bg-secondary/10 text-secondary font-semibold">
-              DE
-            </button>
-          </div>
+          <LanguageSwitcher mobile />
         </div>
       </Collapse>
+    </div>
+  );
+}
+
+// LanguageSwitcher component
+function LanguageSwitcher({ mobile }: { mobile?: boolean }) {
+  const { lang, setLang } = useContext(LanguageContext);
+  const btnClass =
+    "px-2 py-1 rounded hover:bg-secondary/10 text-secondary font-semibold" +
+    (mobile ? "" : "");
+  return (
+    <div
+      className={
+        mobile
+          ? "mt-6 mb-4 flex items-center justify-center gap-4"
+          : "hidden items-center gap-4 lg:flex ml-6"
+      }
+    >
+      <button
+        className={btnClass + (lang === "pl" ? " bg-secondary/20" : "")}
+        onClick={() => setLang("pl")}
+      >
+        PL
+      </button>
+      <button
+        className={btnClass + (lang === "de" ? " bg-secondary/20" : "")}
+        onClick={() => setLang("de")}
+      >
+        DE
+      </button>
     </div>
   );
 }

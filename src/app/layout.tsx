@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import { Layout, Footer } from "@/components";
 import { Navbar } from "@/components";
+import ClientProvider from "./provider";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -21,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="pl">
       <head>
         <script
           defer
@@ -31,11 +32,13 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/favicon.png" type="image/png" />
       </head>
       <body className={`${roboto.className} bg-primary`}>
-        <Layout>
-          <Navbar />
-          {children}
-          <Footer />
-        </Layout>
+        <ClientProvider>
+          <Layout>
+            <Navbar />
+            {children}
+            <Footer />
+          </Layout>
+        </ClientProvider>
       </body>
     </html>
   );

@@ -1,16 +1,48 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
+import { LanguageContext } from "./provider";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { componentConfig } from "./config/componentConfig";
 
 export default function Campaign() {
-  const components = componentConfig.map((config) => ({
-    ...config,
-    ref: useInView(),
-    controls: useAnimation(),
-  }));
+  const { lang } = useContext(LanguageContext);
+  const components = componentConfig.map((config) => {
+    // Deep clone props and replace with translation if available
+    const props = JSON.parse(JSON.stringify(config.props));
+    // Hero
+    if (
+      props.content &&
+      props.content.translations &&
+      props.content.translations[lang]
+    ) {
+      Object.assign(props.content, props.content.translations[lang]);
+    }
+    // RSVP
+    if (
+      props.header &&
+      props.header.translations &&
+      props.header.translations[lang]
+    ) {
+      Object.assign(props.header, props.header.translations[lang]);
+    }
+    // FAQ
+    if (props.faqs) {
+      props.faqs = props.faqs.map((faq: any) => {
+        if (faq.translations && faq.translations[lang]) {
+          return { ...faq, ...faq.translations[lang] };
+        }
+        return faq;
+      });
+    }
+    return {
+      ...config,
+      props,
+      ref: useInView(),
+      controls: useAnimation(),
+    };
+  });
 
   useEffect(() => {
     components.forEach(({ ref, controls }) => {

@@ -41,7 +41,7 @@ function HeroInfoBox({ date, address, time }: Props) {
           </svg>
         }
         label="Data uroczystości"
-        content={date.toLocaleDateString('pl-PL')}
+        content={new Date(date).toLocaleDateString("pl-PL")}
       />
       <InfoItem
         icon={
