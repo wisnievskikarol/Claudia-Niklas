@@ -1,0 +1,24 @@
+name: Mirror
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: |
+          git config --global user.email "contact.goweddingonline@gmail.com"
+          git config --global user.name "GoWeddingOnlineBot"
+          git commit --amend --author="GoWeddingOnlineBot <contact.goweddingonline@gmail.com>" --no-edit
+      - run: |
+          mkdir ~/.ssh
+          echo "${{ secrets.MIRROR_DEPLOY_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          git remote add m git@github.com:GoWeddingOnlineBot/template-b.git
+          git push m main --force

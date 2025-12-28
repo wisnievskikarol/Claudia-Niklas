@@ -1,0 +1,40 @@
+{
+  "name": "GoWedding.online product website",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Karol Wiśniewski",
+  "homepage": "gowedding.online",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@heroicons/react": "2.0.18",
+    "@material-tailwind/react": "^2.1.7",
+    "@types/react": "18.2.19",
+    "@types/react-dom": "^18",
+    "framer-motion": "^10.18.0",
+    "next": "13.4.0",
+    "react": "^18",
+    "react-color": "^2.19.3",
+    "react-dom": "^18",
+    "react-intersection-observer": "^9.8.1",
+    "react-slick": "^0.29.0"
+  },
+  "devDependencies": {
+    "@types/node": "20",
+    "@types/react-color": "^3.0.12",
+    "@types/react-slick": "^0.23.13",
+    "autoprefixer": "10",
+    "eslint": "8",
+    "eslint-config-next": "13.5.4",
+    "eslint-config-prettier": "^9.1.0",
+    "postcss": "8",
+    "prettier": "3.3.3",
+    "prettier-plugin-tailwindcss": "^0.5.10",
+    "tailwindcss": "^3.4.0",
+    "typescript": "5"
+  }
+}
