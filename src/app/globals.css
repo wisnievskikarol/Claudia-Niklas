@@ -1,3 +1,26 @@
+/* Lokalny font Inter z pełnym wsparciem PL znaków */
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter/Inter-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter/Inter-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter/Inter-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+/* Dodaj pozostałe wagi/styly jeśli potrzebujesz */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,7 +31,17 @@
   scroll-behavior: smooth;
 }
 
+body {
+  font-family: "Inter", Arial, Helvetica, sans-serif !important;
+  font-feature-settings: "lnum", "kern", "ss01";
+}
+
+.font-Bellefair {
+  font-family: "Bellefair", serif !important;
+  font-feature-settings: "lnum", "kern", "ss01";
+}
+
 :root {
-  --color-primary: #F9F4ED;
+  --color-primary: #f9f4ed;
   --color-secondary: #293238;
 }

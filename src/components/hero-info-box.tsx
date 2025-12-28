@@ -14,12 +14,18 @@ interface InfoItemProps {
 }
 
 function InfoItem({ icon, label, content }: InfoItemProps) {
+  // Wyrównanie do lewej tylko dla "Miejsce"
+  const isAddress = label === "Miejsce";
   return (
     <div className="info-item flex items-center gap-4 p-2 rounded-lg transition duration-300 ease-in-out bg-opacity-75">
       <div className="icon-container flex-shrink-0 w-10 h-10 p-1.5 rounded-full text-secondary">
         {icon}
       </div>
-      <Typography className="text-secondary">
+      <Typography
+        className={
+          "text-secondary" + (isAddress ? " text-left sm:text-center" : "")
+        }
+      >
         <span className="font-bold">{label}: </span>
         {content}
       </Typography>
