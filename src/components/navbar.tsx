@@ -83,7 +83,8 @@ export function Navbar() {
       const navRect = nav.getBoundingClientRect();
       // Napisy białe tylko, gdy dolna krawędź navbara "dotyka" górnej krawędzi harmonogramu (z tolerancją kilku px)
       const tolerance = 4; // px
-      const isDirectlyAbove = Math.abs(navRect.bottom - sectionRect.top) <= tolerance;
+      const isDirectlyAbove =
+        Math.abs(navRect.bottom - sectionRect.top) <= tolerance;
       setOnSchedule(isDirectlyAbove);
     }
     window.addEventListener("scroll", handleScroll);
