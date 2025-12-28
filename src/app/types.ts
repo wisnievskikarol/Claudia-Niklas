@@ -71,8 +71,17 @@ export type FaqItem = {
   };
 };
 
+export type FaqHeader = {
+  title: string;
+  subtitle?: string;
+  translations?: {
+    [lang: string]: Partial<Omit<FaqHeader, "translations">>;
+  };
+};
+
 export type FaqProps = {
   faqs: FaqItem[];
+  header?: FaqHeader;
 };
 
 export type ContactPersonInfo = {
@@ -99,6 +108,11 @@ export type RsvpHeaderProps = {
 
 export type RsvpButtonProps = {
   url: string;
+  translations?: {
+    [lang: string]: {
+      label?: string;
+    };
+  };
 };
 
 export type RsvpProps = {
