@@ -26,10 +26,16 @@ function RsvpHeader({ title, description }: RsvpHeaderProps) {
         </g>
       </svg>
       <div className="w-full flex flex-col justify-center items-center ">
-        <Typography variant="h2" className="mb-4 font-normal font-Bellefair">
+        <Typography
+          variant="h2"
+          className="mb-4 font-normal font-Bellefair text-2xl sm:text-4xl text-center"
+        >
           {title}
         </Typography>
-        <Typography variant="lead" className="text-center max-w-xl">
+        <Typography
+          variant="lead"
+          className="text-center max-w-xl text-base sm:text-lg"
+        >
           {description}
         </Typography>
       </div>
@@ -43,7 +49,7 @@ function RsvpButton({ url }: RsvpButtonProps) {
       <a href={url} target="_blank" rel="noopener noreferrer">
         <Button
           variant="outlined"
-          className="border-secondary text-secondary rounded-full"
+          className="border-secondary text-secondary rounded-full px-8 py-4 text-lg sm:text-xl font-semibold"
         >
           RSVP
         </Button>

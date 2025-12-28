@@ -62,13 +62,13 @@ export function Faq({ faqs }: FaqProps) {
           <div className="text-center">
             <Typography
               variant="h2"
-              className="mb-4 font-normal font-Bellefair"
+              className="mb-4 font-normal font-Bellefair text-2xl sm:text-4xl"
             >
               Często zadawane pytania
             </Typography>
             <Typography
               variant="lead"
-              className="mx-auto hover:text-secondary w-full max-w-2xl"
+              className="mx-auto hover:text-secondary w-full max-w-2xl text-base sm:text-lg"
             >
               Ponieżej znajdziecie odpowiedzi na najczęsciej zadawne przez Was
               pytania!
