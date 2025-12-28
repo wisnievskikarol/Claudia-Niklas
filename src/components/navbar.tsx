@@ -40,6 +40,7 @@ interface NavItemProps {
 
 export function Navbar() {
   const [open, setOpen] = React.useState(false);
+  const [onSchedule, setOnSchedule] = React.useState(false);
   const { lang } = useContext(LanguageContext) as { lang: SupportedLang };
   const nav = NAV_TRANSLATIONS[lang as SupportedLang] || NAV_TRANSLATIONS.pl;
 
@@ -54,7 +55,11 @@ export function Navbar() {
           as="a"
           variant="paragraph"
           href={href || "#"}
-          className="flex items-center gap-2 py-4 font-normal text-secondary"
+          className={
+            onSchedule
+              ? "flex items-center gap-2 py-4 font-normal text-white"
+              : "flex items-center gap-2 py-4 font-normal text-secondary"
+          }
         >
           {children}
         </Typography>
@@ -63,18 +68,53 @@ export function Navbar() {
   }
 
   React.useEffect(() => {
-    window.addEventListener("resize", () => {
+    function handleResize() {
       if (window.innerWidth >= 960) {
         setOpen(false);
       }
-    });
+    }
+    window.addEventListener("resize", handleResize);
+
+    function handleScroll() {
+      const section = document.getElementById("harmonogram");
+      const nav = document.getElementById("navbar-main");
+      if (!section || !nav) return;
+      const sectionRect = section.getBoundingClientRect();
+      const navRect = nav.getBoundingClientRect();
+      // Napisy białe tylko, gdy dolna krawędź navbara "dotyka" górnej krawędzi harmonogramu (z tolerancją kilku px)
+      const tolerance = 4; // px
+      const isDirectlyAbove = Math.abs(navRect.bottom - sectionRect.top) <= tolerance;
+      setOnSchedule(isDirectlyAbove);
+    }
+    window.addEventListener("scroll", handleScroll);
+    // Wywołaj od razu po załadowaniu
+    handleScroll();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
-    <div className="px-2 backdrop-blur-xl bg-primary/90 w-full fixed bg-opacity-10 top-0 z-50 py-5 md:py-2">
+    <div
+      id="navbar-main"
+      className={
+        `px-2 backdrop-blur-xl w-full fixed top-0 z-50 py-5 md:py-2 transition-colors duration-300 ` +
+        (onSchedule
+          ? "bg-primary/90 bg-opacity-10 text-white"
+          : "bg-primary/90 bg-opacity-10 text-secondary")
+      }
+    >
       <div className="container mx-auto flex items-center justify-between px-2 lg:px-0">
         <a href="#">
-          <Typography variant="lead" className="font-normal text-secondary">
+          <Typography
+            variant="lead"
+            className={
+              onSchedule
+                ? "font-normal text-white"
+                : "font-normal text-secondary"
+            }
+          >
             {nav.brand}
           </Typography>
         </a>
@@ -86,16 +126,26 @@ export function Navbar() {
           ))}
         </ul>
         {/* Language Switcher */}
-        <LanguageSwitcher />
+        <LanguageSwitcher isWhite={onSchedule} />
         <IconButton
           variant="text"
           onClick={handleOpen}
           className="ml-auto inline-block lg:hidden"
         >
           {open ? (
-            <XMarkIcon strokeWidth={2} className="h-6 w-6 fill-secondary" />
+            <XMarkIcon
+              strokeWidth={2}
+              className={
+                onSchedule ? "h-6 w-6 fill-white" : "h-6 w-6 fill-secondary"
+              }
+            />
           ) : (
-            <Bars3Icon strokeWidth={2} className="h-6 w-6 fill-secondary" />
+            <Bars3Icon
+              strokeWidth={2}
+              className={
+                onSchedule ? "h-6 w-6 fill-white" : "h-6 w-6 fill-secondary"
+              }
+            />
           )}
         </IconButton>
       </div>
@@ -109,7 +159,7 @@ export function Navbar() {
             ))}
           </ul>
           {/* Language Switcher for mobile */}
-          <LanguageSwitcher mobile />
+          <LanguageSwitcher mobile isWhite={onSchedule} />
         </div>
       </Collapse>
     </div>
@@ -117,10 +167,19 @@ export function Navbar() {
 }
 
 // LanguageSwitcher component
-function LanguageSwitcher({ mobile }: { mobile?: boolean }) {
+function LanguageSwitcher({
+  mobile,
+  isWhite,
+}: {
+  mobile?: boolean;
+  isWhite?: boolean;
+}) {
   const { lang, setLang } = useContext(LanguageContext);
   const btnClass =
-    "px-2 py-1 rounded hover:bg-secondary/10 text-secondary font-semibold" +
+    "px-2 py-1 rounded font-semibold transition-colors duration-200 " +
+    (isWhite
+      ? "text-white hover:bg-white/10"
+      : "text-secondary hover:bg-secondary/10") +
     (mobile ? "" : "");
   return (
     <div
@@ -131,13 +190,19 @@ function LanguageSwitcher({ mobile }: { mobile?: boolean }) {
       }
     >
       <button
-        className={btnClass + (lang === "pl" ? " bg-secondary/20" : "")}
+        className={
+          btnClass +
+          (lang === "pl" ? (isWhite ? " bg-white/20" : " bg-secondary/20") : "")
+        }
         onClick={() => setLang("pl")}
       >
         PL
       </button>
       <button
-        className={btnClass + (lang === "de" ? " bg-secondary/20" : "")}
+        className={
+          btnClass +
+          (lang === "de" ? (isWhite ? " bg-white/20" : " bg-secondary/20") : "")
+        }
         onClick={() => setLang("de")}
       >
         DE

@@ -23,12 +23,21 @@ export function Schedule({ items, customStyle }: Props) {
     >
       {/* Background image */}
       {customStyle?.backgroundImage && (
-        <Image
-          src={customStyle.backgroundImage}
-          alt="tło harmonogramu"
-          fill
-          style={{ objectFit: "cover", zIndex: 1, opacity: 0.35 }}
-          priority
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            zIndex: 1,
+            backgroundImage: `url(${customStyle.backgroundImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundAttachment: "fixed",
+            opacity: 0.15,
+          }}
+          aria-hidden="true"
         />
       )}
       {/* Black translucent overlay */}
