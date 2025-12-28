@@ -9,11 +9,24 @@ import {
 import React, { useContext } from "react";
 import { LanguageContext } from "@/app/provider";
 
-const NAV_MENU = [
-  { name: "Miejsce", href: "#miejsce" },
-  { name: "RSVP", href: "#rsvp" },
-  { name: "Często zadawane pytania", href: "#q&a" },
-];
+const NAV_TRANSLATIONS = {
+  pl: {
+    brand: "Claudia & Niklas",
+    menu: [
+      { name: "Miejsce", href: "#miejsce" },
+      { name: "RSVP", href: "#rsvp" },
+      { name: "Często zadawane pytania", href: "#q&a" },
+    ],
+  },
+  de: {
+    brand: "Claudia & Niklas",
+    menu: [
+      { name: "Ort", href: "#miejsce" },
+      { name: "RSVP", href: "#rsvp" },
+      { name: "Häufig gestellte Fragen", href: "#q&a" },
+    ],
+  },
+};
 
 interface NavItemProps {
   children: React.ReactNode;
@@ -22,6 +35,8 @@ interface NavItemProps {
 
 export function Navbar() {
   const [open, setOpen] = React.useState(false);
+  const { lang } = useContext(LanguageContext);
+  const nav = NAV_TRANSLATIONS[lang] || NAV_TRANSLATIONS.pl;
 
   function handleOpen() {
     setOpen((cur) => !cur);
@@ -55,11 +70,11 @@ export function Navbar() {
       <div className="container mx-auto flex items-center justify-between px-2 lg:px-0">
         <a href="#">
           <Typography variant="lead" className="font-normal text-secondary">
-            Claudia & Niklas
+            {nav.brand}
           </Typography>
         </a>
         <ul className="hidden items-center gap-8 lg:flex">
-          {NAV_MENU.map(({ name, href }) => (
+          {nav.menu.map(({ name, href }) => (
             <NavItem key={name} href={href}>
               {name}
             </NavItem>
@@ -82,7 +97,7 @@ export function Navbar() {
       <Collapse open={open}>
         <div className="container mx-auto mt-3 border-t border-b border-secondary px-2 pt-4">
           <ul className="flex flex-col gap-4">
-            {NAV_MENU.map(({ name, href }) => (
+            {nav.menu.map(({ name, href }) => (
               <NavItem key={name} href={href}>
                 {name}
               </NavItem>
