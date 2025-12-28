@@ -83,11 +83,11 @@ export function Faq({ faqs }: FaqProps) {
               icon={<Icon id={key + 1} open={open} />}
               onClick={() => handleOpen(key + 1)}
             >
-              <AccordionHeader className="text-left hover:text-gray-600 hover:text-underline  font-normal text-secondary">
+              <AccordionHeader className="text-left hover:text-gray-600 hover:text-underline font-normal text-secondary text-base sm:text-lg">
                 {title}
               </AccordionHeader>
               <AccordionBody>
-                <Typography className="font-normal text-secondary">
+                <Typography className="font-normal text-secondary text-sm sm:text-base">
                   {desc}
                 </Typography>
               </AccordionBody>
