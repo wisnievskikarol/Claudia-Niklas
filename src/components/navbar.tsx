@@ -66,8 +66,12 @@ export function Navbar() {
         </ul>
         {/* Language Switcher */}
         <div className="hidden items-center gap-4 lg:flex ml-6">
-          <button className="px-2 py-1 rounded hover:bg-secondary/10 text-secondary font-semibold">PL</button>
-          <button className="px-2 py-1 rounded hover:bg-secondary/10 text-secondary font-semibold">DE</button>
+          <button className="px-2 py-1 rounded hover:bg-secondary/10 text-secondary font-semibold">
+            PL
+          </button>
+          <button className="px-2 py-1 rounded hover:bg-secondary/10 text-secondary font-semibold">
+            DE
+          </button>
         </div>
         <IconButton
           variant="text"
@@ -92,8 +96,12 @@ export function Navbar() {
           </ul>
           {/* Language Switcher for mobile */}
           <div className="mt-6 mb-4 flex items-center justify-center gap-4">
-            <button className="px-2 py-1 rounded hover:bg-secondary/10 text-secondary font-semibold">PL</button>
-            <button className="px-2 py-1 rounded hover:bg-secondary/10 text-secondary font-semibold">DE</button>
+            <button className="px-2 py-1 rounded hover:bg-secondary/10 text-secondary font-semibold">
+              PL
+            </button>
+            <button className="px-2 py-1 rounded hover:bg-secondary/10 text-secondary font-semibold">
+              DE
+            </button>
           </div>
         </div>
       </Collapse>
