@@ -157,6 +157,16 @@ export const componentConfig: ComponentConfig<any>[] = [
   {
     component: require("@/components/hotels/hotels").Hotels,
     props: {
+      header: {
+        title: "Polecane hotele",
+        subtitle: "Poniżej znajduje się lista polecanych przez nas hoteli",
+        translations: {
+          de: {
+            title: "Empfohlene Hotels",
+            subtitle: "Unten findet ihr eine Liste unserer empfohlenen Hotels.",
+          },
+        },
+      },
       hotels: [
         {
           title: "Hotel Belwederski",

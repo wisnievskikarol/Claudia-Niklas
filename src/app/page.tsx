@@ -36,6 +36,15 @@ export default function Campaign() {
         return faq;
       });
     }
+    // Hotels
+    if (props.hotels) {
+      props.hotels = props.hotels.map((hotel: any) => {
+        if (hotel.translations && hotel.translations[lang]) {
+          return { ...hotel, ...hotel.translations[lang] };
+        }
+        return hotel;
+      });
+    }
     return {
       ...config,
       props,

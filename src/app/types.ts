@@ -33,8 +33,17 @@ export type HotelInfo = {
   reservationLink: string;
 };
 
+export type HotelsHeader = {
+  title: string;
+  subtitle?: string;
+  translations?: {
+    [lang: string]: Partial<Omit<HotelsHeader, "translations">>;
+  };
+};
+
 export type HotelsProps = {
   hotels: HotelInfo[];
+  header?: HotelsHeader;
 };
 
 export type HeroContentProps = {
