@@ -49,7 +49,7 @@ function RsvpButton({ url }: RsvpButtonProps) {
       <a href={url} target="_blank" rel="noopener noreferrer">
         <Button
           variant="outlined"
-          className="border-secondary text-secondary rounded-full px-8 py-4 text-lg sm:text-xl font-semibold"
+          className="border-secondary text-secondary rounded-full px-8 py-4 text-lg sm:text-xl font-normal font-sans"
         >
           RSVP
         </Button>

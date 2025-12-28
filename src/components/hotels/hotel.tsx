@@ -27,7 +27,7 @@ function Hotel({ title, phone, description, reservationLink }: props) {
         <a href={reservationLink}>
           <Button
             variant="outlined"
-            className="rounded-full border-secondary text-secondary text-base sm:text-lg px-6 py-2"
+            className="rounded-full border-secondary text-secondary text-base sm:text-lg px-6 py-2 font-normal font-sans"
           >
             Zarezerwuj
           </Button>
