@@ -60,7 +60,7 @@ function RsvpButton({ url }: RsvpButtonProps) {
 
 export function Rsvp({ header, button }: RsvpProps) {
   return (
-    <section className="px-4 scroll-mt-24">
+    <section id="rsvp" className="px-4 scroll-mt-24">
       <div className="container mx-auto text-center">
         <div className="flex flex-col justify-center items-center gap-7">
           <RsvpHeader title={header.title} description={header.description} />

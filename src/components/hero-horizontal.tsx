@@ -84,7 +84,10 @@ export function HeroHorizontal({
   backgroundImage,
 }: HeroHorizontalProps) {
   return (
-    <header className="mt-12 md:mt-24 px-2 overflow-hidden">
+    <header
+      id="miejsce"
+      className="mt-12 md:mt-24 px-2 overflow-hidden scroll-mt-24"
+    >
       <div className="container mx-auto flex flex-col items-center text-center gap-y-4">
         <HeroContent
           title={content.title}

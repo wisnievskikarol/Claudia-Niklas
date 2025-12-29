@@ -1,7 +1,11 @@
 "use client";
 
 import { Button } from "@material-tailwind/react";
-import { SpotifyPlayerProps, AddToPlaylistButtonProps, SpotifyProps } from "@/app/types";
+import {
+  SpotifyPlayerProps,
+  AddToPlaylistButtonProps,
+  SpotifyProps,
+} from "@/app/types";
 
 function SpotifyPlayer({ playlistUrl }: SpotifyPlayerProps) {
   return (
@@ -29,7 +33,7 @@ function AddToPlaylistButton({ buttonText }: AddToPlaylistButtonProps) {
 
 export function Spotify({ player, button }: SpotifyProps) {
   return (
-    <section id="muzyka" className="px-4 md:px-8 scroll-mt-24">
+    <section id="spotify" className="px-4 md:px-8 scroll-mt-24">
       <div className="container mx-auto text-center">
         <SpotifyPlayer playlistUrl={player.playlistUrl} />
         <AddToPlaylistButton buttonText={button.buttonText} />

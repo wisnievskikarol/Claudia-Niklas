@@ -19,6 +19,9 @@ const NAV_TRANSLATIONS: Record<
     brand: "Claudia & Niklas",
     menu: [
       { name: "Miejsce", href: "#miejsce" },
+      { name: "Plan uroczystości", href: "#harmonogram" },
+      { name: "Polecane hotele", href: "#hotele" },
+      { name: "Spotify", href: "#spotify" },
       { name: "RSVP", href: "#rsvp" },
       { name: "Często zadawane pytania", href: "#q&a" },
     ],
@@ -27,6 +30,9 @@ const NAV_TRANSLATIONS: Record<
     brand: "Claudia & Niklas",
     menu: [
       { name: "Ort", href: "#miejsce" },
+      { name: "Ablauf", href: "#harmonogram" },
+      { name: "Empfohlene Hotels", href: "#hotele" },
+      { name: "Spotify", href: "#spotify" },
       { name: "RSVP", href: "#rsvp" },
       { name: "Häufig gestellte Fragen", href: "#q&a" },
     ],
@@ -36,6 +42,51 @@ const NAV_TRANSLATIONS: Record<
 interface NavItemProps {
   children: React.ReactNode;
   href?: string;
+}
+
+// LanguageSwitcher component
+function LanguageSwitcher({
+  mobile,
+  isWhite,
+}: {
+  mobile?: boolean;
+  isWhite?: boolean;
+}) {
+  const { lang, setLang } = useContext(LanguageContext);
+  const btnClass =
+    "px-2 py-1 rounded font-semibold transition-colors duration-200 " +
+    (isWhite
+      ? "text-white hover:bg-white/10"
+      : "text-secondary hover:bg-secondary/10");
+
+  return (
+    <div
+      className={
+        mobile
+          ? "mt-6 mb-4 flex items-center justify-center gap-4"
+          : "hidden items-center gap-4 lg:flex ml-6"
+      }
+    >
+      <button
+        className={
+          btnClass +
+          (lang === "pl" ? (isWhite ? " bg-white/20" : " bg-secondary/20") : "")
+        }
+        onClick={() => setLang("pl")}
+      >
+        PL
+      </button>
+      <button
+        className={
+          btnClass +
+          (lang === "de" ? (isWhite ? " bg-white/20" : " bg-secondary/20") : "")
+        }
+        onClick={() => setLang("de")}
+      >
+        DE
+      </button>
+    </div>
+  );
 }
 
 export function Navbar() {
@@ -49,12 +100,30 @@ export function Navbar() {
   }
 
   function NavItem({ children, href }: NavItemProps) {
+    const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+      if (href && href.startsWith("#")) {
+        e.preventDefault();
+        setOpen(false);
+        const id = href.slice(1);
+        const el = document.getElementById(id);
+        const nav = document.getElementById("navbar-main");
+        if (el) {
+          const navHeight = nav ? nav.offsetHeight : 0;
+          const elTop = el.getBoundingClientRect().top + window.scrollY;
+          window.scrollTo({
+            top: elTop - navHeight - 8, // 8px extra offset
+            behavior: "smooth",
+          });
+        }
+      }
+    };
     return (
-      <li onClick={() => setOpen(false)} className="hover:underline">
+      <li className="hover:underline">
         <Typography
           as="a"
           variant="paragraph"
           href={href || "#"}
+          onClick={handleClick}
           className={
             onSchedule
               ? "flex items-center gap-2 py-4 font-normal text-white"
@@ -81,14 +150,12 @@ export function Navbar() {
       if (!section || !nav) return;
       const sectionRect = section.getBoundingClientRect();
       const navRect = nav.getBoundingClientRect();
-      // Napisy białe tylko, gdy dolna krawędź navbara "dotyka" górnej krawędzi harmonogramu (z tolerancją kilku px)
-      const tolerance = 4; // px
+      const tolerance = 4;
       const isDirectlyAbove =
         Math.abs(navRect.bottom - sectionRect.top) <= tolerance;
       setOnSchedule(isDirectlyAbove);
     }
     window.addEventListener("scroll", handleScroll);
-    // Wywołaj od razu po załadowaniu
     handleScroll();
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -126,30 +193,29 @@ export function Navbar() {
             </NavItem>
           ))}
         </ul>
-        {/* Language Switcher */}
+
         <LanguageSwitcher isWhite={onSchedule} />
+
         <IconButton
           variant="text"
+          color="white"
           onClick={handleOpen}
           className="ml-auto inline-block lg:hidden"
         >
           {open ? (
             <XMarkIcon
               strokeWidth={2}
-              className={
-                onSchedule ? "h-6 w-6 fill-white" : "h-6 w-6 fill-secondary"
-              }
+              className={`h-6 w-6 ${onSchedule ? "text-white" : "text-secondary"}`}
             />
           ) : (
             <Bars3Icon
               strokeWidth={2}
-              className={
-                onSchedule ? "h-6 w-6 fill-white" : "h-6 w-6 fill-secondary"
-              }
+              className={`h-6 w-6 ${onSchedule ? "text-white" : "text-secondary"}`}
             />
           )}
         </IconButton>
       </div>
+
       <Collapse open={open}>
         <div className="container mx-auto mt-3 border-t border-b border-secondary px-2 pt-4">
           <ul className="flex flex-col gap-4">
@@ -159,55 +225,9 @@ export function Navbar() {
               </NavItem>
             ))}
           </ul>
-          {/* Language Switcher for mobile */}
           <LanguageSwitcher mobile isWhite={onSchedule} />
         </div>
       </Collapse>
-    </div>
-  );
-}
-
-// LanguageSwitcher component
-function LanguageSwitcher({
-  mobile,
-  isWhite,
-}: {
-  mobile?: boolean;
-  isWhite?: boolean;
-}) {
-  const { lang, setLang } = useContext(LanguageContext);
-  const btnClass =
-    "px-2 py-1 rounded font-semibold transition-colors duration-200 " +
-    (isWhite
-      ? "text-white hover:bg-white/10"
-      : "text-secondary hover:bg-secondary/10") +
-    (mobile ? "" : "");
-  return (
-    <div
-      className={
-        mobile
-          ? "mt-6 mb-4 flex items-center justify-center gap-4"
-          : "hidden items-center gap-4 lg:flex ml-6"
-      }
-    >
-      <button
-        className={
-          btnClass +
-          (lang === "pl" ? (isWhite ? " bg-white/20" : " bg-secondary/20") : "")
-        }
-        onClick={() => setLang("pl")}
-      >
-        PL
-      </button>
-      <button
-        className={
-          btnClass +
-          (lang === "de" ? (isWhite ? " bg-white/20" : " bg-secondary/20") : "")
-        }
-        onClick={() => setLang("de")}
-      >
-        DE
-      </button>
     </div>
   );
 }
