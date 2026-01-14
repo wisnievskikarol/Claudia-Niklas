@@ -25,168 +25,117 @@ function HeroContent({
 }: HeroContentProps) {
   const contentRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
-  const infoBoxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!contentRef.current) return;
+    if (!contentRef.current || !titleRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Elegant title reveal with split text effect
-      if (titleRef.current) {
-        gsap.fromTo(
-          titleRef.current,
-          {
-            opacity: 0,
-            y: 60,
-            scale: 0.95,
-            letterSpacing: "-0.05em",
-          },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            letterSpacing: "0em",
-            duration: 1.4,
-            ease: "power3.out",
-            delay: 0.3,
-          }
-        );
-      }
+      // Powerful title reveal
+      gsap.fromTo(
+        titleRef.current,
+        {
+          opacity: 0,
+          y: 80,
+          scale: 0.9,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1.6,
+          ease: "power4.out",
+          delay: 0.2,
+        }
+      );
 
-      // Floating animation for decorative elements
+      // Gentle floating for decorative elements
       gsap.to(".hero-blur-circle", {
-        y: "random(-30, 30)",
-        x: "random(-20, 20)",
-        duration: "random(3, 5)",
+        y: "random(-20, 20)",
+        x: "random(-15, 15)",
+        duration: "random(4, 6)",
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
       });
 
-      // Info box entrance with 3D effect
-      if (infoBoxRef.current) {
-        gsap.fromTo(
-          infoBoxRef.current,
-          {
-            opacity: 0,
-            y: 50,
-            rotateX: 15,
-            scale: 0.9,
-          },
-          {
-            opacity: 1,
-            y: 0,
-            rotateX: 0,
-            scale: 1,
-            duration: 1.2,
-            ease: "back.out(1.2)",
-            delay: 0.8,
-          }
-        );
-      }
+      // Info box entrance
+      gsap.fromTo(
+        ".hero-info-box",
+        {
+          opacity: 0,
+          y: 60,
+          scale: 0.95,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1.2,
+          ease: "power3.out",
+          delay: 0.6,
+        }
+      );
     }, contentRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <motion.div
+    <div
       ref={contentRef}
-      className="z-10 flex text-secondary flex-col gap-y-2 sm:gap-y-3 md:gap-y-5 justify-center px-3 sm:px-6 md:px-8 lg:px-16 lg:py-16 text-center lg:text-left mt-6 sm:mt-8 md:mt-12 relative"
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, ease: "easeOut" }}
+      className="relative z-10 flex flex-col items-center text-center px-3 sm:px-6 md:px-8 py-0 w-full"
     >
-      {/* Decorative background elements with GSAP animation */}
-      <motion.div
-        className="hero-blur-circle absolute -top-10 -left-20 w-40 h-40 rounded-full bg-primary/20 blur-3xl"
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.5, delay: 0.1 }}
-      />
-      <motion.div
-        className="hero-blur-circle absolute -bottom-20 -right-10 w-60 h-60 rounded-full bg-secondary/10 blur-3xl"
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.5, delay: 0.2 }}
-      />
+      {/* Decorative blur circles */}
+      <div className="hero-blur-circle absolute top-0 left-1/4 w-64 h-64 rounded-full bg-primary/15 blur-3xl -z-10" />
+      <div className="hero-blur-circle absolute bottom-0 right-1/4 w-80 h-80 rounded-full bg-secondary/8 blur-3xl -z-10" />
 
-      <motion.div
-        initial={{ opacity: 0, letterSpacing: "-0.1em" }}
-        animate={{ opacity: 1, letterSpacing: "0.05em" }}
+      {/* Overline text */}
+      <motion.p
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.1 }}
-        className="text-xs sm:text-sm tracking-widest uppercase font-light text-secondary/60"
+        className="text-xs sm:text-sm tracking-[0.2em] uppercase font-light text-secondary/50 mb-4 sm:mb-6"
       >
         Zapraszamy na nasz wielki dzień
-      </motion.div>
+      </motion.p>
 
+      {/* Main title */}
       <Typography
         ref={titleRef}
         variant="h1"
-        className="mb-2 sm:mb-3 font-Bellefair font-light text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-center sm:text-center tracking-tight leading-tight relative"
+        className="font-Bellefair font-light text-6xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-secondary tracking-tight leading-[0.95] mb-4 sm:mb-6 w-full"
       >
         {title}
       </Typography>
 
-      {/* Enhanced divider */}
+      {/* Elegant divider */}
       <motion.div
-        className="flex items-center justify-center gap-3 my-4 sm:my-5 md:my-6"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.3 }}
+        className="flex items-center gap-3 mb-4 sm:mb-6"
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
       >
-        <motion.div
-          className="h-0.5 bg-gradient-to-r from-transparent to-secondary/40"
-          initial={{ width: 0 }}
-          animate={{ width: 40 }}
-          transition={{ duration: 0.8, delay: 0.35 }}
-        />
-        <motion.div
-          className="w-1.5 h-1.5 rounded-full bg-secondary/50"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.45 }}
-        />
-        <motion.div
-          className="h-0.5 bg-gradient-to-l from-transparent to-secondary/40"
-          initial={{ width: 0 }}
-          animate={{ width: 40 }}
-          transition={{ duration: 0.8, delay: 0.35 }}
-        />
+        <div className="h-px w-8 sm:w-12 bg-gradient-to-r from-transparent to-secondary/30" />
+        <div className="w-1.5 h-1.5 rounded-full bg-secondary/40" />
+        <div className="h-px w-8 sm:w-12 bg-gradient-to-l from-transparent to-secondary/30" />
       </motion.div>
 
-      <Typography
-        ref={subtitleRef}
-        className="mb-8 sm:mb-10 md:mb-12 text-center text-sm sm:text-base md:text-lg lg:text-xl text-secondary/70 font-light italic relative z-10"
+      {/* Subtitle */}
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.5 }}
+        className="text-sm sm:text-base md:text-lg lg:text-xl text-secondary/60 font-light italic max-w-2xl mb-6 sm:mb-10 md:mb-12"
       >
         {subtitle}
-      </Typography>
+      </motion.p>
 
-      <motion.div
-        ref={infoBoxRef}
-        className="flex mb-8 sm:mb-10 md:mb-12 justify-center relative z-10"
-        data-info-box
-        initial={{ opacity: 0, y: 30, scale: 0.9 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-        whileHover={{ y: -5 }}
-        style={{ perspective: "1000px" }}
-      >
-        <div className="relative">
-          {/* Glow effect behind info box */}
-          <motion.div
-            className="absolute -inset-6 rounded-xl bg-gradient-to-r from-secondary/5 to-primary/5 blur-xl"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-          />
-          <div className="relative">
-            <HeroInfoBox address={address} date={date} time={time} />
-          </div>
-        </div>
-      </motion.div>
-    </motion.div>
+      {/* Info box */}
+      <div className="hero-info-box relative">
+        <div className="absolute -inset-4 bg-gradient-to-r from-primary/10 to-secondary/5 rounded-2xl blur-xl" />
+        <HeroInfoBox address={address} date={date} time={time} />
+      </div>
+    </div>
   );
 }
 
@@ -197,27 +146,16 @@ function HeroImage({ imageSrc, altText }: HeroImageProps) {
     if (!imageRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Parallax effect on scroll
+      // Subtle parallax on scroll
       gsap.to(imageRef.current, {
-        y: -50,
+        y: -40,
         scrollTrigger: {
           trigger: imageRef.current,
           start: "top bottom",
           end: "bottom top",
-          scrub: 1.5,
+          scrub: 2,
         },
       });
-
-      // Elegant zoom on hover
-      const hoverTl = gsap.timeline({ paused: true });
-      hoverTl.to(imageRef.current?.querySelector("img"), {
-        scale: 1.05,
-        duration: 0.8,
-        ease: "power2.out",
-      });
-
-      imageRef.current?.addEventListener("mouseenter", () => hoverTl.play());
-      imageRef.current?.addEventListener("mouseleave", () => hoverTl.reverse());
     }, imageRef);
 
     return () => ctx.revert();
@@ -226,64 +164,34 @@ function HeroImage({ imageSrc, altText }: HeroImageProps) {
   return (
     <motion.div
       ref={imageRef}
-      className="z-10 w-full relative flex justify-center items-center group"
-      initial={{ opacity: 0, y: 40, scale: 0.95 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 1, delay: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      style={{
-        minHeight: "500px",
-        maxHeight: "800px",
-        overflow: "hidden",
-        borderRadius: "24px",
-      }}
+      className="relative w-full sm:max-w-6xl sm:mx-auto"
+      initial={{ opacity: 0, y: 60, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 1.2, delay: 0.3, ease: [0.19, 1, 0.22, 1] }}
     >
-      {/* Subtle glow wrapper */}
-      <motion.div className="absolute -inset-4 rounded-2xl bg-gradient-to-br from-secondary/20 via-secondary/5 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="relative w-full aspect-[3/4] sm:aspect-[5/3] overflow-hidden rounded-none sm:rounded-2xl shadow-2xl group">
+        {/* Subtle glow effect */}
+        <div className="absolute -inset-0.5 bg-gradient-to-br from-secondary/10 to-primary/10 rounded-none sm:rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-      <Image
-        src={imageSrc}
-        fill
-        style={{
-          objectFit: "cover",
-          width: "100%",
-          height: "100%",
-          borderRadius: "24px",
-          filter: "brightness(0.92) contrast(1.08)",
-        }}
-        alt={altText}
-        priority
-      />
+        <div className="relative w-full h-full overflow-hidden rounded-none sm:rounded-2xl">
+          <Image
+            src={imageSrc}
+            fill
+            className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+            style={{
+              filter: "brightness(0.96) contrast(1.04) saturate(1.05)",
+            }}
+            alt={altText}
+            priority
+          />
 
-      {/* Gradient overlay - top to bottom */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          borderRadius: "24px",
-          background:
-            "linear-gradient(180deg, rgba(249,244,237,0.05) 0%, rgba(41,50,56,0.08) 100%)",
-          pointerEvents: "none",
-        }}
-      />
+          {/* Subtle overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/3 via-transparent to-transparent" />
 
-      {/* Elegant border */}
-      <motion.div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          borderRadius: "24px",
-          border: "1px solid rgba(41,50,56,0.15)",
-          pointerEvents: "none",
-        }}
-        className="group-hover:border-secondary/30 transition-colors duration-300"
-      />
+          {/* Elegant border */}
+          <div className="absolute inset-0 rounded-none sm:rounded-2xl border-0 sm:border border-secondary/10 group-hover:border-secondary/20 transition-colors duration-500" />
+        </div>
+      </div>
     </motion.div>
   );
 }
@@ -296,26 +204,28 @@ export function HeroHorizontal({
   return (
     <header
       id="miejsce"
-      className="relative mt-8 sm:mt-12 md:mt-16 lg:mt-20 px-2 overflow-hidden scroll-mt-24 py-8 sm:py-12 md:py-16"
+      className="relative min-h-screen flex items-center px-0 sm:px-6 md:px-8 pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-20 md:pb-24 overflow-hidden scroll-mt-24 bg-gradient-to-b from-primary/30 via-primary/10 to-transparent"
     >
-      {/* Decorative top elements */}
-      <motion.div
-        className="absolute top-0 right-1/4 w-64 h-64 rounded-full bg-secondary/5 blur-3xl"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 1.5 }}
-        viewport={{ once: true }}
-      />
+      {/* Ambient background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-0 w-96 h-96 rounded-full bg-secondary/5 blur-3xl" />
+        <div className="absolute bottom-1/4 right-0 w-96 h-96 rounded-full bg-primary/20 blur-3xl" />
+      </div>
 
-      <div className="container mx-auto flex flex-col items-center text-center gap-y-8 sm:gap-y-12 md:gap-y-14 relative z-10">
-        <HeroContent
-          title={content.title}
-          subtitle={content.subtitle}
-          address={content.address}
-          date={content.date}
-          time={content.time}
-        />
-        <HeroImage imageSrc={heroImage.imageSrc} altText={heroImage.altText} />
+      <div className="w-full container mx-auto relative z-10 px-0">
+        <div className="flex flex-col items-center gap-4 sm:gap-10 md:gap-14">
+          <HeroContent
+            title={content.title}
+            subtitle={content.subtitle}
+            address={content.address}
+            date={content.date}
+            time={content.time}
+          />
+          <HeroImage
+            imageSrc={heroImage.imageSrc}
+            altText={heroImage.altText}
+          />
+        </div>
       </div>
     </header>
   );
