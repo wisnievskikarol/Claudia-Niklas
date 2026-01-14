@@ -25,13 +25,18 @@ const Countdown: React.FC<CountdownProps> = ({ weddingDate }) => {
   };
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    setMounted(true);
+    setTimeLeft(calculateTimeLeft());
+
+    const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
-    return () => clearTimeout(timer);
-  });
+
+    return () => clearInterval(timer);
+  }, [weddingDate]);
 
   return (
     <section className="w-full flex justify-center mt-16 mb-16 px-2">
@@ -42,7 +47,10 @@ const Countdown: React.FC<CountdownProps> = ({ weddingDate }) => {
         <p className="text-base sm:text-lg text-secondary/60 mb-12 text-center font-light">
           Już niedługo
         </p>
-        <div className="flex gap-6 sm:gap-8 text-center justify-center flex-wrap">
+        <div
+          className="flex gap-6 sm:gap-8 text-center justify-center flex-wrap"
+          suppressHydrationWarning
+        >
           {[
             { value: timeLeft.days, label: "dni" },
             { value: timeLeft.hours, label: "godz" },
@@ -51,7 +59,7 @@ const Countdown: React.FC<CountdownProps> = ({ weddingDate }) => {
           ].map((item, idx) => (
             <div key={idx} className="flex flex-col items-center">
               <div className="text-4xl sm:text-5xl md:text-6xl font-Bellefair text-secondary font-normal">
-                {String(item.value).padStart(2, "0")}
+                {mounted ? String(item.value).padStart(2, "0") : "00"}
               </div>
               <span className="text-xs sm:text-sm text-secondary/50 uppercase tracking-widest mt-3 font-light">
                 {item.label}
