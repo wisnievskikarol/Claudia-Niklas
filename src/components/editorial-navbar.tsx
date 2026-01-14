@@ -33,7 +33,7 @@ export function EditorialNavbar({
       <motion.nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? "bg-editorial-cream/95 backdrop-blur-sm shadow-editorial"
+            ? "bg-editorial-cream/90 backdrop-blur-sm"
             : "bg-transparent"
         }`}
         initial={{ y: -100, opacity: 0 }}
@@ -41,11 +41,11 @@ export function EditorialNavbar({
         transition={{ duration: 0.8, delay: 0.5, ease: [0.23, 1, 0.32, 1] }}
       >
         <div className="container-editorial">
-          <div className="flex items-center justify-between h-16 sm:h-18 md:h-20 lg:h-24 px-3 sm:px-4 md:px-6 lg:px-12">
+          <div className="flex items-center justify-between h-14 sm:h-16 md:h-18 px-4 sm:px-6 md:px-8 lg:px-16">
             {/* Logo / Couple names */}
             <a
               href="#hero"
-              className="font-editorial text-lg sm:text-xl md:text-2xl text-editorial-charcoal hover:text-editorial-graphite transition-colors duration-300"
+              className="font-editorial text-base sm:text-lg md:text-xl text-editorial-charcoal hover:text-editorial-stone transition-colors duration-300"
             >
               {coupleNames}
             </a>
@@ -56,13 +56,12 @@ export function EditorialNavbar({
                 <motion.a
                   key={link.href}
                   href={link.href}
-                  className="font-clean text-editorial-caption text-editorial-charcoal hover:text-editorial-stone transition-colors duration-300 relative group"
+                  className="font-clean text-[11px] tracking-[0.15em] uppercase text-editorial-stone hover:text-editorial-charcoal transition-colors duration-300"
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
                 >
                   {link.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-editorial-charcoal group-hover:w-full transition-all duration-300" />
                 </motion.a>
               ))}
             </div>
