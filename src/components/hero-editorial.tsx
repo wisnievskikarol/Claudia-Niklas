@@ -23,7 +23,6 @@ const containerVariants = {
   },
 };
 
-// Letter animation for hero title
 const letterVariants = {
   hidden: { opacity: 0, y: 50, rotateX: -20 },
   visible: (i: number) => ({
@@ -44,13 +43,13 @@ function AnimatedTitle({ title }: { title: string }) {
 
   return (
     <motion.h1
-      className="font-editorial text-[2.75rem] sm:text-[4rem] md:text-[5rem] lg:text-[6rem] xl:text-[7rem] text-editorial-charcoal leading-[0.95] tracking-tight text-center px-2"
+      className="font-editorial text-[3rem] sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem] xl:text-[9rem] text-editorial-charcoal leading-[0.9] tracking-[-0.02em] text-center"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
     >
       {words.map((word, wordIndex) => (
-        <span key={wordIndex} className="inline-block mr-[0.2em]">
+        <span key={wordIndex} className="inline-block mx-[0.08em]">
           {word.split("").map((letter, letterIndex) => (
             <motion.span
               key={letterIndex}
@@ -62,36 +61,9 @@ function AnimatedTitle({ title }: { title: string }) {
               {letter}
             </motion.span>
           ))}
-          {wordIndex < words.length - 1 && <span>&nbsp;</span>}
         </span>
       ))}
     </motion.h1>
-  );
-}
-
-// Elegant divider with animation
-function EditorialDivider() {
-  return (
-    <motion.div
-      className="flex items-center justify-center gap-2 sm:gap-3 md:gap-4 my-2 sm:my-4 md:my-6 lg:my-8"
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
-    >
-      <motion.div
-        className="h-px bg-editorial-stone/30"
-        initial={{ width: 0 }}
-        animate={{ width: 40 }}
-        transition={{ duration: 1.2, delay: 1, ease: [0.23, 1, 0.32, 1] }}
-      />
-      <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-editorial-stone/40" />
-      <motion.div
-        className="h-px bg-editorial-stone/30"
-        initial={{ width: 0 }}
-        animate={{ width: 40 }}
-        transition={{ duration: 1.2, delay: 1, ease: [0.23, 1, 0.32, 1] }}
-      />
-    </motion.div>
   );
 }
 
@@ -104,34 +76,52 @@ function DateDisplay({ date, time }: { date: Date; time: string }) {
 
   return (
     <motion.div
-      className="text-center px-4"
+      className="flex flex-col items-center"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, delay: 1.2, ease: [0.23, 1, 0.32, 1] }}
     >
-      <div className="font-clean text-[10px] sm:text-xs tracking-[0.2em] uppercase text-editorial-muted mb-3 sm:mb-4">
-        Zapraszamy Was
-      </div>
-      <div className="flex items-baseline justify-center gap-2 sm:gap-3 md:gap-4">
+      {/* Decorative top line */}
+      <motion.div
+        className="w-12 h-px bg-editorial-stone/30 mb-8 sm:mb-10"
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ duration: 1, delay: 1.4, ease: [0.23, 1, 0.32, 1] }}
+      />
+
+      {/* Date row - all elements same visual weight */}
+      <div className="flex items-center justify-center gap-4 sm:gap-6 md:gap-8">
         <span className="font-editorial text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-editorial-charcoal leading-none">
           {day}
         </span>
-        <span className="font-editorial text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-editorial-stone/40">
+        <span className="font-editorial text-xl sm:text-2xl md:text-3xl lg:text-4xl text-editorial-stone/40 leading-none">
           /
         </span>
-        <span className="font-editorial text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-editorial-charcoal capitalize">
+        <span className="font-editorial text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-editorial-charcoal capitalize leading-none">
           {month}
         </span>
-        <span className="font-editorial text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-editorial-stone/40">
+        <span className="font-editorial text-xl sm:text-2xl md:text-3xl lg:text-4xl text-editorial-stone/40 leading-none">
           /
         </span>
-        <span className="font-editorial text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-editorial-charcoal">
+        <span className="font-editorial text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-editorial-charcoal leading-none">
           {year}
         </span>
       </div>
-      <div className="font-clean text-[10px] sm:text-xs tracking-[0.2em] uppercase text-editorial-stone mt-3 sm:mt-4">
-        godz. {time}
+
+      {/* Time - centered below */}
+      <div className="mt-4 sm:mt-6">
+        <span className="font-clean text-[10px] sm:text-xs tracking-[0.3em] uppercase text-editorial-muted">
+          godz. {time}
+        </span>
       </div>
+
+      {/* Decorative bottom line */}
+      <motion.div
+        className="w-12 h-px bg-editorial-stone/30 mt-8 sm:mt-10"
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ duration: 1, delay: 1.4, ease: [0.23, 1, 0.32, 1] }}
+      />
     </motion.div>
   );
 }
@@ -243,7 +233,7 @@ export function HeroEditorial({ content, heroImage }: HeroHorizontalProps) {
     <header
       ref={heroRef}
       id="hero"
-      className="relative min-h-screen flex flex-col justify-center items-center px-3 sm:px-6 md:px-12 pt-16 sm:pt-24 md:pt-32 pb-8 sm:pb-16 md:pb-24 overflow-hidden bg-editorial-cream"
+      className="relative min-h-screen flex flex-col px-4 sm:px-8 md:px-16 lg:px-24 pt-20 sm:pt-28 md:pt-36 pb-12 sm:pb-20 overflow-hidden bg-editorial-cream"
     >
       {/* Ambient background elements */}
       <div className="hero-ambient absolute inset-0 overflow-hidden pointer-events-none">
@@ -252,11 +242,12 @@ export function HeroEditorial({ content, heroImage }: HeroHorizontalProps) {
       </div>
 
       {/* Main content */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto">
-        <div className="flex flex-col items-center gap-3 sm:gap-6 md:gap-10 lg:gap-14">
+      <div className="relative z-10 w-full max-w-7xl mx-auto flex-1 flex flex-col">
+        {/* Top section - Overline & Title */}
+        <div className="flex flex-col items-center mb-8 sm:mb-12 md:mb-16">
           {/* Overline */}
           <motion.p
-            className="font-clean text-[10px] sm:text-xs tracking-[0.2em] uppercase text-editorial-muted"
+            className="font-clean text-[10px] sm:text-[11px] tracking-[0.3em] uppercase text-editorial-muted mb-6 sm:mb-8 md:mb-10"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
@@ -266,42 +257,69 @@ export function HeroEditorial({ content, heroImage }: HeroHorizontalProps) {
 
           {/* Main title - Names */}
           <AnimatedTitle title={content.title} />
+        </div>
 
-          {/* Elegant divider */}
-          <EditorialDivider />
+        {/* Middle section - Subtitle & Details in elegant grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-12 lg:gap-8 items-center mb-10 sm:mb-14 md:mb-20">
+          {/* Left - decorative line */}
+          <motion.div
+            className="hidden lg:flex items-center justify-end"
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={{ opacity: 1, scaleX: 1 }}
+            transition={{ duration: 1.2, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
+          >
+            <div className="w-full max-w-[200px] h-px bg-gradient-to-l from-editorial-stone/30 to-transparent" />
+          </motion.div>
 
-          {/* Emotional subtitle */}
-          <motion.p
-            className="font-clean text-xs sm:text-sm md:text-base lg:text-lg text-editorial-stone text-center max-w-lg sm:max-w-xl italic px-3 sm:px-4 leading-relaxed"
+          {/* Center - Subtitle */}
+          <motion.div
+            className="flex flex-col items-center text-center"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1, ease: [0.23, 1, 0.32, 1] }}
           >
-            {content.subtitle}
-          </motion.p>
+            <p className="font-clean text-sm sm:text-base md:text-lg text-editorial-stone italic leading-relaxed max-w-md">
+              {content.subtitle}
+            </p>
+          </motion.div>
 
+          {/* Right - decorative line */}
+          <motion.div
+            className="hidden lg:flex items-center justify-start"
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={{ opacity: 1, scaleX: 1 }}
+            transition={{ duration: 1.2, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
+          >
+            <div className="w-full max-w-[200px] h-px bg-gradient-to-r from-editorial-stone/30 to-transparent" />
+          </motion.div>
+        </div>
+
+        {/* Date & Location section */}
+        <div className="flex flex-col items-center gap-6 sm:gap-8 md:gap-10 mb-10 sm:mb-14 md:mb-20">
           {/* Date display */}
           <DateDisplay date={content.date} time={content.time} />
 
-          {/* Location */}
+          {/* Location with icon-like styling */}
           <motion.div
-            className="text-center px-4"
-            initial={{ opacity: 0, y: 30 }}
+            className="flex items-center gap-3"
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.4, ease: [0.23, 1, 0.32, 1] }}
           >
-            <div className="font-clean text-[10px] sm:text-xs tracking-[0.15em] uppercase text-editorial-stone">
+            <div className="w-1 h-1 rounded-full bg-editorial-stone/40" />
+            <span className="font-clean text-[10px] sm:text-xs tracking-[0.2em] uppercase text-editorial-stone">
               {content.address}
-            </div>
+            </span>
+            <div className="w-1 h-1 rounded-full bg-editorial-stone/40" />
           </motion.div>
+        </div>
 
-          {/* Hero image */}
-          <div className="w-full mt-3 sm:mt-6 md:mt-10 lg:mt-16">
-            <HeroImage
-              imageSrc={heroImage.imageSrc}
-              altText={heroImage.altText}
-            />
-          </div>
+        {/* Hero image - full width with elegant framing */}
+        <div className="w-full mt-auto">
+          <HeroImage
+            imageSrc={heroImage.imageSrc}
+            altText={heroImage.altText}
+          />
         </div>
       </div>
 
