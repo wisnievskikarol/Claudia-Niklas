@@ -8,7 +8,13 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 function Icon({ id, open }: { id: number; open: number }) {
   const isActive = id === open;
@@ -22,11 +28,76 @@ function Icon({ id, open }: { id: number; open: number }) {
 export function Faq({ faqs }: FaqProps) {
   const [open, setOpen] = useState(0);
   const handleOpen = (value: number) => setOpen(open === value ? 0 : value);
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // Header reveal with elegant scale
+      if (headerRef.current) {
+        gsap.fromTo(
+          headerRef.current,
+          {
+            opacity: 0,
+            y: 50,
+            scale: 0.9,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1.2,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: headerRef.current,
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+
+      // Accordion items staggered entrance
+      const accordions = gsap.utils.toArray(".faq-accordion-item");
+      accordions.forEach((item, index) => {
+        gsap.fromTo(
+          item as HTMLElement,
+          {
+            opacity: 0,
+            x: index % 2 === 0 ? -40 : 40,
+            rotateY: index % 2 === 0 ? -10 : 10,
+          },
+          {
+            opacity: 1,
+            x: 0,
+            rotateY: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: item as HTMLElement,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8">
+    <section
+      ref={sectionRef}
+      className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8"
+    >
       <div className="container mx-auto">
-        <div className="mb-12 sm:mb-16 md:mb-20 flex flex-col items-center">
+        <div
+          ref={headerRef}
+          className="mb-12 sm:mb-16 md:mb-20 flex flex-col items-center"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -64,6 +135,7 @@ export function Faq({ faqs }: FaqProps) {
               open={open === key + 1}
               icon={<Icon id={key + 1} open={open} />}
               onClick={() => handleOpen(key + 1)}
+              className="faq-accordion-item"
             >
               <AccordionHeader className="text-left hover:text-gray-600 hover:text-underline font-normal text-secondary text-sm sm:text-base md:text-lg">
                 {title}

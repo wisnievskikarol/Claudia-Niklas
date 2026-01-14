@@ -1,4 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface CountdownProps {
   weddingDate: string; // Format: YYYY-MM-DD
@@ -26,6 +33,9 @@ const Countdown: React.FC<CountdownProps> = ({ weddingDate }) => {
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
   const [mounted, setMounted] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const numbersRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -38,17 +48,107 @@ const Countdown: React.FC<CountdownProps> = ({ weddingDate }) => {
     return () => clearInterval(timer);
   }, [weddingDate]);
 
+  useEffect(() => {
+    if (!sectionRef.current || !mounted) return;
+
+    const ctx = gsap.context(() => {
+      // Title elegant reveal
+      if (titleRef.current) {
+        gsap.fromTo(
+          titleRef.current,
+          { opacity: 0, y: 40, scale: 0.9 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1.2,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: titleRef.current,
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+
+      // Number counters entrance
+      const numbers = gsap.utils.toArray(".countdown-number");
+      numbers.forEach((num, index) => {
+        gsap.fromTo(
+          num as HTMLElement,
+          {
+            opacity: 0,
+            scale: 0.5,
+            rotateY: 90,
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            rotateY: 0,
+            duration: 0.8,
+            delay: index * 0.1,
+            ease: "back.out(1.4)",
+            scrollTrigger: {
+              trigger: numbersRef.current,
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      });
+
+      // Subtle floating animation for numbers
+      gsap.to(".countdown-number", {
+        y: -5,
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        stagger: {
+          each: 0.2,
+          from: "start",
+        },
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, [mounted]);
+
   return (
-    <section className="w-full flex justify-center mt-12 sm:mt-16 md:mt-20 mb-12 sm:mb-16 md:mb-20 px-3 sm:px-4 md:px-6">
-      <div className="flex flex-col items-center justify-center px-4 sm:px-8 md:px-12 py-12 sm:py-16 md:py-20 max-w-5xl w-full">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-Bellefair text-secondary mb-1 sm:mb-2 tracking-tight text-center font-light">
+    <section
+      ref={sectionRef}
+      className="w-full flex justify-center mt-12 sm:mt-16 md:mt-20 mb-12 sm:mb-16 md:mb-20 px-3 sm:px-4 md:px-6"
+    >
+      <div className="flex flex-col items-center justify-center px-4 sm:px-8 md:px-12 py-12 sm:py-16 md:py-20 max-w-5xl w-full relative">
+        {/* Decorative elements */}
+        <motion.div
+          className="absolute -top-10 left-1/4 w-40 h-40 rounded-full bg-primary/10 blur-3xl"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1.5 }}
+          viewport={{ once: true }}
+        />
+        <motion.div
+          className="absolute -bottom-10 right-1/4 w-32 h-32 rounded-full bg-secondary/5 blur-3xl"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1.5, delay: 0.2 }}
+          viewport={{ once: true }}
+        />
+
+        <h2
+          ref={titleRef}
+          className="text-3xl sm:text-4xl md:text-5xl font-Bellefair text-secondary mb-1 sm:mb-2 tracking-tight text-center font-light relative z-10"
+        >
           Odliczanie do ślubu
         </h2>
-        <p className="text-sm sm:text-base md:text-lg text-secondary/60 mb-8 sm:mb-12 text-center font-light">
+        <p className="text-sm sm:text-base md:text-lg text-secondary/60 mb-8 sm:mb-12 text-center font-light relative z-10">
           Już niedługo
         </p>
-        <div className="flex gap-4 sm:gap-6 md:gap-8 text-center justify-center flex-wrap">
-          className="flex gap-6 sm:gap-8 text-center justify-center flex-wrap"
+        <div
+          ref={numbersRef}
+          className="flex gap-4 sm:gap-6 md:gap-8 text-center justify-center flex-wrap relative z-10"
           suppressHydrationWarning
         >
           {[
@@ -57,8 +157,12 @@ const Countdown: React.FC<CountdownProps> = ({ weddingDate }) => {
             { value: timeLeft.minutes, label: "min" },
             { value: timeLeft.seconds, label: "sek" },
           ].map((item, idx) => (
-            <div key={idx} className="flex flex-col items-center gap-1 sm:gap-2">
-              <div className="text-3xl sm:text-4xl md:text-5xl font-Bellefair text-secondary font-normal">
+            <div
+              key={idx}
+              className="countdown-number flex flex-col items-center gap-1 sm:gap-2 min-w-[70px] sm:min-w-[90px]"
+              style={{ perspective: "1000px" }}
+            >
+              <div className="text-3xl sm:text-4xl md:text-5xl font-Bellefair text-secondary font-normal px-3 py-2 rounded-lg bg-primary/20 backdrop-blur-sm border border-secondary/10">
                 {mounted ? String(item.value).padStart(2, "0") : "00"}
               </div>
               <span className="text-xs sm:text-xs md:text-sm text-secondary/50 uppercase tracking-widest font-light">

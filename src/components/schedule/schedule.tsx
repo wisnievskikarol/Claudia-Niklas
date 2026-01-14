@@ -5,6 +5,13 @@ import { Typography } from "@material-tailwind/react";
 import ScheduleItem from "./schedule-item";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface CustomStyleProps {
   sectionClass?: string;
@@ -39,8 +46,105 @@ const itemVariants = {
 };
 
 export function Schedule({ items, customStyle }: Props) {
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // Parallax background effect
+      if (customStyle?.backgroundImage) {
+        gsap.to(".schedule-bg", {
+          y: 100,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.5,
+          },
+        });
+      }
+
+      // Header reveal with elegant fade
+      if (headerRef.current) {
+        gsap.fromTo(
+          headerRef.current,
+          {
+            opacity: 0,
+            y: -50,
+            scale: 0.95,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1.2,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: headerRef.current,
+              start: "top 80%",
+              end: "top 50%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+
+      // Staggered timeline items with sophisticated entrance
+      const timelineItems = gsap.utils.toArray(".schedule-item-wrapper");
+      timelineItems.forEach((item, index) => {
+        gsap.fromTo(
+          item as HTMLElement,
+          {
+            opacity: 0,
+            x: index % 2 === 0 ? -60 : 60,
+            rotateY: index % 2 === 0 ? -15 : 15,
+          },
+          {
+            opacity: 1,
+            x: 0,
+            rotateY: 0,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: item as HTMLElement,
+              start: "top 85%",
+              end: "top 60%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      });
+
+      // Divider lines animated growth
+      const dividers = gsap.utils.toArray(".schedule-divider");
+      dividers.forEach((divider) => {
+        gsap.fromTo(
+          divider as HTMLElement,
+          { scaleY: 0, opacity: 0 },
+          {
+            scaleY: 1,
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.inOut",
+            scrollTrigger: {
+              trigger: divider as HTMLElement,
+              start: "top 90%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, [customStyle?.backgroundImage]);
+
   return (
     <section
+      ref={sectionRef}
       id="harmonogram"
       className="relative w-full min-h-screen flex items-center justify-center py-20 px-4 overflow-hidden"
       style={{ position: "relative", width: "100%", overflow: "hidden" }}
@@ -48,6 +152,7 @@ export function Schedule({ items, customStyle }: Props) {
       {/* Background image */}
       {customStyle?.backgroundImage && (
         <div
+          className="schedule-bg"
           style={{
             position: "absolute",
             top: 0,
@@ -72,6 +177,7 @@ export function Schedule({ items, customStyle }: Props) {
       <div className="relative z-20 flex flex-col items-center justify-center w-full max-w-5xl px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-20">
         {/* Header */}
         <motion.div
+          ref={headerRef}
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -92,7 +198,10 @@ export function Schedule({ items, customStyle }: Props) {
         </motion.div>
 
         {/* Timeline */}
-        <div className="w-full max-w-2xl mx-auto px-2 sm:px-4">
+        <div
+          ref={timelineRef}
+          className="w-full max-w-2xl mx-auto px-2 sm:px-4"
+        >
           {/* Timeline items */}
           <motion.div
             className="space-y-8 sm:space-y-12 md:space-y-16 relative z-10"
@@ -104,13 +213,14 @@ export function Schedule({ items, customStyle }: Props) {
             {items.map((item, index) => (
               <motion.div
                 key={index}
-                className="flex justify-center"
+                className="flex justify-center schedule-item-wrapper"
                 variants={itemVariants}
+                style={{ perspective: "1000px" }}
               >
                 {/* Content with divider line */}
                 <div className="flex flex-col items-center w-full">
                   {index > 0 && (
-                    <div className="w-0.5 h-8 md:h-10 bg-gradient-to-b from-white/40 via-white/15 to-transparent" />
+                    <div className="schedule-divider w-0.5 h-8 md:h-10 bg-gradient-to-b from-white/40 via-white/15 to-transparent" />
                   )}
                   <ScheduleItem
                     title={item.title}
@@ -118,7 +228,7 @@ export function Schedule({ items, customStyle }: Props) {
                     type={item.type}
                   />
                   {index < items.length - 1 && (
-                    <div className="w-0.5 h-8 md:h-10 bg-gradient-to-b from-transparent via-white/15 to-white/40" />
+                    <div className="schedule-divider w-0.5 h-8 md:h-10 bg-gradient-to-b from-transparent via-white/15 to-white/40" />
                   )}
                 </div>
               </motion.div>
