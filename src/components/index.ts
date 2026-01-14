@@ -10,3 +10,4 @@ export * from "./schedule/schedule";
 export * from "./location";
 export * from "./locations";
 export * from "./color-picker";
+export { default as AnimatedDecorations } from "./animated-decorations";

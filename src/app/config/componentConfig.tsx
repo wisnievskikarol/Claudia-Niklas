@@ -1,5 +1,6 @@
 import HeroHorizontal from "@/components/hero-horizontal";
 import Location from "@/components/location";
+import Countdown from "@/components/countdown";
 // import Locations from "@/components/locations";
 // import Schedule from "@/components/schedule/schedule";
 // import Spotify from "@/components/spotify";
@@ -51,6 +52,12 @@ export const componentConfig: ComponentConfig<any>[] = [
         imageSrc: "/image/temp2.svg",
       },
     } satisfies HeroHorizontalProps,
+  },
+  {
+    component: Countdown,
+    props: {
+      weddingDate: "2026-08-08",
+    },
   },
   // {
   //   component: Locations,

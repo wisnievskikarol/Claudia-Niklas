@@ -6,7 +6,7 @@ import {
   Navbar as MTNavbar,
   Typography,
 } from "@material-tailwind/react";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 type SupportedLang = "pl" | "de";
 import { LanguageContext } from "@/app/provider";
@@ -111,27 +111,25 @@ export function Navbar() {
           const navHeight = nav ? nav.offsetHeight : 0;
           const elTop = el.getBoundingClientRect().top + window.scrollY;
           window.scrollTo({
-            top: elTop - navHeight - 8, // 8px extra offset
+            top: elTop - navHeight - 8,
             behavior: "smooth",
           });
         }
       }
     };
     return (
-      <li className="hover:underline">
-        <Typography
-          as="a"
-          variant="paragraph"
+      <li>
+        <a
           href={href || "#"}
           onClick={handleClick}
           className={
             onSchedule
-              ? "flex items-center gap-2 py-4 font-normal text-white"
-              : "flex items-center gap-2 py-4 font-normal text-secondary"
+              ? "flex items-center gap-2 py-4 font-normal text-white transition-colors duration-300 text-sm hover:opacity-70"
+              : "flex items-center gap-2 py-4 font-normal text-secondary transition-colors duration-300 text-sm hover:opacity-70"
           }
         >
           {children}
-        </Typography>
+        </a>
       </li>
     );
   }
@@ -167,10 +165,10 @@ export function Navbar() {
     <div
       id="navbar-main"
       className={
-        `px-2 backdrop-blur-xl w-full fixed top-0 z-50 py-5 md:py-2 transition-colors duration-300 ` +
+        `px-4 w-full fixed top-0 z-50 py-4 transition-colors duration-300 border-b ` +
         (onSchedule
-          ? "bg-primary/90 bg-opacity-10 text-white"
-          : "bg-primary/90 bg-opacity-10 text-secondary")
+          ? "bg-primary/95 text-white border-b-white/10"
+          : "bg-primary/95 text-secondary border-b-secondary/10")
       }
     >
       <div className="container mx-auto flex items-center justify-between px-2 lg:px-0">

@@ -4,6 +4,7 @@ import { ScheduleProps } from "@/app/types";
 import { Typography } from "@material-tailwind/react";
 import ScheduleItem from "./schedule-item";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 interface CustomStyleProps {
   sectionClass?: string;
@@ -14,11 +15,34 @@ interface CustomStyleProps {
 
 type Props = ScheduleProps & { customStyle?: CustomStyleProps };
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+};
+
 export function Schedule({ items, customStyle }: Props) {
   return (
     <section
       id="harmonogram"
-      className={customStyle?.sectionClass || "relative w-full py-0 px-0"}
+      className="relative w-full min-h-screen flex items-center justify-center py-20 px-4 overflow-hidden"
       style={{ position: "relative", width: "100%", overflow: "hidden" }}
     >
       {/* Background image */}
@@ -35,48 +59,71 @@ export function Schedule({ items, customStyle }: Props) {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundAttachment: "fixed",
-            opacity: 0.15,
+            opacity: 0.2,
           }}
           aria-hidden="true"
         />
       )}
-      {/* Black translucent overlay */}
-      <div
-        className={
-          customStyle?.overlayClass ||
-          "absolute inset-0 w-full h-full bg-black bg-opacity-70 z-10"
-        }
-      />
+
+      {/* Dark overlay */}
+      <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-black/80 via-black/75 to-black/80 z-10" />
+
       {/* Content */}
-      <div
-        className={
-          customStyle?.contentClass ||
-          "relative z-20 flex flex-col items-center justify-center min-h-[700px] py-20"
-        }
-      >
-        <Typography
-          variant="h2"
-          className="mb-10 font-normal font-Bellefair text-4xl md:text-5xl text-white"
+      <div className="relative z-20 flex flex-col items-center justify-center w-full max-w-5xl">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-16 md:mb-20"
         >
-          Plan uroczystości
-        </Typography>
-        <div className="flex flex-col items-center gap-3 w-full px-2 md:px-0">
-          <div className="flex flex-col gap-3 w-full">
+          <Typography
+            variant="h2"
+            className="font-light font-Bellefair text-5xl md:text-6xl text-white mb-6 tracking-tight"
+          >
+            Plan uroczystości
+          </Typography>
+          <div className="flex items-center justify-center gap-4">
+            <div className="w-12 h-0.5 bg-gradient-to-r from-transparent to-white/40" />
+            <div className="w-2 h-2 rounded-full bg-white/60" />
+            <div className="w-12 h-0.5 bg-gradient-to-l from-transparent to-white/40" />
+          </div>
+        </motion.div>
+
+        {/* Timeline */}
+        <div className="w-full max-w-3xl mx-auto">
+          {/* Timeline items */}
+          <motion.div
+            className="space-y-0 relative z-10"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
             {items.map((item, index) => (
-              <div
+              <motion.div
                 key={index}
-                className={`w-full max-w-xl mx-auto py-2 md:py-2 border-b border-white/20 last:border-b-0 transition-colors duration-300 text-white/80`}
-                style={{ textAlign: "center" }}
+                className="flex justify-center"
+                variants={itemVariants}
               >
-                <div className="flex flex-col items-center justify-center w-full text-center">
+                {/* Content with divider line */}
+                <div className="flex flex-col items-center w-full">
+                  {index > 0 && (
+                    <div className="w-0.5 h-8 md:h-10 bg-gradient-to-b from-white/40 via-white/15 to-transparent" />
+                  )}
                   <ScheduleItem
                     title={item.title}
                     description={item.description}
+                    type={item.type}
                   />
+                  {index < items.length - 1 && (
+                    <div className="w-0.5 h-8 md:h-10 bg-gradient-to-b from-transparent via-white/15 to-white/40" />
+                  )}
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

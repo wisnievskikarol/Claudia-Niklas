@@ -17,17 +17,30 @@ function HeroContent({
   time,
 }: HeroContentProps) {
   return (
-    <motion.div className="z-10 flex text-secondary flex-col gap-y-4 justify-center px-2 sm:px-4 md:px-8 lg:px-16 lg:py-16 text-center lg:text-left mt-16">
+    <motion.div
+      className="z-10 flex text-secondary flex-col gap-y-4 justify-center px-2 sm:px-4 md:px-8 lg:px-16 lg:py-16 text-center lg:text-left mt-16"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+    >
       <Typography
         variant="h1"
-        className="mb-2 font-Bellefair font-normal text-4xl text-center sm:text-7xl"
+        className="mb-2 font-Bellefair font-normal text-5xl sm:text-7xl md:text-8xl text-center sm:text-center tracking-tight"
       >
         {title}
       </Typography>
-      <Typography className="mb-6 text-center">{subtitle}</Typography>
-      <div className="flex mb-8 justify-center">
+      <Typography className="mb-6 text-center text-base sm:text-lg md:text-xl text-secondary/80 font-light">
+        {subtitle}
+      </Typography>
+      <motion.div
+        className="flex mb-8 justify-center"
+        data-info-box
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
         <HeroInfoBox address={address} date={date} time={time} />
-      </div>
+      </motion.div>
     </motion.div>
   );
 }
@@ -35,16 +48,15 @@ function HeroContent({
 function HeroImage({ imageSrc, altText }: HeroImageProps) {
   return (
     <motion.div
-      className="z-10 w-full relative flex justify-center items-center xl:min-h-[1000px] 2xl:min-h-[1200px]"
+      className="z-10 w-full relative flex justify-center items-center"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
       style={{
-        minHeight: "640px",
-        maxHeight: "1000px",
+        minHeight: "600px",
+        maxHeight: "900px",
         overflow: "hidden",
-        borderRadius: "32px",
-        /* Responsive: even taller on large screens */
+        borderRadius: "16px",
       }}
     >
       <Image
@@ -54,13 +66,13 @@ function HeroImage({ imageSrc, altText }: HeroImageProps) {
           objectFit: "cover",
           width: "100%",
           height: "100%",
-          borderRadius: "32px",
-          filter: "brightness(0.92)",
+          borderRadius: "16px",
+          filter: "brightness(0.95)",
         }}
         alt={altText}
         priority
       />
-      {/* Gradient overlay for designer look */}
+      {/* Subtle overlay */}
       <div
         style={{
           position: "absolute",
@@ -68,9 +80,9 @@ function HeroImage({ imageSrc, altText }: HeroImageProps) {
           left: 0,
           width: "100%",
           height: "100%",
-          borderRadius: "32px",
+          borderRadius: "16px",
           background:
-            "linear-gradient(180deg,rgba(255,255,255,0.08) 0%,rgba(0,0,0,0.18) 100%)",
+            "linear-gradient(180deg,rgba(255,255,255,0.05) 0%,rgba(0,0,0,0.1) 100%)",
           pointerEvents: "none",
         }}
       />

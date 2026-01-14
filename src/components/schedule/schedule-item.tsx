@@ -1,6 +1,7 @@
 "use client";
 
 import { Typography } from "@material-tailwind/react";
+import { motion } from "framer-motion";
 
 interface Props {
   title: string;
@@ -8,23 +9,30 @@ interface Props {
   time?: string;
   dresscode?: string;
   location?: string;
+  type?: string;
 }
 
-export function ScheduleItems({ title, description }: Props) {
+export function ScheduleItems({
+  title,
+  description,
+  type = "ceremony",
+}: Props) {
   return (
-    <div className="flex flex-col items-center gap-2 py-1 w-full">
-      <div className="w-full max-w-xl px-2">
-        <Typography
-          variant="h5"
-          className="text-white font-bold text-lg md:text-xl text-center"
-        >
-          {title}
-        </Typography>
-        <Typography className="text-white text-sm md:text-base text-center mt-1">
-          {description}
-        </Typography>
+    <motion.div
+      className="w-full text-center"
+      whileHover={{ scale: 1.05 }}
+      transition={{ duration: 0.3 }}
+    >
+      {/* Time badge */}
+      <div className="inline-block px-4 py-1 rounded-full text-xs font-semibold tracking-widest mb-3 bg-white/15 text-white/90">
+        {title}
       </div>
-    </div>
+
+      {/* Description */}
+      <Typography className="text-white text-lg md:text-2xl font-serif font-light">
+        {description}
+      </Typography>
+    </motion.div>
   );
 }
 

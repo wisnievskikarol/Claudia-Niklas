@@ -34,47 +34,30 @@ const Countdown: React.FC<CountdownProps> = ({ weddingDate }) => {
   });
 
   return (
-    <section className="w-full flex justify-center mt-8">
-      <div className="flex flex-col items-center justify-center px-6 py-8 bg-primary bg-opacity-30 rounded-2xl shadow-lg max-w-2xl w-full mx-2 border border-primary/20">
-        <h2 className="text-4xl sm:text-5xl font-Bellefair text-secondary mb-2 tracking-tight text-center drop-shadow-sm">
+    <section className="w-full flex justify-center mt-16 mb-16 px-2">
+      <div className="flex flex-col items-center justify-center px-8 py-16 max-w-5xl w-full">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-Bellefair text-secondary mb-3 tracking-tight text-center font-light">
           Odliczanie do ślubu
         </h2>
-        <p className="text-base sm:text-lg text-secondary/70 mb-6 text-center">
-          Już niedługo ten wyjątkowy dzień!
+        <p className="text-base sm:text-lg text-secondary/60 mb-12 text-center font-light">
+          Już niedługo
         </p>
-        <div className="flex gap-4 sm:gap-8 text-center justify-center">
-          <div className="flex flex-col items-center">
-            <span className="text-4xl sm:text-5xl font-Bellefair text-primary drop-shadow font-normal">
-              {timeLeft.days}
-            </span>
-            <span className="text-xs sm:text-sm text-secondary/70 uppercase tracking-widest">
-              dni
-            </span>
-          </div>
-          <div className="flex flex-col items-center">
-            <span className="text-4xl sm:text-5xl font-Bellefair text-primary drop-shadow font-normal">
-              {timeLeft.hours}
-            </span>
-            <span className="text-xs sm:text-sm text-secondary/70 uppercase tracking-widest">
-              godz.
-            </span>
-          </div>
-          <div className="flex flex-col items-center">
-            <span className="text-4xl sm:text-5xl font-Bellefair text-primary drop-shadow font-normal">
-              {timeLeft.minutes}
-            </span>
-            <span className="text-xs sm:text-sm text-secondary/70 uppercase tracking-widest">
-              min
-            </span>
-          </div>
-          <div className="flex flex-col items-center">
-            <span className="text-4xl sm:text-5xl font-Bellefair text-primary drop-shadow font-normal">
-              {timeLeft.seconds}
-            </span>
-            <span className="text-xs sm:text-sm text-secondary/70 uppercase tracking-widest">
-              sek
-            </span>
-          </div>
+        <div className="flex gap-6 sm:gap-8 text-center justify-center flex-wrap">
+          {[
+            { value: timeLeft.days, label: "dni" },
+            { value: timeLeft.hours, label: "godz" },
+            { value: timeLeft.minutes, label: "min" },
+            { value: timeLeft.seconds, label: "sek" },
+          ].map((item, idx) => (
+            <div key={idx} className="flex flex-col items-center">
+              <div className="text-4xl sm:text-5xl md:text-6xl font-Bellefair text-secondary font-normal">
+                {String(item.value).padStart(2, "0")}
+              </div>
+              <span className="text-xs sm:text-sm text-secondary/50 uppercase tracking-widest mt-3 font-light">
+                {item.label}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </section>
