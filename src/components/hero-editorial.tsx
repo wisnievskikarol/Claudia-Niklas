@@ -17,22 +17,22 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.5,
+      staggerChildren: 0.12,
+      delayChildren: 0.3,
     },
   },
 };
 
-// Letter animation for hero title - more dramatic
+// Letter animation for hero title
 const letterVariants = {
-  hidden: { opacity: 0, y: 80, rotateX: -40 },
+  hidden: { opacity: 0, y: 50, rotateX: -20 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
     rotateX: 0,
     transition: {
-      duration: 1.2,
-      delay: i * 0.04,
+      duration: 0.8,
+      delay: i * 0.03,
       ease: [0.23, 1, 0.32, 1],
     },
   }),
@@ -40,88 +40,62 @@ const letterVariants = {
 
 // Animated title with letter-by-letter reveal
 function AnimatedTitle({ title }: { title: string }) {
-  const names = title.split(" & ");
+  const words = title.split(" ");
 
   return (
-    <motion.div
-      className="text-center"
+    <motion.h1
+      className="font-editorial text-[2.75rem] sm:text-[4rem] md:text-[5rem] lg:text-[6rem] xl:text-[7rem] text-editorial-charcoal leading-[0.95] tracking-tight text-center px-2"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
     >
-      {names.length === 2 ? (
-        <>
-          {/* First name */}
-          <div className="overflow-hidden">
-            <motion.h1
-              className="font-editorial text-[3.5rem] sm:text-[5rem] md:text-[7rem] lg:text-[9rem] xl:text-[11rem] text-editorial-charcoal leading-[0.85] tracking-[-0.02em]"
-              initial={{ y: 100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{
-                duration: 1.2,
-                delay: 0.3,
-                ease: [0.23, 1, 0.32, 1],
-              }}
+      {words.map((word, wordIndex) => (
+        <span key={wordIndex} className="inline-block mr-[0.2em]">
+          {word.split("").map((letter, letterIndex) => (
+            <motion.span
+              key={letterIndex}
+              className="inline-block"
+              custom={wordIndex * 5 + letterIndex}
+              variants={letterVariants}
+              style={{ transformOrigin: "center bottom" }}
             >
-              {names[0]}
-            </motion.h1>
-          </div>
+              {letter}
+            </motion.span>
+          ))}
+          {wordIndex < words.length - 1 && <span>&nbsp;</span>}
+        </span>
+      ))}
+    </motion.h1>
+  );
+}
 
-          {/* Ampersand with decorative lines */}
-          <motion.div
-            className="flex items-center justify-center gap-4 sm:gap-8 my-2 sm:my-4"
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
-          >
-            <motion.div
-              className="h-px bg-editorial-stone/40"
-              initial={{ width: 0 }}
-              animate={{ width: "4rem" }}
-              transition={{ duration: 1.2, delay: 1, ease: [0.23, 1, 0.32, 1] }}
-            />
-            <span className="font-editorial text-2xl sm:text-3xl md:text-4xl text-editorial-stone italic">
-              &
-            </span>
-            <motion.div
-              className="h-px bg-editorial-stone/40"
-              initial={{ width: 0 }}
-              animate={{ width: "4rem" }}
-              transition={{ duration: 1.2, delay: 1, ease: [0.23, 1, 0.32, 1] }}
-            />
-          </motion.div>
-
-          {/* Second name */}
-          <div className="overflow-hidden">
-            <motion.h1
-              className="font-editorial text-[3.5rem] sm:text-[5rem] md:text-[7rem] lg:text-[9rem] xl:text-[11rem] text-editorial-charcoal leading-[0.85] tracking-[-0.02em]"
-              initial={{ y: 100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{
-                duration: 1.2,
-                delay: 0.6,
-                ease: [0.23, 1, 0.32, 1],
-              }}
-            >
-              {names[1]}
-            </motion.h1>
-          </div>
-        </>
-      ) : (
-        <motion.h1
-          className="font-editorial text-[3rem] sm:text-[4.5rem] md:text-[6rem] lg:text-[8rem] text-editorial-charcoal leading-[0.9] tracking-[-0.02em]"
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1.2, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
-        >
-          {title}
-        </motion.h1>
-      )}
+// Elegant divider with animation
+function EditorialDivider() {
+  return (
+    <motion.div
+      className="flex items-center justify-center gap-2 sm:gap-3 md:gap-4 my-2 sm:my-4 md:my-6 lg:my-8"
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
+    >
+      <motion.div
+        className="h-px bg-editorial-stone/30"
+        initial={{ width: 0 }}
+        animate={{ width: 40 }}
+        transition={{ duration: 1.2, delay: 1, ease: [0.23, 1, 0.32, 1] }}
+      />
+      <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-editorial-stone/40" />
+      <motion.div
+        className="h-px bg-editorial-stone/30"
+        initial={{ width: 0 }}
+        animate={{ width: 40 }}
+        transition={{ duration: 1.2, delay: 1, ease: [0.23, 1, 0.32, 1] }}
+      />
     </motion.div>
   );
 }
 
-// Date display component - refined layout
+// Date display component with elegant formatting
 function DateDisplay({ date, time }: { date: Date; time: string }) {
   const dateObj = new Date(date);
   const day = dateObj.getDate();
@@ -130,11 +104,14 @@ function DateDisplay({ date, time }: { date: Date; time: string }) {
 
   return (
     <motion.div
-      className="text-center"
-      initial={{ opacity: 0, y: 40 }}
+      className="text-center px-4"
+      initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, delay: 1.4, ease: [0.23, 1, 0.32, 1] }}
+      transition={{ duration: 1, delay: 1.2, ease: [0.23, 1, 0.32, 1] }}
     >
+      <div className="font-clean text-[10px] sm:text-xs tracking-[0.2em] uppercase text-editorial-muted mb-3 sm:mb-4">
+        Zapraszamy Was
+      </div>
       <div className="flex items-baseline justify-center gap-2 sm:gap-3 md:gap-4">
         <span className="font-editorial text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-editorial-charcoal leading-none">
           {day}
@@ -152,19 +129,14 @@ function DateDisplay({ date, time }: { date: Date; time: string }) {
           {year}
         </span>
       </div>
-      <motion.div
-        className="font-clean text-xs sm:text-sm tracking-[0.3em] uppercase text-editorial-stone mt-3 sm:mt-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 1.8 }}
-      >
+      <div className="font-clean text-[10px] sm:text-xs tracking-[0.2em] uppercase text-editorial-stone mt-3 sm:mt-4">
         godz. {time}
-      </motion.div>
+      </div>
     </motion.div>
   );
 }
 
-// Hero image with parallax effect - larger and more impactful
+// Hero image with parallax effect
 function HeroImage({
   imageSrc,
   altText,
@@ -178,26 +150,18 @@ function HeroImage({
     offset: ["start end", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.15, 1, 1.1]);
+  const y = useTransform(scrollYProgress, [0, 1], ["-5%", "5%"]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1, 1.05]);
 
   return (
     <motion.div
       ref={imageRef}
-      className="relative w-full overflow-hidden"
-      initial={{ opacity: 0, y: 60 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1.5, delay: 1.6, ease: [0.23, 1, 0.32, 1] }}
+      className="relative w-screen -mx-3 sm:-mx-6 md:-mx-12 overflow-hidden"
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1.5, delay: 0.5, ease: [0.23, 1, 0.32, 1] }}
     >
-      {/* Frame decoration */}
-      <div className="absolute inset-0 pointer-events-none z-10">
-        <div className="absolute top-4 left-4 w-12 h-12 border-l border-t border-editorial-charcoal/20" />
-        <div className="absolute top-4 right-4 w-12 h-12 border-r border-t border-editorial-charcoal/20" />
-        <div className="absolute bottom-4 left-4 w-12 h-12 border-l border-b border-editorial-charcoal/20" />
-        <div className="absolute bottom-4 right-4 w-12 h-12 border-r border-b border-editorial-charcoal/20" />
-      </div>
-
-      <div className="relative w-full aspect-[3/4] sm:aspect-[4/5] md:aspect-[3/2] lg:aspect-[16/9] overflow-hidden">
+      <div className="relative w-full aspect-[4/5] sm:aspect-[3/2] overflow-hidden">
         <motion.div
           className="absolute inset-0 w-full h-full"
           style={{ y, scale }}
@@ -205,38 +169,40 @@ function HeroImage({
           <Image
             src={imageSrc}
             fill
-            className="object-cover object-center"
+            className="object-cover object-center image-editorial"
             alt={altText}
             priority
-            sizes="100vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
           />
         </motion.div>
 
-        {/* Elegant vignette overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-editorial-cream/30 via-transparent to-editorial-cream/10 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-b from-editorial-cream/20 via-transparent to-transparent pointer-events-none" />
+        {/* Subtle overlay gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-editorial-cream/10 via-transparent to-transparent pointer-events-none" />
       </div>
     </motion.div>
   );
 }
 
-// Scroll indicator - more subtle
+// Scroll indicator
 function ScrollIndicator() {
   return (
     <motion.div
-      className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+      className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, delay: 2.2, ease: [0.23, 1, 0.32, 1] }}
+      transition={{ duration: 1, delay: 2, ease: [0.23, 1, 0.32, 1] }}
     >
+      <span className="font-clean text-[10px] tracking-[0.2em] uppercase text-editorial-muted">
+        Scroll
+      </span>
       <motion.div
-        className="w-px h-8 sm:h-12 bg-gradient-to-b from-editorial-charcoal/60 to-transparent"
+        className="w-px h-12 bg-gradient-to-b from-editorial-charcoal to-transparent"
         animate={{
-          scaleY: [1, 0.5, 1],
-          opacity: [0.6, 0.3, 0.6],
+          scaleY: [1, 0.6, 1],
+          opacity: [0.4, 0.8, 0.4],
         }}
         transition={{
-          duration: 2.5,
+          duration: 2,
           repeat: Infinity,
           ease: "easeInOut",
         }}
@@ -260,7 +226,7 @@ export function HeroEditorial({ content, heroImage }: HeroHorizontalProps) {
     const ctx = gsap.context(() => {
       // Gentle parallax for background elements
       gsap.to(".hero-ambient", {
-        y: 150,
+        y: 100,
         scrollTrigger: {
           trigger: heroRef.current,
           start: "top top",
@@ -277,56 +243,66 @@ export function HeroEditorial({ content, heroImage }: HeroHorizontalProps) {
     <header
       ref={heroRef}
       id="hero"
-      className="relative min-h-screen flex flex-col justify-between items-center overflow-hidden bg-editorial-cream"
+      className="relative min-h-screen flex flex-col justify-center items-center px-3 sm:px-6 md:px-12 pt-16 sm:pt-24 md:pt-32 pb-8 sm:pb-16 md:pb-24 overflow-hidden bg-editorial-cream"
     >
       {/* Ambient background elements */}
       <div className="hero-ambient absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-[40rem] h-[40rem] rounded-full bg-editorial-champagne/30 blur-[150px]" />
-        <div className="absolute bottom-1/3 right-0 w-[30rem] h-[30rem] rounded-full bg-editorial-sand/30 blur-[120px]" />
+        <div className="absolute top-1/4 -left-20 w-96 h-96 rounded-full bg-editorial-champagne/50 blur-[100px]" />
+        <div className="absolute bottom-1/4 -right-20 w-80 h-80 rounded-full bg-editorial-sand/40 blur-[100px]" />
       </div>
 
-      {/* Top section with text content */}
-      <div className="relative z-10 w-full flex-1 flex flex-col justify-center items-center pt-24 sm:pt-28 md:pt-32 pb-8 sm:pb-12 px-4 sm:px-6">
-        <div className="w-full max-w-7xl mx-auto">
-          <div className="flex flex-col items-center gap-6 sm:gap-8 md:gap-10">
-            {/* Overline - wedding invitation */}
-            <motion.p
-              className="font-clean text-[10px] sm:text-xs tracking-[0.3em] uppercase text-editorial-stone"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.8,
-                delay: 0.1,
-                ease: [0.23, 1, 0.32, 1],
-              }}
-            >
-              Zaproszenie ślubne
-            </motion.p>
+      {/* Main content */}
+      <div className="relative z-10 w-full max-w-6xl mx-auto">
+        <div className="flex flex-col items-center gap-3 sm:gap-6 md:gap-10 lg:gap-14">
+          {/* Overline */}
+          <motion.p
+            className="font-clean text-[10px] sm:text-xs tracking-[0.2em] uppercase text-editorial-muted"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
+          >
+            Zaproszenie ślubne
+          </motion.p>
 
-            {/* Main title - Names */}
-            <AnimatedTitle title={content.title} />
+          {/* Main title - Names */}
+          <AnimatedTitle title={content.title} />
 
-            {/* Date display */}
-            <DateDisplay date={content.date} time={content.time} />
+          {/* Elegant divider */}
+          <EditorialDivider />
 
-            {/* Location */}
-            <motion.div
-              className="text-center"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 1.6, ease: [0.23, 1, 0.32, 1] }}
-            >
-              <div className="font-clean text-xs sm:text-sm tracking-[0.15em] uppercase text-editorial-stone/80">
-                {content.address}
-              </div>
-            </motion.div>
+          {/* Emotional subtitle */}
+          <motion.p
+            className="font-clean text-xs sm:text-sm md:text-base lg:text-lg text-editorial-stone text-center max-w-lg sm:max-w-xl italic px-3 sm:px-4 leading-relaxed"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1, ease: [0.23, 1, 0.32, 1] }}
+          >
+            {content.subtitle}
+          </motion.p>
+
+          {/* Date display */}
+          <DateDisplay date={content.date} time={content.time} />
+
+          {/* Location */}
+          <motion.div
+            className="text-center px-4"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1.4, ease: [0.23, 1, 0.32, 1] }}
+          >
+            <div className="font-clean text-[10px] sm:text-xs tracking-[0.15em] uppercase text-editorial-stone">
+              {content.address}
+            </div>
+          </motion.div>
+
+          {/* Hero image */}
+          <div className="w-full mt-3 sm:mt-6 md:mt-10 lg:mt-16">
+            <HeroImage
+              imageSrc={heroImage.imageSrc}
+              altText={heroImage.altText}
+            />
           </div>
         </div>
-      </div>
-
-      {/* Full-width hero image at bottom */}
-      <div className="relative z-10 w-full">
-        <HeroImage imageSrc={heroImage.imageSrc} altText={heroImage.altText} />
       </div>
 
       {/* Scroll indicator */}
