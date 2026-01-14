@@ -29,7 +29,7 @@ export const componentConfig: ComponentConfig<any>[] = [
       content: {
         title: "Claudia & Niklas",
         subtitle:
-          "Nie możemy się doczekać, aby wspólnie z Wami świętować naszą miłośc!",
+          "Nie możemy się doczekać, aby wspólnie z Wami świętować naszą miłość!",
         address: "ul. Belwederskiej 54/56 w Warszawie",
         date: new Date(2026, 7, 8),
         time: "12:00",
@@ -169,41 +169,41 @@ export const componentConfig: ComponentConfig<any>[] = [
       },
       hotels: [
         {
-          title: "Hotel Belwederski",
-          phone: "+48 22 123 45 67",
+          title: "Hotel Bulwar",
           description:
-            "Hotel położony 5 minut spacerem od miejsca uroczystości.",
-          reservationLink: "https://hotel-belwederski.pl/",
+            "Elegancki hotel położony w samym sercu Torunia, tuż nad brzegiem Wisły. Oferuje dostęp do parkingu. Odległość od miejsca uroczystości: ok. 5 minut samochodem.",
+          reservationLink: "https://hotelbulwar.pl/",
           translations: {
             de: {
-              title: "Hotel Belwederski",
+              title: "Hotel Bulwar",
               description:
-                "Das Hotel liegt 5 Gehminuten vom Veranstaltungsort entfernt.",
+                "Elegantes Hotel im Herzen von Toruń, direkt am Ufer der Weichsel. Bietet Parkplätze. Entfernung zum Veranstaltungsort: ca. 5 Minuten mit dem Auto.",
             },
           },
         },
         {
-          title: "Hotel Royal",
-          phone: "+48 22 987 65 43",
-          description: "Komfortowe pokoje i śniadanie w cenie.",
-          reservationLink: "https://hotelroyal.pl/",
+          title: "Hotel Filmar",
+          description:
+            "Komfortowy hotel w centrum miasta, w odległości około 15 minut spacerem od toruńskiej Starówki. Odległość od miejsca uroczystości: ok. 9 minut samochodem.",
+          reservationLink: "https://hotelfilmar.pl/",
           translations: {
             de: {
-              title: "Hotel Royal",
-              description: "Komfortable Zimmer und Frühstück inklusive.",
+              title: "Hotel Filmar",
+              description:
+                "Komfortables Hotel im Stadtzentrum, etwa 15 Gehminuten von der Altstadt von Toruń entfernt. Entfernung zum Veranstaltungsort: ca. 9 Minuten mit dem Auto.",
             },
           },
         },
         {
-          title: "Hotel City Center",
-          phone: "+48 22 555 66 77",
-          description: "W samym centrum Warszawy, dogodny dojazd komunikacją.",
-          reservationLink: "https://hotelcitycenter.pl/",
+          title: "Hotel i Camping Tramp",
+          description:
+            "Hotel położony w pobliżu dworca kolejowego Toruń Główny (ok. 15 minut pieszo). Oferuje również dostęp do parkingu i znajduje się najbliżej miejsca uroczystości. Odległość od miejsca uroczystości: ok. 12 minut pieszo lub 4 minuty samochodem.",
+          reservationLink: "https://www.campingtramp.pl/",
           translations: {
             de: {
-              title: "Hotel City Center",
+              title: "Hotel i Camping Tramp",
               description:
-                "Im Herzen von Warschau, gute Anbindung an den Nahverkehr.",
+                "Hotel in der Nähe des Bahnhofs Toruń Główny (ca. 15 Minuten zu Fuß). Bietet Parkplätze und liegt am nächsten zum Veranstaltungsort. Entfernung zum Veranstaltungsort: ca. 12 Minuten zu Fuß oder 4 Minuten mit dem Auto.",
             },
           },
         },
@@ -275,32 +275,32 @@ export const componentConfig: ComponentConfig<any>[] = [
       faqs: [
         {
           title: "Jak dojechać na miejsce uroczystości?",
-          desc: "Odpowiedzi będą dodane później...",
+          desc: "Najwygodniej dotrzeć na miejsce uroczystości samochodem lub taksówką. Istnieje również możliwość dojazdu komunikacją miejską - autobusem do przystanku Dworzec Główny 00, skąd spacer do obiektu zajmuje około 10 minut.",
           translations: {
             de: {
               title: "Wie kommt man zum Veranstaltungsort?",
-              desc: "Antworten werden später hinzugefügt...",
+              desc: "Am bequemsten erreicht ihr den Veranstaltungsort mit dem Auto oder Taxi. Es gibt auch eine Anbindung mit öffentlichen Verkehrsmitteln – Bus bis zur Haltestelle Dworzec Główny 00, von dort ca. 10 Minuten zu Fuß zum Objekt.",
             },
           },
         },
         {
           title: "Czy na miejscu będzie zapewniony parking dla gości?",
-          desc: "Odpowiedzi będą dodane później...",
+          desc: "Tak. Na terenie obiektu dostępny jest bezpłatny parking dla Gości, oferujący około 50 miejsc parkingowych, co zapewnia komfortowy i spokojny udział w uroczystości.",
           translations: {
             de: {
               title: "Gibt es Parkplätze für Gäste vor Ort?",
-              desc: "Antworten werden später hinzugefügt...",
+              desc: "Ja. Auf dem Gelände steht ein kostenloser Parkplatz für Gäste zur Verfügung, mit rund 50 Stellplätzen, was einen komfortablen und entspannten Besuch der Feier ermöglicht.",
             },
           },
         },
         {
           title:
             "Czy istnieje możliwość zakwaterowania dla gości spoza miasta?",
-          desc: "Odpowiedzi będą dodane później...",
+          desc: "Tak. Aby pobyt w Toruniu był jak najbardziej komfortowy, przygotowaliśmy propozycje noclegów położonych blisko miejsca uroczystości. Szczegóły dostępne są w sekcji ‘Polecane hotele’.",
           translations: {
             de: {
               title: "Gibt es Übernachtungsmöglichkeiten für auswärtige Gäste?",
-              desc: "Antworten werden später hinzugefügt...",
+              desc: "Ja. Damit euer Aufenthalt in Toruń möglichst komfortabel ist, haben wir Unterkunftsvorschläge in der Nähe des Veranstaltungsorts vorbereitet. Details findet ihr im Abschnitt ‚Empfohlene Hotels‘.",
             },
           },
         },
