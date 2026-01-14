@@ -40,10 +40,16 @@ function HeroInfoBox({ date, address, time }: Props) {
         icon={
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
+            fill="none"
             viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={1.5}
           >
-            <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5"
+            />
           </svg>
         }
         label="Data uroczystości"
@@ -53,10 +59,21 @@ function HeroInfoBox({ date, address, time }: Props) {
         icon={
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
+            fill="none"
             viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={1.5}
           >
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 17.2S7 11.48 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.48-5 10.2-5 10.2zM12 11.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5 14.5 7.62 14.5 9 13.38 11.5 12 11.5z" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+            />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+            />
           </svg>
         }
         label="Miejsce"
@@ -66,11 +83,16 @@ function HeroInfoBox({ date, address, time }: Props) {
         icon={
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
+            fill="none"
             viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={1.5}
           >
-            <path d="M12 8v5l4.28 2.54.72-1.21-3.5-2.08V8z" />
-            <path d="M20 12c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8 8 3.58 8 8zm-8-10C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 6v6h4.5m4.5-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+            />
           </svg>
         }
         label="Godzina rozpoczęcia"

@@ -7,10 +7,7 @@ import {
   AccordionHeader,
   Typography,
 } from "@material-tailwind/react";
-import {
-  QuestionMarkCircleIcon,
-  ChevronDownIcon,
-} from "@heroicons/react/24/outline";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 
 function Icon({ id, open }: { id: number; open: number }) {
@@ -30,7 +27,20 @@ export function Faq({ faqs }: FaqProps) {
     <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8">
       <div className="container mx-auto">
         <div className="mb-12 sm:mb-16 md:mb-20 flex flex-col items-center">
-          <QuestionMarkCircleIcon className="w-20 h-20 text-secondary mb-6" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={1.5}
+            className="w-20 h-20 text-secondary mb-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0zm-9 5.25h.008v.008H12v-.008z"
+            />
+          </svg>
           <div className="text-center">
             <Typography
               variant="h2"

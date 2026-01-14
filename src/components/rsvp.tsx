@@ -7,7 +7,20 @@ import { EnvelopeIcon } from "@heroicons/react/24/outline";
 function RsvpHeader({ title, description }: RsvpHeaderProps) {
   return (
     <div className="flex flex-col text-secondary justify-center items-center gap-4 md:gap-6">
-      <EnvelopeIcon className="w-20 h-20 text-secondary" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth={1.5}
+        className="w-20 h-20 text-secondary"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.972l-7.5 4.5a2.25 2.25 0 0 1-2.36 0l-7.5-4.5A2.25 2.25 0 0 1 3 6.993V6.75"
+        />
+      </svg>
       <div className="w-full flex flex-col justify-center items-center ">
         <Typography
           variant="h2"
