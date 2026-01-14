@@ -4,6 +4,7 @@ import { Roboto } from "next/font/google";
 import { Layout, Footer } from "@/components";
 import { Navbar } from "@/components";
 import ClientProvider from "./provider";
+import PageLoader from "@/components/page-loader";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -32,6 +33,7 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/favicon.png" type="image/png" />
       </head>
       <body className={`${roboto.className} bg-primary`}>
+        <PageLoader />
         <ClientProvider>
           <Layout>
             <Navbar />

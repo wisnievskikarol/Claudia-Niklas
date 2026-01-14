@@ -31,6 +31,12 @@
   scroll-behavior: smooth;
 }
 
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
 body {
   font-family: "Inter", Arial, Helvetica, sans-serif !important;
   font-feature-settings: "lnum", "kern", "ss01";
