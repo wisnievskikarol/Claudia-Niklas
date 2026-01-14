@@ -132,7 +132,7 @@ export function EditorialSchedule({
             alt="Background"
             priority
           />
-          <div className="absolute inset-0 bg-black/70" />
+          <div className="absolute inset-0 bg-black/80" />
         </div>
       )}
 
