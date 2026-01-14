@@ -1,20 +1,14 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
-import { Layout, Footer } from "@/components";
-import { Navbar } from "@/components";
+import { Layout } from "@/components";
+import { EditorialNavbar } from "@/components/editorial-navbar";
+import { EditorialFooter } from "@/components/editorial-footer";
 import ClientProvider from "./provider";
 import PageLoader from "@/components/page-loader";
 
-const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "700", "900"],
-  display: "swap",
-});
-
 export const metadata: Metadata = {
   title: "Claudia & Niklas",
-  description: "Wesele Claudia & Niklas",
+  description: "Zaproszenie ślubne - Claudia & Niklas",
 };
 
 export default function RootLayout({
@@ -32,13 +26,20 @@ export default function RootLayout({
         ></script>
         <link rel="shortcut icon" href="/favicon.png" type="image/png" />
       </head>
-      <body className={`${roboto.className} bg-primary`}>
+      <body className="bg-editorial-cream">
         <PageLoader />
         <ClientProvider>
           <Layout>
-            <Navbar />
+            <EditorialNavbar
+              coupleNames="C & N"
+              links={[
+                { label: "Start", href: "#hero" },
+                { label: "Harmonogram", href: "#harmonogram" },
+                { label: "RSVP", href: "#rsvp" },
+              ]}
+            />
             {children}
-            <Footer />
+            <EditorialFooter coupleNames="C & N" date="08.08.2026" />
           </Layout>
         </ClientProvider>
       </body>

@@ -1,32 +1,19 @@
-/* Lokalny font Inter z pełnym wsparciem PL znaków */
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/inter/Inter-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/inter/Inter-Bold.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/inter/Inter-Italic.woff2") format("woff2");
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-/* Dodaj pozostałe wagi/styly jeśli potrzebujesz */
+/* ═══════════════════════════════════════════════════════════════
+   EDITORIAL LUXURY WEDDING - Global Styles
+   Elegant Minimalism / Modern Classic Design System
+   ═══════════════════════════════════════════════════════════════ */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Bellefair&display=swap");
 
+/* Google Fonts - Editorial Typography */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap");
+
+/* Import editorial design system */
+@import "../styles/editorial.css";
+
+/* Global scroll behavior */
 * {
   scroll-behavior: smooth;
 }
@@ -38,18 +25,70 @@ body {
 }
 
 body {
-  font-family: "Inter", Arial, Helvetica, sans-serif !important;
-  font-feature-settings: "lnum", "kern", "ss01";
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  font-weight: 300;
+  font-feature-settings: "kern", "liga", "ss01";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--editorial-cream);
+  color: var(--editorial-charcoal);
 }
 
+/* Editorial font utility */
+.font-editorial {
+  font-family: "Cormorant Garamond", "Georgia", serif;
+  font-weight: 300;
+}
+
+.font-clean {
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  font-weight: 300;
+}
+
+/* Legacy support */
 .font-Bellefair {
-  font-family: "Bellefair", serif !important;
-  font-feature-settings: "lnum", "kern", "ss01";
+  font-family: "Cormorant Garamond", "Georgia", serif !important;
+  font-weight: 300;
 }
 
+/* ─────────────────────────────────────────────────────────────────
+   EDITORIAL COLOR PALETTE
+   ───────────────────────────────────────────────────────────────── */
 :root {
-  --color-primary: #f9f4ed;
-  --color-secondary: #293238;
+  /* Legacy support */
+  --color-primary: #faf8f5;
+  --color-secondary: #2c2c2c;
+
+  /* Editorial palette - Warm Neutrals */
+  --editorial-cream: #faf8f5;
+  --editorial-ivory: #f7f4ef;
+  --editorial-linen: #f2ede6;
+  --editorial-champagne: #ede7dd;
+  --editorial-sand: #e8e0d4;
+
+  /* Typography - Rich Darks */
+  --editorial-charcoal: #2c2c2c;
+  --editorial-graphite: #3d3d3d;
+  --editorial-slate: #4a4a4a;
+  --editorial-stone: #666666;
+  --editorial-muted: #8a8a8a;
+
+  /* Accent Colors */
+  --editorial-gold: #b8a080;
+  --editorial-rose: #c9b5a8;
+
+  /* Functional */
+  --editorial-border: rgba(44, 44, 44, 0.08);
+  --editorial-border-hover: rgba(44, 44, 44, 0.15);
+  --editorial-shadow: rgba(44, 44, 44, 0.04);
 }
 
 /* Animacje wejścia */

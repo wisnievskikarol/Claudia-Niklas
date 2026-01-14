@@ -8,23 +8,20 @@ import { EditorialIntro } from "@/components/editorial-intro";
 import { EditorialCountdown } from "@/components/editorial-countdown";
 import { EditorialDetails } from "@/components/editorial-details";
 import { EditorialSchedule } from "@/components/editorial-schedule";
+import { EditorialGallery } from "@/components/editorial-gallery";
 import { EditorialHotels } from "@/components/editorial-hotels";
 import { EditorialFaq } from "@/components/editorial-faq";
 import { EditorialRsvp } from "@/components/editorial-rsvp";
 
-// ═══════════════════════════════════════════════════════════════
-// PAGE CONFIGURATION - Edit this section to customize your wedding website
-// ═══════════════════════════════════════════════════════════════
-
-const weddingConfig = {
-  // Hero Section - Main banner with couple names
+// Page configuration - edit this to customize content
+const pageConfig = {
   hero: {
     content: {
       title: "Claudia & Niklas",
       subtitle:
         "Nie możemy się doczekać, aby wspólnie z Wami świętować naszą miłość",
       address: "ul. Belwederska 54/56, Warszawa",
-      date: new Date(2026, 7, 8), // Month is 0-indexed (7 = August)
+      date: new Date(2026, 7, 8),
       time: "13:00",
     },
     heroImage: {
@@ -33,20 +30,17 @@ const weddingConfig = {
     },
   },
 
-  // Emotional introduction quote
   intro: {
     quote:
       "Każda wielka miłość zaczyna się od małego kroku. Oto początek naszej wspólnej drogi.",
   },
 
-  // Countdown timer
   countdown: {
     weddingDate: "2026-08-08",
     title: "Odliczamy",
     subtitle: "dni do naszego wielkiego dnia",
   },
 
-  // Event details - key information
   details: {
     title: "Szczegóły uroczystości",
     items: [
@@ -57,7 +51,6 @@ const weddingConfig = {
     ],
   },
 
-  // Schedule timeline
   schedule: {
     title: "Harmonogram dnia",
     subtitle: "Plan naszego wspólnego święta",
@@ -87,7 +80,6 @@ const weddingConfig = {
     ],
   },
 
-  // Hotel recommendations
   hotels: {
     title: "Noclegi",
     subtitle: "Polecane przez nas miejsca",
@@ -109,7 +101,6 @@ const weddingConfig = {
     ],
   },
 
-  // FAQ section
   faq: {
     title: "Często zadawane pytania",
     subtitle: "Wszystko, co musisz wiedzieć",
@@ -137,7 +128,6 @@ const weddingConfig = {
     ],
   },
 
-  // RSVP form
   rsvp: {
     title: "Potwierdź obecność",
     subtitle: "Prosimy o odpowiedź do",
@@ -145,108 +135,97 @@ const weddingConfig = {
   },
 };
 
-// ═══════════════════════════════════════════════════════════════
-// PAGE COMPONENT - Main wedding website layout
-// ═══════════════════════════════════════════════════════════════
+// Section wrapper with consistent spacing
+function Section({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
-export default function WeddingPage() {
+export default function EditorialPage() {
   const { lang } = useContext(LanguageContext);
 
   return (
-    <main className="bg-editorial-cream min-h-screen">
-      {/* Hero Section - Full screen banner with couple names */}
+    <main className="bg-editorial-cream">
+      {/* Hero Section */}
       <HeroEditorial
-        content={weddingConfig.hero.content}
-        heroImage={weddingConfig.hero.heroImage}
+        content={pageConfig.hero.content}
+        heroImage={pageConfig.hero.heroImage}
         backgroundImage={{ imageSrc: "" }}
       />
 
-      {/* Emotional Introduction */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 1 }}
-      >
-        <EditorialIntro quote={weddingConfig.intro.quote} />
-      </motion.section>
+      {/* Emotional Intro */}
+      <Section>
+        <EditorialIntro quote={pageConfig.intro.quote} />
+      </Section>
 
-      {/* Countdown Timer */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 1 }}
-      >
+      {/* Countdown */}
+      <Section>
         <EditorialCountdown
-          weddingDate={weddingConfig.countdown.weddingDate}
-          title={weddingConfig.countdown.title}
-          subtitle={weddingConfig.countdown.subtitle}
+          weddingDate={pageConfig.countdown.weddingDate}
+          title={pageConfig.countdown.title}
+          subtitle={pageConfig.countdown.subtitle}
         />
-      </motion.section>
+      </Section>
 
-      {/* Event Details Grid */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 1 }}
-      >
+      {/* Event Details */}
+      <Section>
         <EditorialDetails
-          title={weddingConfig.details.title}
-          details={weddingConfig.details.items}
+          title={pageConfig.details.title}
+          details={pageConfig.details.items}
         />
-      </motion.section>
+      </Section>
 
-      {/* Day Schedule Timeline */}
-      <EditorialSchedule
-        items={weddingConfig.schedule.items}
-        title={weddingConfig.schedule.title}
-        subtitle={weddingConfig.schedule.subtitle}
-        backgroundImage={weddingConfig.schedule.backgroundImage}
-      />
+      {/* Schedule */}
+      <Section>
+        <EditorialSchedule
+          items={pageConfig.schedule.items}
+          title={pageConfig.schedule.title}
+          subtitle={pageConfig.schedule.subtitle}
+          backgroundImage={pageConfig.schedule.backgroundImage}
+        />
+      </Section>
 
-      {/* Hotel Recommendations */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 1 }}
-      >
+      {/* Hotels */}
+      <Section>
         <EditorialHotels
-          hotels={weddingConfig.hotels.items}
-          title={weddingConfig.hotels.title}
-          subtitle={weddingConfig.hotels.subtitle}
+          hotels={pageConfig.hotels.items}
+          title={pageConfig.hotels.title}
+          subtitle={pageConfig.hotels.subtitle}
         />
-      </motion.section>
+      </Section>
 
-      {/* FAQ Section */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 1 }}
-      >
+      {/* FAQ */}
+      <Section>
         <EditorialFaq
-          items={weddingConfig.faq.items}
-          title={weddingConfig.faq.title}
-          subtitle={weddingConfig.faq.subtitle}
+          items={pageConfig.faq.items}
+          title={pageConfig.faq.title}
+          subtitle={pageConfig.faq.subtitle}
         />
-      </motion.section>
+      </Section>
 
-      {/* RSVP Form */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 1 }}
-      >
+      {/* RSVP */}
+      <Section>
         <EditorialRsvp
-          title={weddingConfig.rsvp.title}
-          subtitle={weddingConfig.rsvp.subtitle}
-          deadline={weddingConfig.rsvp.deadline}
+          title={pageConfig.rsvp.title}
+          subtitle={pageConfig.rsvp.subtitle}
+          deadline={pageConfig.rsvp.deadline}
         />
-      </motion.section>
+      </Section>
     </main>
   );
 }
