@@ -124,8 +124,8 @@ export function Navbar() {
           onClick={handleClick}
           className={
             onSchedule
-              ? "flex items-center gap-2 py-4 font-normal text-white transition-colors duration-300 text-sm hover:opacity-70"
-              : "flex items-center gap-2 py-4 font-normal text-secondary transition-colors duration-300 text-sm hover:opacity-70"
+              ? "flex items-center gap-2 py-4 font-normal text-white transition-colors duration-300 text-xs sm:text-sm hover:opacity-70"
+              : "flex items-center gap-2 py-4 font-normal text-secondary transition-colors duration-300 text-xs sm:text-sm hover:opacity-70"
           }
         >
           {children}
@@ -143,16 +143,20 @@ export function Navbar() {
     window.addEventListener("resize", handleResize);
 
     function handleScroll() {
-      const section = document.getElementById("harmonogram");
       const nav = document.getElementById("navbar-main");
-      if (!section || !nav) return;
-      const sectionRect = section.getBoundingClientRect();
+      const scheduleSection = document.getElementById("harmonogram");
+
+      if (!nav || !scheduleSection) return;
+
       const navRect = nav.getBoundingClientRect();
-      const tolerance = 4;
-      const isDirectlyAbove =
-        Math.abs(navRect.bottom - sectionRect.top) <= tolerance;
-      setOnSchedule(isDirectlyAbove);
+      const scheduleRect = scheduleSection.getBoundingClientRect();
+
+      // Check if navbar bottom is within or overlapping schedule section
+      const isOverDarkBg = navRect.bottom >= scheduleRect.top;
+
+      setOnSchedule(isOverDarkBg);
     }
+
     window.addEventListener("scroll", handleScroll);
     handleScroll();
     return () => {
@@ -165,10 +169,10 @@ export function Navbar() {
     <div
       id="navbar-main"
       className={
-        `px-4 w-full fixed top-0 z-50 py-4 transition-colors duration-300 border-b ` +
+        `px-4 w-full fixed top-0 z-50 py-4 transition-colors duration-300 border-b backdrop-blur-md ` +
         (onSchedule
-          ? "bg-primary/95 text-white border-b-white/10"
-          : "bg-primary/95 text-secondary border-b-secondary/10")
+          ? "bg-primary/80 text-white border-b-white/10"
+          : "bg-primary/80 text-secondary border-b-secondary/10")
       }
     >
       <div className="container mx-auto flex items-center justify-between px-2 lg:px-0">
@@ -215,7 +219,14 @@ export function Navbar() {
       </div>
 
       <Collapse open={open}>
-        <div className="container mx-auto mt-3 border-t border-b border-secondary px-2 pt-4">
+        <div
+          className={
+            `container mx-auto mt-3 border-t border-b px-2 pt-4 ` +
+            (onSchedule
+              ? "border-white/20 bg-black/20 backdrop-blur-md"
+              : "border-secondary bg-primary/50 backdrop-blur-sm")
+          }
+        >
           <ul className="flex flex-col gap-4">
             {nav.menu.map(({ name, href }) => (
               <NavItem key={name} href={href}>

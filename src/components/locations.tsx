@@ -9,16 +9,22 @@ export function Locations({
   mapSrc,
 }: LocationsProps) {
   return (
-    <section id="mapa" className="scroll-mt-24 text-secondary bg-primary py-10">
+    <section
+      id="mapa"
+      className="scroll-mt-24 text-secondary bg-primary py-12 sm:py-16 md:py-20"
+    >
       <div className="mx-auto text-center max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col justify-center items-center gap-10">
+        <div className="flex flex-col justify-center items-center gap-8 sm:gap-10 md:gap-12">
           <div className="flex-col justify-start items-start flex">
             <div className="flex-col justify-start items-center gap-2 md:gap-4 flex">
               <div className="text-center text-sm md:text-base font-normal font-['Roboto'] text-secondary leading-normal">
                 {sectionTitle}
               </div>
               <div className="self-stretch w-full flex-col justify-start items-center gap-3 md:gap-6 flex">
-                <Typography variant="h2" className="mb-4 font-normal font-Bellefair">
+                <Typography
+                  variant="h2"
+                  className="mb-4 font-normal font-Bellefair"
+                >
                   {headerTitle}
                 </Typography>
               </div>
@@ -32,7 +38,7 @@ export function Locations({
                 loading="lazy"
               ></iframe>
             </div>
-            <div className="py-8 text-left px-4 flex flex-col bg-primary bg-opacity-75 text-secondary rounded-lg shadow-md lg:w-1/2 lg:ml-4">
+            <div className="py-6 sm:py-8 md:py-10 text-left px-4 sm:px-6 flex flex-col bg-primary bg-opacity-75 text-secondary rounded-lg shadow-md lg:w-1/2 lg:ml-4">
               {locations.map((location, index) => (
                 <div key={index}>
                   <h2 className="text-secondary text-lg mb-1 font-medium title-font">

@@ -18,18 +18,18 @@ function HeroContent({
 }: HeroContentProps) {
   return (
     <motion.div
-      className="z-10 flex text-secondary flex-col gap-y-4 justify-center px-2 sm:px-4 md:px-8 lg:px-16 lg:py-16 text-center lg:text-left mt-16"
+      className="z-10 flex text-secondary flex-col gap-y-3 sm:gap-y-4 md:gap-y-6 justify-center px-3 sm:px-6 md:px-8 lg:px-16 lg:py-16 text-center lg:text-left mt-8 sm:mt-12 md:mt-16"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
       <Typography
         variant="h1"
-        className="mb-2 font-Bellefair font-normal text-5xl sm:text-7xl md:text-8xl text-center sm:text-center tracking-tight"
+        className="mb-2 font-Bellefair font-normal text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-center sm:text-center tracking-tight"
       >
         {title}
       </Typography>
-      <Typography className="mb-6 text-center text-base sm:text-lg md:text-xl text-secondary/80 font-light">
+      <Typography className="mb-6 text-center text-sm sm:text-base md:text-lg lg:text-xl text-secondary/80 font-light">
         {subtitle}
       </Typography>
       <motion.div

@@ -27,22 +27,22 @@ export function Faq({ faqs }: FaqProps) {
   const handleOpen = (value: number) => setOpen(open === value ? 0 : value);
 
   return (
-    <section className="py-12 px-4 sm:px-6">
+    <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8">
       <div className="container mx-auto">
-        <div className="mb-12 flex flex-col items-center">
+        <div className="mb-12 sm:mb-16 md:mb-20 flex flex-col items-center">
           <QuestionMarkCircleIcon className="w-20 h-20 text-secondary mb-6" />
           <div className="text-center">
             <Typography
               variant="h2"
-              className="mb-4 font-normal font-Bellefair text-2xl sm:text-4xl"
+              className="mb-4 font-normal font-Bellefair text-2xl sm:text-3xl md:text-4xl"
             >
               Często zadawane pytania
             </Typography>
             <Typography
               variant="lead"
-              className="mx-auto hover:text-secondary w-full max-w-2xl text-base sm:text-lg"
+              className="mx-auto hover:text-secondary w-full max-w-2xl text-sm sm:text-base md:text-lg"
             >
-              Ponieżej znajdziecie odpowiedzi na najczęsciej zadawne przez Was
+              Ponieżej znajdziecie odpowiedzi na najczęściej zadawane przez Was
               pytania!
             </Typography>
           </div>
@@ -55,11 +55,11 @@ export function Faq({ faqs }: FaqProps) {
               icon={<Icon id={key + 1} open={open} />}
               onClick={() => handleOpen(key + 1)}
             >
-              <AccordionHeader className="text-left hover:text-gray-600 hover:text-underline font-normal text-secondary text-base sm:text-lg">
+              <AccordionHeader className="text-left hover:text-gray-600 hover:text-underline font-normal text-secondary text-sm sm:text-base md:text-lg">
                 {title}
               </AccordionHeader>
               <AccordionBody>
-                <Typography className="font-normal text-secondary text-sm sm:text-base">
+                <Typography className="font-normal text-secondary text-xs sm:text-sm md:text-base">
                   {desc}
                 </Typography>
               </AccordionBody>

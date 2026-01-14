@@ -24,12 +24,12 @@ export function ScheduleItems({
       transition={{ duration: 0.3 }}
     >
       {/* Time badge */}
-      <div className="inline-block px-4 py-1 rounded-full text-xs font-semibold tracking-widest mb-3 bg-white/15 text-white/90">
+      <div className="inline-block px-3 py-1.5 rounded-full text-xs font-semibold tracking-widest mb-4 bg-white/15 text-white/90">
         {title}
       </div>
 
       {/* Description */}
-      <Typography className="text-white text-lg md:text-2xl font-serif font-light">
+      <Typography className="text-white text-base sm:text-lg md:text-xl font-serif font-light leading-relaxed">
         {description}
       </Typography>
     </motion.div>

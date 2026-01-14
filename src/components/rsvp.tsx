@@ -11,13 +11,13 @@ function RsvpHeader({ title, description }: RsvpHeaderProps) {
       <div className="w-full flex flex-col justify-center items-center ">
         <Typography
           variant="h2"
-          className="mb-4 font-normal font-Bellefair text-2xl sm:text-4xl text-center"
+          className="mb-4 font-normal font-Bellefair text-2xl sm:text-3xl md:text-4xl text-center"
         >
           {title}
         </Typography>
         <Typography
           variant="lead"
-          className="text-center max-w-xl text-base sm:text-lg"
+          className="text-center max-w-xl text-sm sm:text-base md:text-lg"
         >
           {description}
         </Typography>
@@ -43,9 +43,12 @@ function RsvpButton({ url }: RsvpButtonProps) {
 
 export function Rsvp({ header, button }: RsvpProps) {
   return (
-    <section id="rsvp" className="px-4 scroll-mt-24">
+    <section
+      id="rsvp"
+      className="px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-20 scroll-mt-24"
+    >
       <div className="container mx-auto text-center">
-        <div className="flex flex-col justify-center items-center gap-7">
+        <div className="flex flex-col justify-center items-center gap-6 sm:gap-8 md:gap-10">
           <RsvpHeader title={header.title} description={header.description} />
           <RsvpButton url={button.url} />
         </div>

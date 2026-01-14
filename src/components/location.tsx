@@ -10,14 +10,19 @@ import Image from "next/image";
 function LocationHeader({ title, description }: LocationHeaderProps) {
   return (
     <div className="flex flex-col text-secondary justify-start items-center gap-2 md:gap-4">
-      <div className="text-center text-neutral-500 text-sm md:text-base text-secondary font-['Roboto'] leading-normal">
+      <div className="text-center text-neutral-500 text-xs sm:text-sm md:text-base text-secondary font-['Roboto'] leading-normal">
         Miejsce
       </div>
       <div className="flex flex-col justify-start items-center gap-3 md:gap-6">
-        <Typography variant="h2" className="mb-4 font-normal font-normal font-Bellefair">
+        <Typography
+          variant="h2"
+          className="mb-4 font-normal font-normal font-Bellefair text-2xl sm:text-3xl md:text-4xl"
+        >
           {title}
         </Typography>
-        <Typography variant="lead">{description}</Typography>
+        <Typography variant="lead" className="text-sm sm:text-base md:text-lg">
+          {description}
+        </Typography>
       </div>
     </div>
   );

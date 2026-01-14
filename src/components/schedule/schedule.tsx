@@ -69,18 +69,18 @@ export function Schedule({ items, customStyle }: Props) {
       <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-black/80 via-black/75 to-black/80 z-10" />
 
       {/* Content */}
-      <div className="relative z-20 flex flex-col items-center justify-center w-full max-w-5xl">
+      <div className="relative z-20 flex flex-col items-center justify-center w-full max-w-5xl px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-20">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16 md:mb-20"
+          className="text-center mb-12 sm:mb-16 md:mb-20"
         >
           <Typography
             variant="h2"
-            className="font-light font-Bellefair text-5xl md:text-6xl text-white mb-6 tracking-tight"
+            className="font-light font-Bellefair text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-6 tracking-tight"
           >
             Plan uroczystości
           </Typography>
@@ -92,10 +92,10 @@ export function Schedule({ items, customStyle }: Props) {
         </motion.div>
 
         {/* Timeline */}
-        <div className="w-full max-w-3xl mx-auto">
+        <div className="w-full max-w-2xl mx-auto px-2 sm:px-4">
           {/* Timeline items */}
           <motion.div
-            className="space-y-0 relative z-10"
+            className="space-y-8 sm:space-y-12 md:space-y-16 relative z-10"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
