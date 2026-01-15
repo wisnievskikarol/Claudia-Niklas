@@ -95,8 +95,7 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
     hero: {
       content: {
         title: "Claudia & Niklas",
-        subtitle:
-          "Nie możemy się doczekać, aby wspólnie z Wami świętować naszą miłość",
+        subtitle: "",
         address: "Pałac Widokowy ul. Majdany 1, 87-100 Toruń",
         date: new Date(2026, 7, 8),
         time: "16:00",

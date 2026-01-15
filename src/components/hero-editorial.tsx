@@ -83,7 +83,7 @@ function DateDisplay({ date, time }: { date: Date; time: string }) {
     >
       {/* Decorative top line */}
       <motion.div
-        className="w-12 h-px bg-editorial-stone/30 mb-8 sm:mb-10"
+        className="w-16 h-px bg-editorial-stone/30 mb-6 sm:mb-8"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ duration: 1, delay: 1.4, ease: [0.23, 1, 0.32, 1] }}
@@ -117,7 +117,7 @@ function DateDisplay({ date, time }: { date: Date; time: string }) {
 
       {/* Decorative bottom line */}
       <motion.div
-        className="w-12 h-px bg-editorial-stone/30 mt-8 sm:mt-10"
+        className="w-16 h-px bg-editorial-stone/30 mt-6 sm:mt-8"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ duration: 1, delay: 1.4, ease: [0.23, 1, 0.32, 1] }}
@@ -217,6 +217,9 @@ function ScrollIndicator() {
 export function HeroEditorial({ content, heroImage }: HeroHorizontalProps) {
   const heroRef = useRef<HTMLElement>(null);
   const [isMounted, setIsMounted] = useState(false);
+  const hasSubtitle = Boolean(
+    content.subtitle && content.subtitle.trim().length > 0
+  );
 
   useEffect(() => {
     setIsMounted(true);
@@ -256,10 +259,12 @@ export function HeroEditorial({ content, heroImage }: HeroHorizontalProps) {
       {/* Main content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto flex-1 flex flex-col">
         {/* Top section - Overline & Title */}
-        <div className="flex flex-col items-center mb-8 sm:mb-12 md:mb-16">
+        <div
+          className={`flex flex-col items-center ${hasSubtitle ? "mb-8 sm:mb-10 md:mb-12" : "mb-10 sm:mb-12 md:mb-16"}`}
+        >
           {/* Overline */}
           <motion.p
-            className="font-clean text-[10px] sm:text-[11px] tracking-[0.3em] uppercase text-editorial-muted mb-6 sm:mb-8 md:mb-10"
+            className="font-clean text-[10px] sm:text-[11px] tracking-[0.3em] uppercase text-editorial-muted mb-4 sm:mb-5 md:mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
@@ -272,62 +277,88 @@ export function HeroEditorial({ content, heroImage }: HeroHorizontalProps) {
         </div>
 
         {/* Middle section - Subtitle & Details in elegant grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-12 lg:gap-8 items-center mb-10 sm:mb-14 md:mb-20">
-          {/* Left - decorative line */}
-          <motion.div
-            className="hidden lg:flex items-center justify-end"
-            initial={{ opacity: 0, scaleX: 0 }}
-            animate={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 1.2, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
-          >
-            <div className="w-full max-w-[200px] h-px bg-gradient-to-l from-editorial-stone/30 to-transparent" />
-          </motion.div>
+        {hasSubtitle && (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-12 lg:gap-8 items-center mb-10 sm:mb-14 md:mb-20">
+            {/* Left - decorative line */}
+            <motion.div
+              className="hidden lg:flex items-center justify-end"
+              initial={{ opacity: 0, scaleX: 0 }}
+              animate={{ opacity: 1, scaleX: 1 }}
+              transition={{
+                duration: 1.2,
+                delay: 0.8,
+                ease: [0.23, 1, 0.32, 1],
+              }}
+            >
+              <div className="w-full max-w-[200px] h-px bg-gradient-to-l from-editorial-stone/30 to-transparent" />
+            </motion.div>
 
-          {/* Center - Subtitle */}
-          <motion.div
-            className="flex flex-col items-center text-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1, ease: [0.23, 1, 0.32, 1] }}
-          >
-            <p className="font-clean text-sm sm:text-base md:text-lg text-editorial-stone italic leading-relaxed max-w-md">
-              {content.subtitle}
-            </p>
-          </motion.div>
+            {/* Center - Subtitle */}
+            <motion.div
+              className="flex flex-col items-center text-center"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 1, ease: [0.23, 1, 0.32, 1] }}
+            >
+              <p className="font-clean text-sm sm:text-base md:text-lg text-editorial-stone italic leading-relaxed max-w-md">
+                {content.subtitle}
+              </p>
+            </motion.div>
 
-          {/* Right - decorative line */}
-          <motion.div
-            className="hidden lg:flex items-center justify-start"
-            initial={{ opacity: 0, scaleX: 0 }}
-            animate={{ opacity: 1, scaleX: 1 }}
-            transition={{ duration: 1.2, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
-          >
-            <div className="w-full max-w-[200px] h-px bg-gradient-to-r from-editorial-stone/30 to-transparent" />
-          </motion.div>
-        </div>
+            {/* Right - decorative line */}
+            <motion.div
+              className="hidden lg:flex items-center justify-start"
+              initial={{ opacity: 0, scaleX: 0 }}
+              animate={{ opacity: 1, scaleX: 1 }}
+              transition={{
+                duration: 1.2,
+                delay: 0.8,
+                ease: [0.23, 1, 0.32, 1],
+              }}
+            >
+              <div className="w-full max-w-[200px] h-px bg-gradient-to-r from-editorial-stone/30 to-transparent" />
+            </motion.div>
+          </div>
+        )}
 
         {/* Date & Location section */}
-        <div className="flex flex-col items-center gap-6 sm:gap-8 md:gap-10 mb-10 sm:mb-14 md:mb-20">
+        <div className="flex flex-col items-center gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12 md:mb-16">
           {/* Date display */}
           <DateDisplay date={content.date} time={content.time} />
 
           {/* Location with icon-like styling */}
           <motion.div
-            className="flex items-center gap-3"
+            className="flex items-center gap-3 px-4 py-2 rounded-full border border-editorial-stone/10 bg-editorial-cream/50 backdrop-blur-sm"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 1.4, ease: [0.23, 1, 0.32, 1] }}
           >
-            <div className="w-1 h-1 rounded-full bg-editorial-stone/40" />
-            <span className="font-clean text-[10px] sm:text-xs tracking-[0.2em] uppercase text-editorial-stone">
+            <svg
+              className="w-3.5 h-3.5 text-editorial-stone/60"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+              />
+            </svg>
+            <span className="font-clean text-[10px] sm:text-xs tracking-[0.15em] uppercase text-editorial-stone">
               {content.address}
             </span>
-            <div className="w-1 h-1 rounded-full bg-editorial-stone/40" />
           </motion.div>
         </div>
 
         {/* Hero image - full width with elegant framing */}
-        <div className="w-full mt-auto">
+        <div className="w-full mt-auto pt-4 sm:pt-6 md:pt-8">
           <HeroImage
             imageSrc={heroImage.imageSrc}
             altText={heroImage.altText}
