@@ -69,11 +69,21 @@ function AnimatedTitle({ title }: { title: string }) {
 }
 
 // Date display component with elegant formatting
-function DateDisplay({ date, time }: { date: Date; time: string }) {
+function DateDisplay({
+  date,
+  time,
+  lang = "pl",
+}: {
+  date: Date;
+  time: string;
+  lang?: "pl" | "de";
+}) {
+  const locale = lang === "de" ? "de-DE" : "pl-PL";
   const dateObj = new Date(date);
   const day = dateObj.getDate();
-  const month = dateObj.toLocaleString("pl-PL", { month: "long" });
+  const month = dateObj.toLocaleString(locale, { month: "long" });
   const year = dateObj.getFullYear();
+  const timeLabel = lang === "de" ? `${time} Uhr` : `godz. ${time}`;
 
   return (
     <motion.div
@@ -112,7 +122,7 @@ function DateDisplay({ date, time }: { date: Date; time: string }) {
       {/* Time - centered below */}
       <div className="mt-4 sm:mt-6">
         <span className="font-clean text-[10px] sm:text-xs tracking-[0.3em] uppercase text-editorial-muted">
-          godz. {time}
+          {timeLabel}
         </span>
       </div>
 
@@ -327,7 +337,11 @@ export function HeroEditorial({ content, heroImage }: HeroHorizontalProps) {
         {/* Date & Location section */}
         <div className="flex flex-col items-center gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12 md:mb-16">
           {/* Date display */}
-          <DateDisplay date={content.date} time={content.time} />
+          <DateDisplay
+            date={content.date}
+            time={content.time}
+            lang={lang === "de" ? "de" : "pl"}
+          />
 
           {/* Location with icon-like styling */}
           <motion.div
