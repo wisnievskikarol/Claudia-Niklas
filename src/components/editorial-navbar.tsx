@@ -1,7 +1,21 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { LanguageContext } from "@/app/provider";
+
+type SupportedLang = "pl" | "de";
+
+const NAV_LINKS: Record<SupportedLang, { label: string; href: string }[]> = {
+  pl: [
+    { label: "Harmonogram", href: "#harmonogram" },
+    { label: "RSVP", href: "#rsvp" },
+  ],
+  de: [
+    { label: "Ablauf", href: "#harmonogram" },
+    { label: "RSVP", href: "#rsvp" },
+  ],
+};
 
 interface EditorialNavbarProps {
   coupleNames?: string;
@@ -10,14 +24,50 @@ interface EditorialNavbarProps {
 
 export function EditorialNavbar({
   coupleNames = "C & N",
-  links = [
-    { label: "Start", href: "#hero" },
-    { label: "Harmonogram", href: "#harmonogram" },
-    { label: "RSVP", href: "#rsvp" },
-  ],
+  links,
 }: EditorialNavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { lang, setLang } = useContext(LanguageContext);
+  const currentLang: SupportedLang = lang === "de" ? "de" : "pl";
+  const navLinks = links ?? NAV_LINKS[currentLang];
+
+  function LanguageToggle({ isMobile = false }: { isMobile?: boolean }) {
+    const baseBtn =
+      "px-3 py-1 text-[11px] tracking-[0.15em] uppercase rounded-full border transition-colors duration-300";
+    const wrapperClass = isMobile
+      ? "mt-6 flex items-center justify-center gap-3"
+      : "hidden md:flex items-center gap-3";
+
+    return (
+      <div className={wrapperClass}>
+        <button
+          type="button"
+          aria-pressed={currentLang === "pl"}
+          className={`${baseBtn} ${
+            currentLang === "pl"
+              ? "bg-editorial-charcoal text-editorial-cream border-editorial-charcoal"
+              : "border-editorial-stone text-editorial-charcoal hover:bg-editorial-stone/60"
+          }`}
+          onClick={() => setLang("pl")}
+        >
+          PL
+        </button>
+        <button
+          type="button"
+          aria-pressed={currentLang === "de"}
+          className={`${baseBtn} ${
+            currentLang === "de"
+              ? "bg-editorial-charcoal text-editorial-cream border-editorial-charcoal"
+              : "border-editorial-stone text-editorial-charcoal hover:bg-editorial-stone/60"
+          }`}
+          onClick={() => setLang("de")}
+        >
+          DE
+        </button>
+      </div>
+    );
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,8 +101,8 @@ export function EditorialNavbar({
             </a>
 
             {/* Desktop navigation */}
-            <div className="hidden md:flex items-center gap-8 lg:gap-12">
-              {links.map((link, index) => (
+            <div className="hidden md:flex items-center gap-6 lg:gap-10">
+              {navLinks.map((link, index) => (
                 <motion.a
                   key={link.href}
                   href={link.href}
@@ -64,6 +114,7 @@ export function EditorialNavbar({
                   {link.label}
                 </motion.a>
               ))}
+              <LanguageToggle />
             </div>
 
             {/* Mobile menu button */}
@@ -109,7 +160,7 @@ export function EditorialNavbar({
             transition={{ duration: 0.3 }}
           >
             <div className="flex flex-col items-center gap-6 sm:gap-8">
-              {links.map((link, index) => (
+              {navLinks.map((link, index) => (
                 <motion.a
                   key={link.href}
                   href={link.href}
@@ -123,6 +174,7 @@ export function EditorialNavbar({
                   {link.label}
                 </motion.a>
               ))}
+              <LanguageToggle isMobile />
             </div>
           </motion.div>
         )}

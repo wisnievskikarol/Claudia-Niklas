@@ -14,10 +14,19 @@ interface EditorialHotelsProps {
   hotels: Hotel[];
   title?: string;
   subtitle?: string;
+  ctaLabel?: string;
 }
 
 // Hotel card with elegant reveal
-function HotelCard({ hotel, index }: { hotel: Hotel; index: number }) {
+function HotelCard({
+  hotel,
+  index,
+  ctaLabel,
+}: {
+  hotel: Hotel;
+  index: number;
+  ctaLabel: string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
@@ -66,7 +75,7 @@ function HotelCard({ hotel, index }: { hotel: Hotel; index: number }) {
             whileHover={{ x: 5 }}
             transition={{ duration: 0.3 }}
           >
-            <span>Rezerwuj</span>
+            <span>{ctaLabel}</span>
             <svg
               width="16"
               height="16"
@@ -88,6 +97,7 @@ export function EditorialHotels({
   hotels,
   title = "Noclegi",
   subtitle = "Polecane przez nas miejsca",
+  ctaLabel = "Rezerwuj",
 }: EditorialHotelsProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
@@ -128,7 +138,12 @@ export function EditorialHotels({
         {/* Hotels grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8">
           {hotels.map((hotel, index) => (
-            <HotelCard key={index} hotel={hotel} index={index} />
+            <HotelCard
+              key={index}
+              hotel={hotel}
+              index={index}
+              ctaLabel={ctaLabel}
+            />
           ))}
         </div>
       </div>

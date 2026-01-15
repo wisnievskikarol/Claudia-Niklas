@@ -30,14 +30,7 @@ export default function RootLayout({
         <PageLoader />
         <ClientProvider>
           <Layout>
-            <EditorialNavbar
-              coupleNames="C & N"
-              links={[
-                { label: "Start", href: "#hero" },
-                { label: "Harmonogram", href: "#harmonogram" },
-                { label: "RSVP", href: "#rsvp" },
-              ]}
-            />
+            <EditorialNavbar coupleNames="C & N" />
             {children}
             <EditorialFooter coupleNames="C & N" date="08.08.2026" />
           </Layout>

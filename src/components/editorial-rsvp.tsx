@@ -8,7 +8,56 @@ interface EditorialRsvpProps {
   subtitle?: string;
   deadline?: string;
   formAction?: string;
+  copy?: RsvpCopy;
 }
+
+type RsvpCopy = {
+  nameLabel: string;
+  attendanceLabel: string;
+  attendanceOptions: { value: string; label: string }[];
+  dietLabel: string;
+  dietOptions: { value: string; label: string }[];
+  dietRestrictionsLabel: string;
+  withChildrenLabel: string;
+  withChildrenOptions: { value: string; label: string }[];
+  childrenCountLabel: string;
+  submitting: string;
+  submitCta: string;
+  submitError: string;
+  missingEndpoint: string;
+  successTitle: string;
+  successBody: string;
+};
+
+const DEFAULT_COPY_PL: RsvpCopy = {
+  nameLabel: "Proszę podać swoje imię i nazwisko",
+  attendanceLabel: "Czy planujesz przyjść na nasz ślub?",
+  attendanceOptions: [
+    { value: "yes", label: "Tak" },
+    { value: "no", label: "Nie" },
+  ],
+  dietLabel:
+    "Wolicie tradycyjne dania mięsne, czy raczej skłaniacie się ku potrawom wegetariańskim?",
+  dietOptions: [
+    { value: "vegetarian", label: "Dania wegetariańskie" },
+    { value: "meat", label: "Dania mięsne" },
+    { value: "any", label: "Bez różnicy" },
+  ],
+  dietRestrictionsLabel:
+    "Czy masz jakieś ograniczenia dietetyczne lub alergie pokarmowe, o których powinniśmy wiedzieć?",
+  withChildrenLabel: "Planujesz zabrać ze sobą dzieci?",
+  withChildrenOptions: [
+    { value: "yes", label: "Tak" },
+    { value: "no", label: "Nie" },
+  ],
+  childrenCountLabel: "Ile dzieci planujesz ze sobą zabrać?",
+  submitting: "Wysyłanie...",
+  submitCta: "Wyślij odpowiedź",
+  submitError: "Nie udało się wysłać odpowiedzi. Spróbuj ponownie.",
+  missingEndpoint: "Brak skonfigurowanego adresu Google Apps Script.",
+  successTitle: "Dziękujemy!",
+  successBody: "Twoja odpowiedź została zapisana. Do zobaczenia!",
+};
 
 // Elegant input field
 function EditorialInput({
@@ -192,6 +241,7 @@ export function EditorialRsvp({
   subtitle = "Prosimy o odpowiedź do",
   deadline = "15 lipca 2026",
   formAction,
+  copy = DEFAULT_COPY_PL,
 }: EditorialRsvpProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
@@ -217,7 +267,7 @@ export function EditorialRsvp({
     setSubmitError(null);
 
     if (!endpoint) {
-      setSubmitError("Brak skonfigurowanego adresu Google Apps Script.");
+      setSubmitError(copy.missingEndpoint);
       return;
     }
 
@@ -251,7 +301,7 @@ export function EditorialRsvp({
 
       setIsSubmitted(true);
     } catch (err) {
-      setSubmitError("Nie udało się wysłać odpowiedzi. Spróbuj ponownie.");
+      setSubmitError(copy.submitError);
     } finally {
       setIsSubmitting(false);
     }
@@ -302,50 +352,40 @@ export function EditorialRsvp({
             className="space-y-6 sm:space-y-8 md:space-y-10 max-w-xl mx-auto"
           >
             <EditorialInput
-              label="Proszę podać swoje imię i nazwisko"
+              label={copy.nameLabel}
               name="fullName"
               required
               delay={0.1}
             />
 
             <EditorialRadioGroup
-              label="Czy planujesz przyjść na nasz ślub?"
+              label={copy.attendanceLabel}
               name="attendance"
-              options={[
-                { value: "yes", label: "Tak" },
-                { value: "no", label: "Nie" },
-              ]}
+              options={copy.attendanceOptions}
               required
               delay={0.25}
             />
 
             <EditorialRadioGroup
-              label="Wolicie tradycyjne dania mięsne, czy raczej skłaniacie się ku potrawom wegetariańskim?"
+              label={copy.dietLabel}
               name="diet"
-              options={[
-                { value: "vegetarian", label: "Dania wegetariańskie" },
-                { value: "meat", label: "Dania mięsne" },
-                { value: "any", label: "Bez różnicy" },
-              ]}
+              options={copy.dietOptions}
               required
               defaultValue="any"
               delay={0.3}
             />
 
             <EditorialTextarea
-              label="Czy masz jakieś ograniczenia dietetyczne lub alergie pokarmowe, o których powinniśmy wiedzieć?"
+              label={copy.dietRestrictionsLabel}
               name="dietRestrictions"
               required={false}
               delay={0.35}
             />
 
             <EditorialRadioGroup
-              label="Planujesz zabrać ze sobą dzieci?"
+              label={copy.withChildrenLabel}
               name="withChildren"
-              options={[
-                { value: "yes", label: "Tak" },
-                { value: "no", label: "Nie" },
-              ]}
+              options={copy.withChildrenOptions}
               required
               onChange={(value) => {
                 setWithChildren(value);
@@ -358,7 +398,7 @@ export function EditorialRsvp({
 
             {withChildren === "yes" && (
               <EditorialInput
-                label="Ile dzieci planujesz ze sobą zabrać?"
+                label={copy.childrenCountLabel}
                 name="childrenCount"
                 type="number"
                 required
@@ -393,10 +433,10 @@ export function EditorialRsvp({
                         ease: "linear",
                       }}
                     />
-                    Wysyłanie...
+                    {copy.submitting}
                   </span>
                 ) : (
-                  "Wyślij odpowiedź"
+                  copy.submitCta
                 )}
               </button>
               {submitError && (
@@ -427,10 +467,10 @@ export function EditorialRsvp({
               </svg>
             </div>
             <h3 className="font-editorial text-editorial-h3 text-editorial-charcoal mb-4">
-              Dziękujemy!
+              {copy.successTitle}
             </h3>
             <p className="font-clean text-editorial-body text-editorial-stone">
-              Twoja odpowiedź została zapisana. Do zobaczenia!
+              {copy.successBody}
             </p>
           </motion.div>
         )}

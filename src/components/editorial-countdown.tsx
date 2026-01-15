@@ -7,6 +7,14 @@ interface EditorialCountdownProps {
   weddingDate: string; // Format: YYYY-MM-DD
   title?: string;
   subtitle?: string;
+  timeLabels?: {
+    day: string;
+    dayPlural: string;
+    hour: string;
+    hourPlural: string;
+    minute: string;
+    minutePlural: string;
+  };
 }
 
 interface TimeUnit {
@@ -103,11 +111,20 @@ export function EditorialCountdown({
   weddingDate,
   title = "Odliczamy",
   subtitle = "dni do naszego wielkiego dnia",
+  timeLabels,
 }: EditorialCountdownProps) {
+  const labels = timeLabels ?? {
+    day: "dzień",
+    dayPlural: "dni",
+    hour: "godzina",
+    hourPlural: "godzin",
+    minute: "minuta",
+    minutePlural: "minut",
+  };
   const [timeLeft, setTimeLeft] = useState<TimeUnit[]>([
-    { value: 0, label: "dzień", labelPlural: "dni" },
-    { value: 0, label: "godzina", labelPlural: "godzin" },
-    { value: 0, label: "minuta", labelPlural: "minut" },
+    { value: 0, label: labels.day, labelPlural: labels.dayPlural },
+    { value: 0, label: labels.hour, labelPlural: labels.hourPlural },
+    { value: 0, label: labels.minute, labelPlural: labels.minutePlural },
   ]);
   const [mounted, setMounted] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -120,26 +137,26 @@ export function EditorialCountdown({
       return [
         {
           value: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          label: "dzień",
-          labelPlural: "dni",
+          label: labels.day,
+          labelPlural: labels.dayPlural,
         },
         {
           value: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          label: "godzina",
-          labelPlural: "godzin",
+          label: labels.hour,
+          labelPlural: labels.hourPlural,
         },
         {
           value: Math.floor((difference / 1000 / 60) % 60),
-          label: "minuta",
-          labelPlural: "minut",
+          label: labels.minute,
+          labelPlural: labels.minutePlural,
         },
       ];
     }
 
     return [
-      { value: 0, label: "dzień", labelPlural: "dni" },
-      { value: 0, label: "godzina", labelPlural: "godzin" },
-      { value: 0, label: "minuta", labelPlural: "minut" },
+      { value: 0, label: labels.day, labelPlural: labels.dayPlural },
+      { value: 0, label: labels.hour, labelPlural: labels.hourPlural },
+      { value: 0, label: labels.minute, labelPlural: labels.minutePlural },
     ];
   };
 
