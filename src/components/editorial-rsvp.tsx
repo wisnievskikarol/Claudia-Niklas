@@ -272,30 +272,19 @@ export function EditorialRsvp({
     }
 
     const formData = new FormData(e.currentTarget);
-
-    const payload: RsvpPayload = {
-      fullName: (formData.get("fullName") as string) ?? null,
-      attendance: (formData.get("attendance") as string) ?? null,
-      diet: (formData.get("diet") as string) ?? null,
-      dietRestrictions: (formData.get("dietRestrictions") as string) ?? null,
-      withChildren: (formData.get("withChildren") as string) ?? null,
-      childrenCount: formData.get("childrenCount")
-        ? Number(formData.get("childrenCount"))
-        : "",
-    };
+    const params = new URLSearchParams();
+    for (const [key, value] of formData.entries()) {
+      params.append(key, String(value));
+    }
 
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(endpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      // Use GET with query params to avoid preflight on Vercel
+      const url = `${endpoint}?${params.toString()}`;
+      const response = await fetch(url, { method: "GET" });
 
-      if (!response.ok) {
+      if (!response.ok && response.status !== 302) {
         throw new Error("Request failed");
       }
 
