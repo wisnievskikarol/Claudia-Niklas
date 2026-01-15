@@ -181,7 +181,7 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
             "Hotel położony w pobliżu dworca kolejowego Toruń Główny (ok. 15 minut pieszo). Oferuje również dostęp do parkingu i znajduje się najbliżej miejsca uroczystości.",
           distance:
             "Ok. 12 minut pieszo lub 4 minuty samochodem od miejsca uroczystości",
-          link: "https://hoteltramp.pl/",
+          link: "https://www.campingtramp.pl/index.php/contacts",
         },
       ],
     },
@@ -311,7 +311,7 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
             "Hotel in der Nähe des Bahnhofs Toruń Główny (ca. 15 Minuten zu Fuß). Parkplätze vorhanden; liegt am nächsten am Veranstaltungsort.",
           distance:
             "Ca. 12 Minuten zu Fuß oder 4 Minuten mit dem Auto vom Veranstaltungsort",
-          link: "https://hoteltramp.pl/",
+          link: "https://www.campingtramp.pl/index.php/contacts",
         },
       ],
     },
