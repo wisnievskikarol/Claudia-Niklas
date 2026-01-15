@@ -120,7 +120,7 @@ export function EditorialSchedule({
     <section
       ref={sectionRef}
       id="harmonogram"
-      className="relative min-h-screen py-16 sm:py-20 md:py-28 lg:py-32 overflow-hidden"
+      className="relative  py-16 sm:py-20 md:py-28 lg:py-32 overflow-hidden"
     >
       {/* Background image with overlay */}
       {backgroundImage && (

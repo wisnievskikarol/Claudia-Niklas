@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { FormEvent, useRef, useState, type InputHTMLAttributes } from "react";
 
 interface EditorialRsvpProps {
   title?: string;
@@ -17,15 +17,21 @@ function EditorialInput({
   type = "text",
   required = false,
   delay = 0,
+  value,
+  onValueChange,
+  inputProps,
 }: {
   label: string;
   name: string;
   type?: string;
   required?: boolean;
   delay?: number;
+  value?: string | number;
+  onValueChange?: (value: string) => void;
+  inputProps?: InputHTMLAttributes<HTMLInputElement>;
 }) {
   const [focused, setFocused] = useState(false);
-  const [hasValue, setHasValue] = useState(false);
+  const [hasValue, setHasValue] = useState(value !== undefined && value !== "");
 
   return (
     <motion.div
@@ -39,13 +45,20 @@ function EditorialInput({
         type={type}
         name={name}
         required={required}
+        value={value ?? undefined}
         className="w-full bg-transparent border-b border-editorial-border py-3 sm:py-4 font-clean text-sm sm:text-base text-editorial-charcoal placeholder-transparent focus:outline-none focus:border-editorial-charcoal transition-colors duration-300 peer"
         placeholder={label}
+        onChange={(e) => {
+          const currentValue = e.target.value;
+          setHasValue(currentValue.length > 0);
+          onValueChange?.(currentValue);
+        }}
         onFocus={() => setFocused(true)}
         onBlur={(e) => {
           setFocused(false);
           setHasValue(e.target.value.length > 0);
         }}
+        {...inputProps}
       />
       <label
         className={`absolute left-0 transition-all duration-300 pointer-events-none font-clean
@@ -66,14 +79,20 @@ function EditorialRadioGroup({
   label,
   name,
   options,
+  required = false,
+  defaultValue,
+  onChange,
   delay = 0,
 }: {
   label: string;
   name: string;
   options: { value: string; label: string }[];
+  required?: boolean;
+  defaultValue?: string;
+  onChange?: (value: string) => void;
   delay?: number;
 }) {
-  const [selected, setSelected] = useState<string | null>(null);
+  const [selected, setSelected] = useState<string | null>(defaultValue ?? null);
 
   return (
     <motion.div
@@ -87,7 +106,7 @@ function EditorialRadioGroup({
         {label}
       </span>
       <div className="flex flex-wrap gap-2 sm:gap-3 md:gap-4">
-        {options.map((option) => (
+        {options.map((option, index) => (
           <label
             key={option.value}
             className={`
@@ -104,7 +123,12 @@ function EditorialRadioGroup({
               name={name}
               value={option.value}
               className="hidden"
-              onChange={() => setSelected(option.value)}
+              required={required && index === 0}
+              checked={selected === option.value}
+              onChange={() => {
+                setSelected(option.value);
+                onChange?.(option.value);
+              }}
             />
             <span className="font-clean text-sm">{option.label}</span>
           </label>
@@ -118,10 +142,12 @@ function EditorialRadioGroup({
 function EditorialTextarea({
   label,
   name,
+  required = false,
   delay = 0,
 }: {
   label: string;
   name: string;
+  required?: boolean;
   delay?: number;
 }) {
   const [focused, setFocused] = useState(false);
@@ -138,6 +164,7 @@ function EditorialTextarea({
       <textarea
         name={name}
         rows={4}
+        required={required}
         className="w-full bg-transparent border-b border-editorial-border py-4 font-clean text-editorial-body text-editorial-charcoal placeholder-transparent focus:outline-none focus:border-editorial-charcoal transition-colors duration-300 peer resize-none"
         placeholder={label}
         onFocus={() => setFocused(true)}
@@ -170,8 +197,10 @@ export function EditorialRsvp({
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [withChildren, setWithChildren] = useState<string | null>(null);
+  const [childrenCount, setChildrenCount] = useState<string>("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -223,58 +252,76 @@ export function EditorialRsvp({
         {!isSubmitted ? (
           <form
             onSubmit={handleSubmit}
+            action={formAction}
             className="space-y-6 sm:space-y-8 md:space-y-10 max-w-xl mx-auto"
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-              <EditorialInput
-                label="Imię"
-                name="firstName"
-                required
-                delay={0.1}
-              />
-              <EditorialInput
-                label="Nazwisko"
-                name="lastName"
-                required
-                delay={0.15}
-              />
-            </div>
-
             <EditorialInput
-              label="Email"
-              name="email"
-              type="email"
+              label="Proszę podać swoje imię i nazwisko"
+              name="fullName"
               required
-              delay={0.2}
+              delay={0.1}
             />
 
             <EditorialRadioGroup
-              label="Czy weźmiesz udział?"
+              label="Czy planujesz przyjść na nasz ślub?"
               name="attendance"
               options={[
-                { value: "yes", label: "Tak, będę" },
-                { value: "no", label: "Niestety nie mogę" },
+                { value: "yes", label: "Tak" },
+                { value: "no", label: "Nie" },
               ]}
+              required
               delay={0.25}
             />
 
             <EditorialRadioGroup
-              label="Preferencje dietetyczne"
+              label="Wolicie tradycyjne dania mięsne, czy raczej skłaniacie się ku potrawom wegetariańskim?"
               name="diet"
               options={[
-                { value: "standard", label: "Standardowe" },
-                { value: "vegetarian", label: "Wegetariańskie" },
-                { value: "vegan", label: "Wegańskie" },
-                { value: "other", label: "Inne" },
+                { value: "vegetarian", label: "Dania wegetariańskie" },
+                { value: "meat", label: "Dania mięsne" },
+                { value: "any", label: "Bez różnicy" },
               ]}
+              required
+              defaultValue="any"
               delay={0.3}
             />
 
             <EditorialTextarea
-              label="Dodatkowe uwagi lub życzenia"
-              name="message"
+              label="Czy masz jakieś ograniczenia dietetyczne lub alergie pokarmowe, o których powinniśmy wiedzieć?"
+              name="dietRestrictions"
+              required={false}
               delay={0.35}
             />
+
+            <EditorialRadioGroup
+              label="Planujesz zabrać ze sobą dzieci?"
+              name="withChildren"
+              options={[
+                { value: "yes", label: "Tak" },
+                { value: "no", label: "Nie" },
+              ]}
+              required
+              onChange={(value) => {
+                setWithChildren(value);
+                if (value === "no") {
+                  setChildrenCount("");
+                }
+              }}
+              delay={0.4}
+            />
+
+            {withChildren === "yes" && (
+              <EditorialInput
+                label="Ile dzieci planujesz ze sobą zabrać?"
+                name="childrenCount"
+                type="number"
+                required
+                value={childrenCount}
+                onValueChange={setChildrenCount}
+                inputProps={{ min: 1, step: 1 }}
+                delay={0.45}
+              />
+            )}
 
             {/* Submit button */}
             <motion.div

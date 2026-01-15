@@ -23,9 +23,9 @@ const weddingConfig = {
       title: "Claudia & Niklas",
       subtitle:
         "Nie możemy się doczekać, aby wspólnie z Wami świętować naszą miłość",
-      address: "ul. Belwederska 54/56, Warszawa",
+      address: "Pałac Widokowy ul. Majdany 1, 87-100 Toruń",
       date: new Date(2026, 7, 8), // Month is 0-indexed (7 = August)
-      time: "13:00",
+      time: "16:00",
     },
     heroImage: {
       imageSrc: "/image/hero/WhatsApp-Image-2025-12-13-at-18.33.59.webp",
@@ -51,8 +51,8 @@ const weddingConfig = {
     title: "Szczegóły uroczystości",
     items: [
       { icon: "calendar" as const, label: "Data", value: "8 sierpnia 2026" },
-      { icon: "clock" as const, label: "Godzina", value: "13:00" },
-      { icon: "location" as const, label: "Miejsce", value: "Warszawa" },
+      { icon: "clock" as const, label: "Godzina", value: "16:00" },
+      { icon: "location" as const, label: "Miejsce", value: "Toruń" },
       { icon: "dress" as const, label: "Dress code", value: "Elegancki" },
     ],
   },
@@ -63,18 +63,6 @@ const weddingConfig = {
     subtitle: "Plan naszego wspólnego święta",
     backgroundImage: "/image/hero/WhatsApp-Image-2025-12-13-at-18.33.59.webp",
     items: [
-      { time: "12:30", title: "", description: "Przybycie gości" },
-      { time: "13:00", title: "", description: "Ceremonia ślubna" },
-      {
-        time: "14:00",
-        title: "",
-        description: "Składanie życzeń i wspólne zdjęcia",
-      },
-      {
-        time: "15:30",
-        title: "",
-        description: "Powitanie Pary Młodej na sali weselnej",
-      },
       { time: "16:00", title: "", description: "Obiad weselny" },
       { time: "17:30", title: "", description: "Pierwszy taniec" },
       { time: "18:00", title: "", description: "Zabawa taneczna" },
