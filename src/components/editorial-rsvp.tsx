@@ -273,9 +273,9 @@ export function EditorialRsvp({
 
     const formData = new FormData(e.currentTarget);
     const params = new URLSearchParams();
-    for (const [key, value] of formData.entries()) {
+    formData.forEach((value, key) => {
       params.append(key, String(value));
-    }
+    });
 
     setIsSubmitting(true);
 
