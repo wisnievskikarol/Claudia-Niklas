@@ -199,16 +199,62 @@ export function EditorialRsvp({
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [withChildren, setWithChildren] = useState<string | null>(null);
   const [childrenCount, setChildrenCount] = useState<string>("");
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: FormEvent) => {
+  const endpoint = formAction ?? process.env.NEXT_PUBLIC_RSVP_WEBAPP_URL;
+
+  type RsvpPayload = {
+    fullName: string | null;
+    attendance: string | null;
+    diet: string | null;
+    dietRestrictions: string | null;
+    withChildren: string | null;
+    childrenCount: number | "";
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSubmitError(null);
+
+    if (!endpoint) {
+      setSubmitError("Brak skonfigurowanego adresu Google Apps Script.");
+      return;
+    }
+
+    const formData = new FormData(e.currentTarget);
+
+    const payload: RsvpPayload = {
+      fullName: (formData.get("fullName") as string) ?? null,
+      attendance: (formData.get("attendance") as string) ?? null,
+      diet: (formData.get("diet") as string) ?? null,
+      dietRestrictions: (formData.get("dietRestrictions") as string) ?? null,
+      withChildren: (formData.get("withChildren") as string) ?? null,
+      childrenCount: formData.get("childrenCount")
+        ? Number(formData.get("childrenCount"))
+        : "",
+    };
+
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+      if (!response.ok) {
+        throw new Error("Request failed");
+      }
+
+      setIsSubmitted(true);
+    } catch (err) {
+      setSubmitError("Nie udało się wysłać odpowiedzi. Spróbuj ponownie.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -353,6 +399,11 @@ export function EditorialRsvp({
                   "Wyślij odpowiedź"
                 )}
               </button>
+              {submitError && (
+                <p className="text-sm text-red-700 mt-3 text-center">
+                  {submitError}
+                </p>
+              )}
             </motion.div>
           </form>
         ) : (
