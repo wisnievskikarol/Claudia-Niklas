@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useContext } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { HeroHorizontalProps } from "@/app/types";
+import { LanguageContext } from "@/app/provider";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -217,6 +218,8 @@ function ScrollIndicator() {
 export function HeroEditorial({ content, heroImage }: HeroHorizontalProps) {
   const heroRef = useRef<HTMLElement>(null);
   const [isMounted, setIsMounted] = useState(false);
+  const { lang } = useContext(LanguageContext);
+  const overline = lang === "de" ? "Hochzeitseinladung" : "Zaproszenie ślubne";
   const hasSubtitle = Boolean(
     content.subtitle && content.subtitle.trim().length > 0
   );
@@ -269,7 +272,7 @@ export function HeroEditorial({ content, heroImage }: HeroHorizontalProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
           >
-            Zaproszenie ślubne
+            {overline}
           </motion.p>
 
           {/* Main title - Names */}

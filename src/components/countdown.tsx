@@ -1,17 +1,58 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
+import { LanguageContext } from "@/app/provider";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+type CountdownLocale = "pl" | "de";
+
+type CountdownCopy = {
+  title: string;
+  subtitle: string;
+  days: string;
+  hours: string;
+  minutes: string;
+  seconds: string;
+};
+
+const COPY: Record<CountdownLocale, CountdownCopy> = {
+  pl: {
+    title: "Odliczanie do ślubu",
+    subtitle: "Już niedługo",
+    days: "dni",
+    hours: "godz",
+    minutes: "min",
+    seconds: "sek",
+  },
+  de: {
+    title: "Countdown bis zur Hochzeit",
+    subtitle: "Bald ist es soweit",
+    days: "Tage",
+    hours: "Std",
+    minutes: "Min",
+    seconds: "Sek",
+  },
+};
+
 interface CountdownProps {
   weddingDate: string; // Format: YYYY-MM-DD
+  lang?: CountdownLocale;
+  copyOverride?: Partial<CountdownCopy>;
 }
 
-const Countdown: React.FC<CountdownProps> = ({ weddingDate }) => {
+const Countdown: React.FC<CountdownProps> = ({
+  weddingDate,
+  lang = "pl",
+  copyOverride,
+}) => {
+  const { lang: contextLang } = useContext(LanguageContext);
+  const activeLang = lang ?? (contextLang as CountdownLocale) ?? "pl";
+  const copy = { ...(COPY[activeLang] ?? COPY.pl), ...copyOverride };
+
   const calculateTimeLeft = () => {
     const difference = +new Date(weddingDate) - +new Date();
     let timeLeft = {
@@ -141,10 +182,10 @@ const Countdown: React.FC<CountdownProps> = ({ weddingDate }) => {
           ref={titleRef}
           className="text-3xl sm:text-4xl md:text-5xl font-Bellefair text-secondary mb-1 sm:mb-2 tracking-tight text-center font-light relative z-10"
         >
-          Odliczanie do ślubu
+          {copy.title}
         </h2>
         <p className="text-sm sm:text-base md:text-lg text-secondary/60 mb-8 sm:mb-12 text-center font-light relative z-10">
-          Już niedługo
+          {copy.subtitle}
         </p>
         <div
           ref={numbersRef}
@@ -152,22 +193,19 @@ const Countdown: React.FC<CountdownProps> = ({ weddingDate }) => {
           suppressHydrationWarning
         >
           {[
-            { value: timeLeft.days, label: "dni" },
-            { value: timeLeft.hours, label: "godz" },
-            { value: timeLeft.minutes, label: "min" },
-            { value: timeLeft.seconds, label: "sek" },
+            { value: timeLeft.days, label: copy.days },
+            { value: timeLeft.hours, label: copy.hours },
+            { value: timeLeft.minutes, label: copy.minutes },
+            { value: timeLeft.seconds, label: copy.seconds },
           ].map((item, idx) => (
             <div
               key={idx}
-              className="countdown-number flex flex-col items-center gap-1 sm:gap-2 min-w-[70px] sm:min-w-[90px]"
+              className="countdown-number flex flex-col items-center min-w-[70px] sm:min-w-[90px]"
               style={{ perspective: "1000px" }}
             >
               <div className="text-3xl sm:text-4xl md:text-5xl font-Bellefair text-secondary font-normal px-3 py-2 rounded-lg bg-primary/20 backdrop-blur-sm border border-secondary/10">
                 {mounted ? String(item.value).padStart(2, "0") : "00"}
               </div>
-              <span className="text-xs sm:text-xs md:text-sm text-secondary/50 uppercase tracking-widest font-light">
-                {item.label}
-              </span>
             </div>
           ))}
         </div>

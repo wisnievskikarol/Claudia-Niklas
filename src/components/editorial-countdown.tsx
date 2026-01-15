@@ -169,7 +169,15 @@ export function EditorialCountdown({
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [weddingDate]);
+  }, [
+    weddingDate,
+    labels.day,
+    labels.dayPlural,
+    labels.hour,
+    labels.hourPlural,
+    labels.minute,
+    labels.minutePlural,
+  ]);
 
   if (!mounted) return null;
 
