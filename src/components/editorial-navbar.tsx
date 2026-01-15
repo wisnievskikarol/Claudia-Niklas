@@ -33,38 +33,48 @@ export function EditorialNavbar({
   const navLinks = links ?? NAV_LINKS[currentLang];
 
   function LanguageToggle({ isMobile = false }: { isMobile?: boolean }) {
-    const baseBtn =
-      "px-3 py-1 text-[11px] tracking-[0.15em] uppercase rounded-full border transition-colors duration-300";
     const wrapperClass = isMobile
-      ? "mt-6 flex items-center justify-center gap-3"
-      : "hidden md:flex items-center gap-3";
+      ? "mt-8 flex items-center justify-center"
+      : "hidden md:flex items-center";
 
     return (
       <div className={wrapperClass}>
-        <button
-          type="button"
-          aria-pressed={currentLang === "pl"}
-          className={`${baseBtn} ${
-            currentLang === "pl"
-              ? "bg-editorial-charcoal text-editorial-cream border-editorial-charcoal"
-              : "border-editorial-stone text-editorial-charcoal hover:bg-editorial-stone/60"
-          }`}
-          onClick={() => setLang("pl")}
-        >
-          PL
-        </button>
-        <button
-          type="button"
-          aria-pressed={currentLang === "de"}
-          className={`${baseBtn} ${
-            currentLang === "de"
-              ? "bg-editorial-charcoal text-editorial-cream border-editorial-charcoal"
-              : "border-editorial-stone text-editorial-charcoal hover:bg-editorial-stone/60"
-          }`}
-          onClick={() => setLang("de")}
-        >
-          DE
-        </button>
+        <div className="relative flex items-center bg-editorial-stone/10 rounded-full p-0.5 border border-editorial-stone/20">
+          {/* Sliding indicator */}
+          <motion.div
+            className="absolute top-0.5 bottom-0.5 rounded-full bg-editorial-charcoal"
+            initial={false}
+            animate={{
+              left: currentLang === "pl" ? "2px" : "50%",
+              width: "calc(50% - 4px)",
+            }}
+            transition={{ type: "spring", stiffness: 500, damping: 30 }}
+          />
+          <button
+            type="button"
+            aria-pressed={currentLang === "pl"}
+            className={`relative z-10 px-4 py-1.5 text-[10px] sm:text-[11px] tracking-[0.2em] uppercase font-medium rounded-full transition-colors duration-200 ${
+              currentLang === "pl"
+                ? "text-editorial-cream"
+                : "text-editorial-stone hover:text-editorial-charcoal"
+            }`}
+            onClick={() => setLang("pl")}
+          >
+            PL
+          </button>
+          <button
+            type="button"
+            aria-pressed={currentLang === "de"}
+            className={`relative z-10 px-4 py-1.5 text-[10px] sm:text-[11px] tracking-[0.2em] uppercase font-medium rounded-full transition-colors duration-200 ${
+              currentLang === "de"
+                ? "text-editorial-cream"
+                : "text-editorial-stone hover:text-editorial-charcoal"
+            }`}
+            onClick={() => setLang("de")}
+          >
+            DE
+          </button>
+        </div>
       </div>
     );
   }
