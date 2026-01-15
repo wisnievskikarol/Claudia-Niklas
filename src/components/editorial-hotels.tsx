@@ -24,7 +24,7 @@ function HotelCard({ hotel, index }: { hotel: Hotel; index: number }) {
   return (
     <motion.div
       ref={ref}
-      className="group"
+      className="group h-full"
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{
@@ -33,7 +33,7 @@ function HotelCard({ hotel, index }: { hotel: Hotel; index: number }) {
         ease: [0.23, 1, 0.32, 1],
       }}
     >
-      <div className="p-5 sm:p-6 md:p-8 lg:p-10 border border-editorial-border bg-editorial-cream/50 hover:border-editorial-border-hover hover:bg-editorial-ivory transition-all duration-500">
+      <div className="h-full p-5 sm:p-6 md:p-8 lg:p-10 border border-editorial-border bg-editorial-cream/50 hover:border-editorial-border-hover hover:bg-editorial-ivory transition-all duration-500 flex flex-col">
         {/* Number */}
         <span className="font-clean text-[10px] sm:text-xs tracking-widest uppercase text-editorial-muted block mb-2 sm:mb-4">
           {(index + 1).toString().padStart(2, "0")}
@@ -62,7 +62,7 @@ function HotelCard({ hotel, index }: { hotel: Hotel; index: number }) {
             href={hotel.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 font-clean text-editorial-caption text-editorial-charcoal hover:text-editorial-stone transition-colors duration-300"
+            className="mt-auto inline-flex items-center gap-2 font-clean text-editorial-caption text-editorial-charcoal hover:text-editorial-stone transition-colors duration-300"
             whileHover={{ x: 5 }}
             transition={{ duration: 0.3 }}
           >

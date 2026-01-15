@@ -146,12 +146,12 @@ function HeroImage({
   return (
     <motion.div
       ref={imageRef}
-      className="relative w-screen -mx-3 sm:-mx-6 md:-mx-12 overflow-hidden"
+      className="relative w-screen -mx-4 sm:-mx-8 lg:w-full lg:-mx-0 overflow-hidden"
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 1.5, delay: 0.5, ease: [0.23, 1, 0.32, 1] }}
     >
-      <div className="relative w-full aspect-[4/5] sm:aspect-[3/2] overflow-hidden">
+      <div className="relative w-full aspect-[4/5] sm:aspect-[16/9] lg:aspect-[5/3] overflow-hidden">
         <motion.div
           className="absolute inset-0 w-full h-full"
           style={{ y, scale }}
@@ -166,8 +166,8 @@ function HeroImage({
           />
         </motion.div>
 
-        {/* Subtle overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-editorial-cream/10 via-transparent to-transparent pointer-events-none" />
+        {/* Bottom fade overlay */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-editorial-charcoal/15 to-transparent pointer-events-none" />
       </div>
     </motion.div>
   );
@@ -182,21 +182,33 @@ function ScrollIndicator() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, delay: 2, ease: [0.23, 1, 0.32, 1] }}
     >
-      <span className="font-clean text-[10px] tracking-[0.2em] uppercase text-editorial-muted">
+      <span className="font-clean text-[10px] tracking-[0.2em] uppercase text-editorial-charcoal font-medium">
         Scroll
       </span>
       <motion.div
-        className="w-px h-12 bg-gradient-to-b from-editorial-charcoal to-transparent"
-        animate={{
-          scaleY: [1, 0.6, 1],
-          opacity: [0.4, 0.8, 0.4],
-        }}
+        className="flex flex-col items-center"
+        animate={{ y: [0, 8, 0] }}
         transition={{
-          duration: 2,
+          duration: 1.5,
           repeat: Infinity,
           ease: "easeInOut",
         }}
-      />
+      >
+        <div className="w-px h-8 bg-editorial-charcoal" />
+        <svg
+          className="w-4 h-4 text-editorial-charcoal"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 14l-7 7m0 0l-7-7m7 7V3"
+          />
+        </svg>
+      </motion.div>
     </motion.div>
   );
 }
@@ -322,9 +334,6 @@ export function HeroEditorial({ content, heroImage }: HeroHorizontalProps) {
           />
         </div>
       </div>
-
-      {/* Scroll indicator */}
-      <ScrollIndicator />
     </header>
   );
 }

@@ -106,6 +106,14 @@ const weddingConfig = {
         distance: "Ok. 9 minut samochodem od miejsca uroczystości",
         link: "https://hotelfilmar.pl/",
       },
+      {
+        name: "Hotel i Camping Tramp",
+        description:
+          "Hotel położony w pobliżu dworca kolejowego Toruń Główny (ok. 15 minut pieszo). Oferuje również dostęp do parkingu i znajduje się najbliżej miejsca uroczystości.",
+        distance:
+          "Ok. 12 minut pieszo lub 4 minuty samochodem od miejsca uroczystości",
+        link: "https://hoteltramp.pl/",
+      },
     ],
   },
 
