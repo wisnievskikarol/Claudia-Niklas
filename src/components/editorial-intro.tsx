@@ -32,14 +32,14 @@ function AnimatedQuote({ text }: { text: string }) {
       className="font-editorial text-xl sm:text-2xl md:text-3xl lg:text-4xl text-editorial-charcoal text-center leading-relaxed max-w-4xl mx-auto px-2"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "50px 0px 0px 0px" }}
+      viewport={{ once: true, margin: "200px" }}
       variants={{
         hidden: { opacity: 0 },
         visible: {
           opacity: 1,
           transition: {
-            staggerChildren: 0.04,
-            delayChildren: 0.1,
+            staggerChildren: 0.02,
+            delayChildren: 0,
           },
         },
       }}
@@ -52,12 +52,12 @@ function AnimatedQuote({ text }: { text: string }) {
           key={index}
           className="inline-block mr-[0.25em]"
           variants={{
-            hidden: { opacity: 0, y: 30 },
+            hidden: { opacity: 0, y: 20 },
             visible: {
               opacity: 1,
               y: 0,
               transition: {
-                duration: 0.6,
+                duration: 0.4,
                 ease: [0.23, 1, 0.32, 1],
               },
             },
