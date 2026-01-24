@@ -23,12 +23,46 @@ interface TimeUnit {
   labelPlural: string;
 }
 
-// Simple countdown number - no animation for performance
-function CountdownNumber({ value }: { value: number; delay?: number }) {
+// Animated countdown number with count-up effect
+function CountdownNumber({
+  value,
+  delay = 0,
+}: {
+  value: number;
+  delay?: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true });
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    // Animate number counting up
+    const duration = 1500;
+    const startTime = Date.now();
+    const endValue = value;
+
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+
+      setDisplayValue(Math.floor(eased * endValue));
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+
+    const timeout = setTimeout(animate, delay);
+    return () => clearTimeout(timeout);
+  }, [isInView, value, delay]);
+
   return (
-    <div className="relative">
+    <div ref={ref} className="relative">
       <span className="font-editorial text-[2.5rem] sm:text-[3.5rem] md:text-[5rem] lg:text-[6rem] leading-none text-editorial-charcoal tabular-nums">
-        {value.toString().padStart(2, "0")}
+        {displayValue.toString().padStart(2, "0")}
       </span>
     </div>
   );
@@ -40,7 +74,7 @@ function TimeUnitDisplay({ unit, index }: { unit: TimeUnit; index: number }) {
 
   return (
     <div className="flex flex-col items-center">
-      <CountdownNumber value={unit.value} />
+      <CountdownNumber value={unit.value} delay={index * 150} />
       <span className="font-clean text-[9px] sm:text-[10px] md:text-xs tracking-wider uppercase text-editorial-stone mt-1 sm:mt-2">
         {label}
       </span>
