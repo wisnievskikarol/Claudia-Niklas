@@ -4,7 +4,6 @@ import { Layout } from "@/components";
 import { EditorialNavbar } from "@/components/editorial-navbar";
 import { EditorialFooter } from "@/components/editorial-footer";
 import ClientProvider from "./provider";
-import PageLoader from "@/components/page-loader";
 
 export const metadata: Metadata = {
   title: "Claudia & Niklas",
@@ -25,21 +24,8 @@ export default function RootLayout({
           src="https://api.nepcha.com/js/nepcha-analytics.js"
         ></script>
         <link rel="shortcut icon" href="/favicon.png" type="image/png" />
-        {/* Safari fallback - ensure content visibility after 3s */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              setTimeout(function() {
-                var loader = document.querySelector('[data-loader]');
-                if (loader) loader.style.display = 'none';
-                document.body.style.visibility = 'visible';
-              }, 3500);
-            `,
-          }}
-        />
       </head>
-      <body className="bg-editorial-cream" style={{ visibility: "visible" }}>
-        <PageLoader />
+      <body className="bg-editorial-cream">
         <ClientProvider>
           <Layout>
             <EditorialNavbar coupleNames="C & N" />
