@@ -23,20 +23,49 @@ const textRevealVariants = {
   },
 };
 
-// Simple fade animation for quote
+// Word-by-word animation for emotional quote
 function AnimatedQuote({ text }: { text: string }) {
+  const words = text.split(" ");
+
   return (
     <motion.blockquote
       className="font-editorial text-xl sm:text-2xl md:text-3xl lg:text-4xl text-editorial-charcoal text-center leading-relaxed max-w-4xl mx-auto px-2"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
+      initial="hidden"
+      whileInView="visible"
       viewport={{ once: true, margin: "100px" }}
-      transition={{ duration: 0.8 }}
+      variants={{
+        hidden: { opacity: 0 },
+        visible: {
+          opacity: 1,
+          transition: {
+            staggerChildren: 0.03,
+            delayChildren: 0.1,
+          },
+        },
+      }}
     >
       <span className="text-editorial-gold text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-none">
         "
       </span>
-      {text}
+      {words.map((word, index) => (
+        <motion.span
+          key={index}
+          className="inline-block mr-[0.25em]"
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: {
+                duration: 0.5,
+                ease: [0.23, 1, 0.32, 1],
+              },
+            },
+          }}
+        >
+          {word}
+        </motion.span>
+      ))}
       <span className="text-editorial-gold text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-none">
         "
       </span>
