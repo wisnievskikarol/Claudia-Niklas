@@ -3,30 +3,83 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
+// Detect Safari
+const isSafari =
+  typeof navigator !== "undefined" &&
+  /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
 export function PageLoader() {
   const [isLoading, setIsLoading] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
-    // Simulate loading time
+
+    // Shorter timeout for Safari to prevent stuck loading
+    const loadTime = isSafari ? 1500 : 2500;
+
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2500);
+    }, loadTime);
 
-    return () => clearTimeout(timer);
+    // Also hide on page fully loaded
+    const handleLoad = () => {
+      setTimeout(() => setIsLoading(false), isSafari ? 300 : 500);
+    };
+
+    if (document.readyState === "complete") {
+      handleLoad();
+    } else {
+      window.addEventListener("load", handleLoad);
+    }
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("load", handleLoad);
+    };
   }, []);
 
-  if (!isMounted) return null;
+  // Don't render anything on server or if not mounted - prevents hydration issues
+  if (typeof window === "undefined" || !isMounted) return null;
+
+  // Simplified loader for Safari - no complex blur animations
+  if (isSafari) {
+    return (
+      <AnimatePresence mode="wait">
+        {isLoading && (
+          <motion.div
+            key="loader"
+            data-loader
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-editorial-cream"
+          >
+            <div className="flex flex-col items-center gap-6">
+              <h1 className="font-editorial text-4xl sm:text-5xl md:text-6xl text-editorial-charcoal tracking-[-0.02em] leading-[0.9]">
+                Claudia & Niklas
+              </h1>
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-px bg-editorial-stone/30" />
+                <div className="w-1 h-1 rounded-full bg-editorial-stone/40" />
+                <div className="w-12 h-px bg-editorial-stone/30" />
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    );
+  }
 
   return (
     <AnimatePresence mode="wait">
       {isLoading && (
         <motion.div
           key="loader"
+          data-loader
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
+          transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-editorial-cream overflow-hidden"
         >
           {/* Decorative background elements */}

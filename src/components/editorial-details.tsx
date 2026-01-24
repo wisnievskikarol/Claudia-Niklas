@@ -77,7 +77,7 @@ const icons = {
 // Single detail card with reveal animation
 function DetailCard({ detail, index }: { detail: EventDetail; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   return (
     <motion.div
@@ -139,7 +139,7 @@ function VerticalDivider({ delay }: { delay: number }) {
       className="hidden md:block w-px h-32 bg-gradient-to-b from-transparent via-editorial-border to-transparent self-center"
       initial={{ scaleY: 0, opacity: 0 }}
       whileInView={{ scaleY: 1, opacity: 1 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, amount: 0 }}
       transition={{
         duration: 0.8,
         delay,
@@ -155,7 +155,7 @@ export function EditorialDetails({
   details,
 }: EditorialDetailsProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
 
   return (
     <section

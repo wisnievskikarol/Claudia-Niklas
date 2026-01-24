@@ -4,6 +4,39 @@
    ═══════════════════════════════════════════════════════════════ */
 
 /* ─────────────────────────────────────────────────────────────────
+   SAFARI/iOS ANIMATION FALLBACK
+   Ensures content is visible even if Framer Motion fails
+   ───────────────────────────────────────────────────────────────── */
+@supports (-webkit-touch-callout: none) {
+  /* Force visibility for elements that might be stuck at opacity: 0 */
+  main > div,
+  section,
+  header,
+  article {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+  }
+}
+
+/* Fallback for all browsers - animate after delay if JS fails */
+@keyframes forceVisible {
+  to {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+}
+
+/* Apply to main content areas after a delay */
+main {
+  animation: forceVisible 0.01ms 4s forwards;
+}
+
+main > * {
+  animation: forceVisible 0.01ms 4s forwards;
+}
+
+/* ─────────────────────────────────────────────────────────────────
    CSS VARIABLES - LUXURY COLOR PALETTE
    ───────────────────────────────────────────────────────────────── */
 :root {

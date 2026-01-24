@@ -87,7 +87,7 @@ function EditorialInput({
       className="relative"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, amount: 0 }}
       transition={{ duration: 0.6, delay, ease: [0.23, 1, 0.32, 1] }}
     >
       <input
@@ -148,7 +148,7 @@ function EditorialRadioGroup({
       className="space-y-3 sm:space-y-4"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, amount: 0 }}
       transition={{ duration: 0.6, delay, ease: [0.23, 1, 0.32, 1] }}
     >
       <span className="font-clean text-xs sm:text-sm text-editorial-stone block mb-2 sm:mb-4">
@@ -207,7 +207,7 @@ function EditorialTextarea({
       className="relative"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, amount: 0 }}
       transition={{ duration: 0.6, delay, ease: [0.23, 1, 0.32, 1] }}
     >
       <textarea
@@ -244,7 +244,7 @@ export function EditorialRsvp({
   copy = DEFAULT_COPY_PL,
 }: EditorialRsvpProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [withChildren, setWithChildren] = useState<string | null>(null);
@@ -403,7 +403,7 @@ export function EditorialRsvp({
               className="pt-8"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
               <button

@@ -26,7 +26,7 @@ function GalleryImage({
   layout: string;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+  const isInView = useInView(containerRef, { once: true, amount: 0.1 });
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -182,7 +182,7 @@ export function EditorialGallery({
   layout = "editorial",
 }: EditorialGalleryProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
 
   return (
     <section

@@ -13,6 +13,31 @@
 /* Import editorial design system */
 @import "../styles/editorial.css";
 
+/* Safari animation fix - ensure content is visible as fallback */
+@supports (-webkit-touch-callout: none) {
+  /* iOS Safari specific fixes */
+  .motion-safe\:animate-fadeIn,
+  [style*="opacity: 0"] {
+    animation: safariReveal 0.01s 3s forwards;
+  }
+
+  @keyframes safariReveal {
+    to {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+}
+
+/* Reduced motion preference - show content immediately */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* Global scroll behavior */
 * {
   scroll-behavior: smooth;

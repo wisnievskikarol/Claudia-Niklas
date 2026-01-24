@@ -25,8 +25,20 @@ export default function RootLayout({
           src="https://api.nepcha.com/js/nepcha-analytics.js"
         ></script>
         <link rel="shortcut icon" href="/favicon.png" type="image/png" />
+        {/* Safari fallback - ensure content visibility after 3s */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              setTimeout(function() {
+                var loader = document.querySelector('[data-loader]');
+                if (loader) loader.style.display = 'none';
+                document.body.style.visibility = 'visible';
+              }, 3500);
+            `,
+          }}
+        />
       </head>
-      <body className="bg-editorial-cream">
+      <body className="bg-editorial-cream" style={{ visibility: "visible" }}>
         <PageLoader />
         <ClientProvider>
           <Layout>

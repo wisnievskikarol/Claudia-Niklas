@@ -381,7 +381,7 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
   },
 };
 
-// Section wrapper with consistent spacing
+// Section wrapper with consistent spacing - Safari-safe animations
 function Section({
   children,
   className = "",
@@ -393,9 +393,10 @@ function Section({
     <motion.div
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: true, margin: "-50px", amount: 0.1 }}
       transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
       className={className}
+      style={{ willChange: "opacity" }}
     >
       {children}
     </motion.div>

@@ -109,7 +109,7 @@ const Countdown: React.FC<CountdownProps> = ({
               start: "top 80%",
               toggleActions: "play none none none",
             },
-          }
+          },
         );
       }
 
@@ -135,7 +135,7 @@ const Countdown: React.FC<CountdownProps> = ({
               start: "top 80%",
               toggleActions: "play none none none",
             },
-          }
+          },
         );
       });
 
@@ -168,14 +168,14 @@ const Countdown: React.FC<CountdownProps> = ({
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 1.5 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0 }}
         />
         <motion.div
           className="absolute -bottom-10 right-1/4 w-32 h-32 rounded-full bg-secondary/5 blur-3xl"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 1.5, delay: 0.2 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0 }}
         />
 
         <h2

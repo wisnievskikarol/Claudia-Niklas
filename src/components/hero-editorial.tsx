@@ -10,6 +10,8 @@ import { LanguageContext } from "@/app/provider";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
+  // Refresh ScrollTrigger on Safari to fix viewport detection issues
+  ScrollTrigger.config({ ignoreMobileResize: true });
 }
 
 // Animation variants for staggered reveals
@@ -231,7 +233,7 @@ export function HeroEditorial({ content, heroImage }: HeroHorizontalProps) {
   const { lang } = useContext(LanguageContext);
   const overline = lang === "de" ? "Hochzeitseinladung" : "Zaproszenie ślubne";
   const hasSubtitle = Boolean(
-    content.subtitle && content.subtitle.trim().length > 0
+    content.subtitle && content.subtitle.trim().length > 0,
   );
 
   useEffect(() => {
@@ -335,7 +337,7 @@ export function HeroEditorial({ content, heroImage }: HeroHorizontalProps) {
         )}
 
         {/* Date & Location section */}
-        <div className="flex flex-col items-center gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12 md:mb-16">
+        <div className="flex flex-col items-center gap-4 sm:gap-6 md:gap-8 mb-4 sm:mb-6 md:mb-8">
           {/* Date display */}
           <DateDisplay
             date={content.date}
@@ -375,7 +377,7 @@ export function HeroEditorial({ content, heroImage }: HeroHorizontalProps) {
         </div>
 
         {/* Hero image - full width with elegant framing */}
-        <div className="w-full mt-auto pt-4 sm:pt-6 md:pt-8">
+        <div className="w-full mt-auto pt-2 sm:pt-4 md:pt-6">
           <HeroImage
             imageSrc={heroImage.imageSrc}
             altText={heroImage.altText}
