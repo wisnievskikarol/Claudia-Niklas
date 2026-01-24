@@ -91,10 +91,8 @@ export function EditorialNavbar({
   return (
     <>
       <motion.nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled
-            ? "bg-editorial-cream/90 backdrop-blur-sm"
-            : "bg-transparent"
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled ? "bg-editorial-cream" : "bg-transparent"
         }`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

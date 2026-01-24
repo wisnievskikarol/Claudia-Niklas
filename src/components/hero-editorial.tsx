@@ -14,58 +14,27 @@ if (typeof window !== "undefined") {
   ScrollTrigger.config({ ignoreMobileResize: true });
 }
 
-// Animation variants for staggered reveals
+// Animation variants for simple fade
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.1,
+      duration: 0.6,
     },
   },
 };
 
-const letterVariants = {
-  hidden: { opacity: 0, y: 50, rotateX: -20 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    rotateX: 0,
-    transition: {
-      duration: 0.6,
-      delay: i * 0.02,
-      ease: [0.23, 1, 0.32, 1],
-    },
-  }),
-};
-
-// Animated title with letter-by-letter reveal
+// Simple animated title - no letter-by-letter for performance
 function AnimatedTitle({ title }: { title: string }) {
-  const words = title.split(" ");
-
   return (
     <motion.h1
       className="font-editorial text-[3rem] sm:text-[4.5rem] md:text-[6rem] lg:text-[7.5rem] xl:text-[9rem] text-editorial-charcoal leading-[0.9] tracking-[-0.02em] text-center"
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
     >
-      {words.map((word, wordIndex) => (
-        <span key={wordIndex} className="inline-block mx-[0.08em]">
-          {word.split("").map((letter, letterIndex) => (
-            <motion.span
-              key={letterIndex}
-              className="inline-block"
-              custom={wordIndex * 5 + letterIndex}
-              variants={letterVariants}
-              style={{ transformOrigin: "center bottom" }}
-            >
-              {letter}
-            </motion.span>
-          ))}
-        </span>
-      ))}
+      {title}
     </motion.h1>
   );
 }
@@ -90,17 +59,12 @@ function DateDisplay({
   return (
     <motion.div
       className="flex flex-col items-center"
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
     >
       {/* Decorative top line */}
-      <motion.div
-        className="w-16 h-px bg-editorial-stone/30 mb-6 sm:mb-8"
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: 1 }}
-        transition={{ duration: 0.8, delay: 0.5, ease: [0.23, 1, 0.32, 1] }}
-      />
+      <div className="w-16 h-px bg-editorial-stone/30 mb-6 sm:mb-8" />
 
       {/* Date row - all elements same visual weight */}
       <div className="flex items-center justify-center gap-4 sm:gap-6 md:gap-8">
@@ -129,17 +93,12 @@ function DateDisplay({
       </div>
 
       {/* Decorative bottom line */}
-      <motion.div
-        className="w-16 h-px bg-editorial-stone/30 mt-6 sm:mt-8"
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: 1 }}
-        transition={{ duration: 0.8, delay: 0.5, ease: [0.23, 1, 0.32, 1] }}
-      />
+      <div className="w-16 h-px bg-editorial-stone/30 mt-6 sm:mt-8" />
     </motion.div>
   );
 }
 
-// Hero image with parallax effect
+// Hero image - simple, no parallax for performance
 function HeroImage({
   imageSrc,
   altText,
@@ -147,37 +106,22 @@ function HeroImage({
   imageSrc: string;
   altText: string;
 }) {
-  const imageRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: imageRef,
-    offset: ["start end", "end start"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], ["-5%", "5%"]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1, 1.05]);
-
   return (
     <motion.div
-      ref={imageRef}
       className="relative w-screen -mx-4 sm:-mx-8 lg:w-full lg:-mx-0 overflow-hidden"
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
     >
       <div className="relative w-full aspect-[4/5] sm:aspect-[16/9] lg:aspect-[5/3] overflow-hidden">
-        <motion.div
-          className="absolute inset-0 w-full h-full"
-          style={{ y, scale }}
-        >
-          <Image
-            src={imageSrc}
-            fill
-            className="object-cover object-center image-editorial"
-            alt={altText}
-            priority
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-          />
-        </motion.div>
+        <Image
+          src={imageSrc}
+          fill
+          className="object-cover object-center image-editorial"
+          alt={altText}
+          priority
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+        />
 
         {/* Bottom fade overlay */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-editorial-charcoal/15 to-transparent pointer-events-none" />
@@ -186,27 +130,14 @@ function HeroImage({
   );
 }
 
-// Scroll indicator
+// Scroll indicator - simple, no animation
 function ScrollIndicator() {
   return (
-    <motion.div
-      className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
-    >
+    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-60">
       <span className="font-clean text-[10px] tracking-[0.2em] uppercase text-editorial-charcoal font-medium">
         Scroll
       </span>
-      <motion.div
-        className="flex flex-col items-center"
-        animate={{ y: [0, 8, 0] }}
-        transition={{
-          duration: 1.5,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
+      <div className="flex flex-col items-center">
         <div className="w-px h-8 bg-editorial-charcoal" />
         <svg
           className="w-4 h-4 text-editorial-charcoal"
@@ -221,8 +152,8 @@ function ScrollIndicator() {
             d="M19 14l-7 7m0 0l-7-7m7 7V3"
           />
         </svg>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }
 
@@ -240,35 +171,16 @@ export function HeroEditorial({ content, heroImage }: HeroHorizontalProps) {
     setIsMounted(true);
   }, []);
 
-  useEffect(() => {
-    if (!heroRef.current || !isMounted) return;
-
-    const ctx = gsap.context(() => {
-      // Gentle parallax for background elements
-      gsap.to(".hero-ambient", {
-        y: 100,
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 2,
-        },
-      });
-    }, heroRef);
-
-    return () => ctx.revert();
-  }, [isMounted]);
-
   return (
     <header
       ref={heroRef}
       id="hero"
       className="relative min-h-screen flex flex-col px-4 sm:px-8 md:px-16 lg:px-24 pt-20 sm:pt-28 md:pt-36 pb-12 sm:pb-20 overflow-hidden bg-editorial-cream"
     >
-      {/* Ambient background elements */}
-      <div className="hero-ambient absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-20 w-96 h-96 rounded-full bg-editorial-champagne/50 blur-[100px]" />
-        <div className="absolute bottom-1/4 -right-20 w-80 h-80 rounded-full bg-editorial-sand/40 blur-[100px]" />
+      {/* Ambient background elements - no blur for performance */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 -left-20 w-96 h-96 rounded-full bg-editorial-champagne/30" />
+        <div className="absolute bottom-1/4 -right-20 w-80 h-80 rounded-full bg-editorial-sand/20" />
       </div>
 
       {/* Main content */}
@@ -351,7 +263,7 @@ export function HeroEditorial({ content, heroImage }: HeroHorizontalProps) {
 
           {/* Location with icon-like styling */}
           <motion.div
-            className="flex items-center gap-3 px-4 py-2 rounded-full border border-editorial-stone/10 bg-editorial-cream/50 backdrop-blur-sm"
+            className="flex items-center gap-3 px-4 py-2 rounded-full border border-editorial-stone/10 bg-editorial-cream"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5, ease: [0.23, 1, 0.32, 1] }}

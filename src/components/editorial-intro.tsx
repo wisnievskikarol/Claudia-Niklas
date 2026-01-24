@@ -85,38 +85,14 @@ function EditorialImage({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-// Decorative ornament
+// Decorative ornament - static for performance
 function Ornament() {
   return (
-    <motion.div
-      className="flex items-center justify-center gap-6 py-8"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, margin: "100px" }}
-      transition={{ duration: 1, delay: 0.1 }}
-    >
-      <motion.div
-        className="w-16 md:w-24 h-px bg-gradient-to-r from-transparent via-editorial-stone/30 to-editorial-stone/30"
-        initial={{ scaleX: 0, originX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true, margin: "100px" }}
-        transition={{ duration: 0.8, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
-      />
-      <motion.div
-        className="w-2 h-2 rotate-45 border border-editorial-stone/30"
-        initial={{ scale: 0, rotate: 0 }}
-        whileInView={{ scale: 1, rotate: 45 }}
-        viewport={{ once: true, margin: "100px" }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-      />
-      <motion.div
-        className="w-16 md:w-24 h-px bg-gradient-to-l from-transparent via-editorial-stone/30 to-editorial-stone/30"
-        initial={{ scaleX: 0, originX: 1 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true, margin: "100px" }}
-        transition={{ duration: 0.8, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
-      />
-    </motion.div>
+    <div className="flex items-center justify-center gap-6 py-8">
+      <div className="w-16 md:w-24 h-px bg-gradient-to-r from-transparent via-editorial-stone/30 to-editorial-stone/30" />
+      <div className="w-2 h-2 rotate-45 border border-editorial-stone/30" />
+      <div className="w-16 md:w-24 h-px bg-gradient-to-l from-transparent via-editorial-stone/30 to-editorial-stone/30" />
+    </div>
   );
 }
 

@@ -2,7 +2,6 @@
 
 import React, { useContext } from "react";
 import { LanguageContext } from "./provider";
-import { motion } from "framer-motion";
 import { HeroEditorial } from "@/components/hero-editorial";
 import { EditorialIntro } from "@/components/editorial-intro";
 import { EditorialCountdown } from "@/components/editorial-countdown";
@@ -381,7 +380,7 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
   },
 };
 
-// Section wrapper with consistent spacing - Safari-safe animations
+// Section wrapper - simple div for performance (no animations)
 function Section({
   children,
   className = "",
@@ -389,18 +388,7 @@ function Section({
   children: React.ReactNode;
   className?: string;
 }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, margin: "200px" }}
-      transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-      className={className}
-      style={{ willChange: "opacity" }}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className={className}>{children}</div>;
 }
 
 export default function EditorialPage() {
