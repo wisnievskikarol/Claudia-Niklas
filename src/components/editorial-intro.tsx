@@ -23,10 +23,16 @@ const textRevealVariants = {
   },
 };
 
-// Quote without animation - visible immediately (Safari/iOS friendly)
+// Simple fade animation for quote
 function AnimatedQuote({ text }: { text: string }) {
   return (
-    <blockquote className="font-editorial text-xl sm:text-2xl md:text-3xl lg:text-4xl text-editorial-charcoal text-center leading-relaxed max-w-4xl mx-auto px-2">
+    <motion.blockquote
+      className="font-editorial text-xl sm:text-2xl md:text-3xl lg:text-4xl text-editorial-charcoal text-center leading-relaxed max-w-4xl mx-auto px-2"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: "100px" }}
+      transition={{ duration: 0.8 }}
+    >
       <span className="text-editorial-gold text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-none">
         "
       </span>
@@ -34,7 +40,7 @@ function AnimatedQuote({ text }: { text: string }) {
       <span className="text-editorial-gold text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-none">
         "
       </span>
-    </blockquote>
+    </motion.blockquote>
   );
 }
 

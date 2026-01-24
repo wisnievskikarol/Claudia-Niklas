@@ -3,20 +3,20 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
-// Detect Safari
-const isSafari =
-  typeof navigator !== "undefined" &&
-  /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
 export function PageLoader() {
   const [isLoading, setIsLoading] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
+  const [isSafari, setIsSafari] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
 
-    // Shorter timeout for Safari to prevent stuck loading
-    const loadTime = isSafari ? 800 : 1500;
+    // Detect Safari in useEffect to avoid hydration mismatch
+    const safari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    setIsSafari(safari);
+
+    // Very short timeout - just wait for hydration
+    const loadTime = safari ? 300 : 800;
 
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -24,7 +24,7 @@ export function PageLoader() {
 
     // Also hide on page fully loaded
     const handleLoad = () => {
-      setTimeout(() => setIsLoading(false), isSafari ? 100 : 300);
+      setIsLoading(false);
     };
 
     if (document.readyState === "complete") {

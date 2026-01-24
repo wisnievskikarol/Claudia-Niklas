@@ -417,10 +417,10 @@ export default function EditorialPage() {
         backgroundImage={{ imageSrc: "" }}
       />
 
-      {/* Emotional Intro - no animation, visible immediately */}
-      <div>
+      {/* Emotional Intro */}
+      <Section>
         <EditorialIntro quote={content.intro.quote} />
-      </div>
+      </Section>
 
       {/* Countdown */}
       <Section>
