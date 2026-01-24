@@ -27,7 +27,7 @@ function FaqAccordionItem({
   onToggle: () => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
+  const isInView = useInView(ref, { once: true, margin: "50px" });
 
   return (
     <motion.div
@@ -105,7 +105,7 @@ export function EditorialFaq({
 }: EditorialFaqProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
+  const isInView = useInView(sectionRef, { once: true, margin: "100px" });
 
   const handleToggle = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);

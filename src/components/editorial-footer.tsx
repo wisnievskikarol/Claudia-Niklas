@@ -20,8 +20,8 @@ export function EditorialFooter({
           className="flex items-center justify-center gap-3 mb-6 sm:mb-8"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0 }}
-          transition={{ duration: 0.8 }}
+          viewport={{ once: true, margin: "50px" }}
+          transition={{ duration: 0.6 }}
         >
           <div className="w-8 h-px bg-editorial-stone/20" />
           <div className="w-1 h-1 rounded-full bg-editorial-stone/30" />
@@ -33,8 +33,8 @@ export function EditorialFooter({
           className="text-center font-editorial text-lg sm:text-xl text-editorial-stone/60 mb-4"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          viewport={{ once: true, margin: "50px" }}
+          transition={{ duration: 0.5, delay: 0.05 }}
         >
           {coupleNames}
         </motion.p>
@@ -44,8 +44,8 @@ export function EditorialFooter({
           className="text-center font-clean text-[10px] tracking-[0.3em] uppercase text-editorial-stone/40 mb-6 sm:mb-8"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true, margin: "50px" }}
+          transition={{ duration: 0.5, delay: 0.1 }}
         >
           {date}
         </motion.p>
@@ -55,8 +55,8 @@ export function EditorialFooter({
           className="flex justify-center"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true, margin: "50px" }}
+          transition={{ duration: 0.5, delay: 0.15 }}
         >
           <a
             href="https://www.gowedding.online/"

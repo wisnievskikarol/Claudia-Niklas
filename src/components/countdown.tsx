@@ -167,15 +167,15 @@ const Countdown: React.FC<CountdownProps> = ({
           className="absolute -top-10 left-1/4 w-40 h-40 rounded-full bg-primary/10 blur-3xl"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ duration: 1.5 }}
-          viewport={{ once: true, amount: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true, margin: "100px" }}
         />
         <motion.div
           className="absolute -bottom-10 right-1/4 w-32 h-32 rounded-full bg-secondary/5 blur-3xl"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ duration: 1.5, delay: 0.2 }}
-          viewport={{ once: true, amount: 0 }}
+          transition={{ duration: 1, delay: 0.1 }}
+          viewport={{ once: true, margin: "100px" }}
         />
 
         <h2

@@ -28,7 +28,7 @@ function HotelCard({
   ctaLabel: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
+  const isInView = useInView(ref, { once: true, margin: "50px" });
 
   return (
     <motion.div
@@ -100,7 +100,7 @@ export function EditorialHotels({
   ctaLabel = "Rezerwuj",
 }: EditorialHotelsProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
+  const isInView = useInView(sectionRef, { once: true, margin: "100px" });
 
   return (
     <section

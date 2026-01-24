@@ -83,8 +83,8 @@ function TimeUnitDisplay({ unit, index }: { unit: TimeUnit; index: number }) {
         className="font-clean text-[9px] sm:text-[10px] md:text-xs tracking-wider uppercase text-editorial-stone mt-1 sm:mt-2"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0 }}
-        transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
+        viewport={{ once: true, margin: "100px" }}
+        transition={{ duration: 0.5, delay: 0.2 + index * 0.05 }}
       >
         {label}
       </motion.span>
@@ -99,8 +99,8 @@ function TimeSeparator({ delay }: { delay: number }) {
       className="flex flex-col items-center justify-center gap-3 px-1 sm:px-4 md:px-6 mt-2 sm:mt-4"
       initial={{ opacity: 0, scale: 0 }}
       whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true, amount: 0 }}
-      transition={{ duration: 0.5, delay }}
+      viewport={{ once: true, margin: "100px" }}
+      transition={{ duration: 0.4, delay: delay * 0.5 }}
     >
       <div className="w-0.5 h-0.5 sm:w-1 sm:h-1 rounded-full bg-editorial-stone/30" />
     </motion.div>
@@ -128,7 +128,7 @@ export function EditorialCountdown({
   ]);
   const [mounted, setMounted] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
+  const isInView = useInView(sectionRef, { once: true, margin: "100px" });
 
   const calculateTimeLeft = () => {
     const difference = +new Date(weddingDate) - +new Date();

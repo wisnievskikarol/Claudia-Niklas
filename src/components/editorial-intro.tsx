@@ -32,14 +32,14 @@ function AnimatedQuote({ text }: { text: string }) {
       className="font-editorial text-xl sm:text-2xl md:text-3xl lg:text-4xl text-editorial-charcoal text-center leading-relaxed max-w-4xl mx-auto px-2"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-100px", amount: 0.3 }}
+      viewport={{ once: true, margin: "50px 0px 0px 0px" }}
       variants={{
         hidden: { opacity: 0 },
         visible: {
           opacity: 1,
           transition: {
             staggerChildren: 0.04,
-            delayChildren: 0.2,
+            delayChildren: 0.1,
           },
         },
       }}
@@ -90,7 +90,7 @@ function EditorialImage({ src, alt }: { src: string; alt: string }) {
       className="relative w-full max-w-6xl mx-auto overflow-hidden"
       initial={{ opacity: 0, y: 80 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
+      viewport={{ once: true, margin: "100px" }}
       transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
     >
       <div className="relative w-full aspect-[16/10] md:aspect-[21/9] overflow-hidden">
@@ -121,29 +121,29 @@ function Ornament() {
       className="flex items-center justify-center gap-6 py-8"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0 }}
-      transition={{ duration: 1, delay: 0.3 }}
+      viewport={{ once: true, margin: "100px" }}
+      transition={{ duration: 1, delay: 0.1 }}
     >
       <motion.div
         className="w-16 md:w-24 h-px bg-gradient-to-r from-transparent via-editorial-stone/30 to-editorial-stone/30"
         initial={{ scaleX: 0, originX: 0 }}
         whileInView={{ scaleX: 1 }}
-        viewport={{ once: true, amount: 0 }}
-        transition={{ duration: 1, delay: 0.5, ease: [0.23, 1, 0.32, 1] }}
+        viewport={{ once: true, margin: "100px" }}
+        transition={{ duration: 0.8, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
       />
       <motion.div
         className="w-2 h-2 rotate-45 border border-editorial-stone/30"
         initial={{ scale: 0, rotate: 0 }}
         whileInView={{ scale: 1, rotate: 45 }}
-        viewport={{ once: true, amount: 0 }}
-        transition={{ duration: 0.6, delay: 0.8 }}
+        viewport={{ once: true, margin: "100px" }}
+        transition={{ duration: 0.5, delay: 0.3 }}
       />
       <motion.div
         className="w-16 md:w-24 h-px bg-gradient-to-l from-transparent via-editorial-stone/30 to-editorial-stone/30"
         initial={{ scaleX: 0, originX: 1 }}
         whileInView={{ scaleX: 1 }}
-        viewport={{ once: true, amount: 0 }}
-        transition={{ duration: 1, delay: 0.5, ease: [0.23, 1, 0.32, 1] }}
+        viewport={{ once: true, margin: "100px" }}
+        transition={{ duration: 0.8, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
       />
     </motion.div>
   );
