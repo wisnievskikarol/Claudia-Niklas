@@ -16,7 +16,7 @@ export function PageLoader() {
     setIsMounted(true);
 
     // Shorter timeout for Safari to prevent stuck loading
-    const loadTime = isSafari ? 1500 : 2500;
+    const loadTime = isSafari ? 800 : 1500;
 
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -24,7 +24,7 @@ export function PageLoader() {
 
     // Also hide on page fully loaded
     const handleLoad = () => {
-      setTimeout(() => setIsLoading(false), isSafari ? 300 : 500);
+      setTimeout(() => setIsLoading(false), isSafari ? 100 : 300);
     };
 
     if (document.readyState === "complete") {

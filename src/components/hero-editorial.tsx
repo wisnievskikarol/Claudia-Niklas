@@ -20,8 +20,8 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.3,
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
     },
   },
 };
@@ -33,8 +33,8 @@ const letterVariants = {
     y: 0,
     rotateX: 0,
     transition: {
-      duration: 0.8,
-      delay: i * 0.03,
+      duration: 0.6,
+      delay: i * 0.02,
       ease: [0.23, 1, 0.32, 1],
     },
   }),
@@ -92,14 +92,14 @@ function DateDisplay({
       className="flex flex-col items-center"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, delay: 1.2, ease: [0.23, 1, 0.32, 1] }}
+      transition={{ duration: 0.8, delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
     >
       {/* Decorative top line */}
       <motion.div
         className="w-16 h-px bg-editorial-stone/30 mb-6 sm:mb-8"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
-        transition={{ duration: 1, delay: 1.4, ease: [0.23, 1, 0.32, 1] }}
+        transition={{ duration: 0.8, delay: 0.5, ease: [0.23, 1, 0.32, 1] }}
       />
 
       {/* Date row - all elements same visual weight */}
@@ -133,7 +133,7 @@ function DateDisplay({
         className="w-16 h-px bg-editorial-stone/30 mt-6 sm:mt-8"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
-        transition={{ duration: 1, delay: 1.4, ease: [0.23, 1, 0.32, 1] }}
+        transition={{ duration: 0.8, delay: 0.5, ease: [0.23, 1, 0.32, 1] }}
       />
     </motion.div>
   );
@@ -162,7 +162,7 @@ function HeroImage({
       className="relative w-screen -mx-4 sm:-mx-8 lg:w-full lg:-mx-0 overflow-hidden"
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1.5, delay: 0.5, ease: [0.23, 1, 0.32, 1] }}
+      transition={{ duration: 1, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
     >
       <div className="relative w-full aspect-[4/5] sm:aspect-[16/9] lg:aspect-[5/3] overflow-hidden">
         <motion.div
@@ -193,7 +193,7 @@ function ScrollIndicator() {
       className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, delay: 2, ease: [0.23, 1, 0.32, 1] }}
+      transition={{ duration: 0.8, delay: 0.8, ease: [0.23, 1, 0.32, 1] }}
     >
       <span className="font-clean text-[10px] tracking-[0.2em] uppercase text-editorial-charcoal font-medium">
         Scroll
@@ -300,8 +300,8 @@ export function HeroEditorial({ content, heroImage }: HeroHorizontalProps) {
               initial={{ opacity: 0, scaleX: 0 }}
               animate={{ opacity: 1, scaleX: 1 }}
               transition={{
-                duration: 1.2,
-                delay: 0.8,
+                duration: 0.8,
+                delay: 0.3,
                 ease: [0.23, 1, 0.32, 1],
               }}
             >
@@ -313,7 +313,11 @@ export function HeroEditorial({ content, heroImage }: HeroHorizontalProps) {
               className="flex flex-col items-center text-center"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 1, ease: [0.23, 1, 0.32, 1] }}
+              transition={{
+                duration: 0.8,
+                delay: 0.4,
+                ease: [0.23, 1, 0.32, 1],
+              }}
             >
               <p className="font-clean text-sm sm:text-base md:text-lg text-editorial-stone italic leading-relaxed max-w-md">
                 {content.subtitle}
@@ -326,8 +330,8 @@ export function HeroEditorial({ content, heroImage }: HeroHorizontalProps) {
               initial={{ opacity: 0, scaleX: 0 }}
               animate={{ opacity: 1, scaleX: 1 }}
               transition={{
-                duration: 1.2,
-                delay: 0.8,
+                duration: 0.8,
+                delay: 0.3,
                 ease: [0.23, 1, 0.32, 1],
               }}
             >
@@ -337,7 +341,7 @@ export function HeroEditorial({ content, heroImage }: HeroHorizontalProps) {
         )}
 
         {/* Date & Location section */}
-        <div className="flex flex-col items-center gap-4 sm:gap-6 md:gap-8 mb-4 sm:mb-6 md:mb-8">
+        <div className="flex flex-col items-center gap-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12 md:mb-16">
           {/* Date display */}
           <DateDisplay
             date={content.date}
@@ -350,7 +354,7 @@ export function HeroEditorial({ content, heroImage }: HeroHorizontalProps) {
             className="flex items-center gap-3 px-4 py-2 rounded-full border border-editorial-stone/10 bg-editorial-cream/50 backdrop-blur-sm"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.4, ease: [0.23, 1, 0.32, 1] }}
+            transition={{ duration: 0.8, delay: 0.5, ease: [0.23, 1, 0.32, 1] }}
           >
             <svg
               className="w-3.5 h-3.5 text-editorial-stone/60"
@@ -377,7 +381,7 @@ export function HeroEditorial({ content, heroImage }: HeroHorizontalProps) {
         </div>
 
         {/* Hero image - full width with elegant framing */}
-        <div className="w-full mt-auto pt-2 sm:pt-4 md:pt-6">
+        <div className="w-full mt-auto pt-4 sm:pt-6 md:pt-8">
           <HeroImage
             imageSrc={heroImage.imageSrc}
             altText={heroImage.altText}
