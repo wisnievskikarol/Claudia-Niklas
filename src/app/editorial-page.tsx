@@ -11,6 +11,7 @@ import { EditorialGallery } from "@/components/editorial-gallery";
 import { EditorialHotels } from "@/components/editorial-hotels";
 import { EditorialFaq } from "@/components/editorial-faq";
 import { EditorialRsvp } from "@/components/editorial-rsvp";
+import { EditorialSpotify } from "@/components/editorial-spotify";
 
 type SupportedLang = "pl" | "de";
 
@@ -48,6 +49,13 @@ type RsvpCopy = {
   successBody: string;
 };
 
+type SpotifyConfig = {
+  title: string;
+  subtitle: string;
+  playlistUrl: string;
+  ctaText: string;
+};
+
 type PageConfig = {
   hero: {
     content: {
@@ -79,6 +87,7 @@ type PageConfig = {
     ctaLabel: string;
     items: HotelItem[];
   };
+  spotify: SpotifyConfig;
   faq: { title: string; subtitle: string; items: FaqItem[] };
   rsvp: { title: string; subtitle: string; deadline: string; copy?: RsvpCopy };
 };
@@ -178,6 +187,14 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
           link: "https://www.campingtramp.pl/index.php/contacts",
         },
       ],
+    },
+
+    spotify: {
+      title: "Nasza playlista",
+      subtitle: "Pomóż nam stworzyć idealną playlistę na nasz wielki dzień",
+      playlistUrl:
+        "https://open.spotify.com/embed/playlist/2N4WE5SPoZ28mcIm99ZprD?utm_source=generator",
+      ctaText: "Dodaj piosenkę",
     },
 
     faq: {
@@ -315,6 +332,15 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
       ],
     },
 
+    spotify: {
+      title: "Unsere Playlist",
+      subtitle:
+        "Hilf uns, die perfekte Playlist für unseren großen Tag zu erstellen",
+      playlistUrl:
+        "https://open.spotify.com/embed/playlist/2N4WE5SPoZ28mcIm99ZprD?utm_source=generator",
+      ctaText: "Lied hinzufügen",
+    },
+
     faq: {
       title: "Häufig gestellte Fragen",
       subtitle: "Alles, was du wissen musst",
@@ -437,6 +463,16 @@ export default function EditorialPage() {
           title={content.hotels.title}
           subtitle={content.hotels.subtitle}
           ctaLabel={content.hotels.ctaLabel}
+        />
+      </Section>
+
+      {/* Spotify Playlist */}
+      <Section>
+        <EditorialSpotify
+          title={content.spotify.title}
+          subtitle={content.spotify.subtitle}
+          playlistUrl={content.spotify.playlistUrl}
+          ctaText={content.spotify.ctaText}
         />
       </Section>
 
