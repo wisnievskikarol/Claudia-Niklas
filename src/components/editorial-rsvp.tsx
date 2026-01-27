@@ -15,12 +15,7 @@ type RsvpCopy = {
   nameLabel: string;
   attendanceLabel: string;
   attendanceOptions: { value: string; label: string }[];
-  dietLabel: string;
-  dietOptions: { value: string; label: string }[];
   dietRestrictionsLabel: string;
-  withChildrenLabel: string;
-  withChildrenOptions: { value: string; label: string }[];
-  childrenCountLabel: string;
   submitting: string;
   submitCta: string;
   submitError: string;
@@ -36,21 +31,8 @@ const DEFAULT_COPY_PL: RsvpCopy = {
     { value: "yes", label: "Tak" },
     { value: "no", label: "Nie" },
   ],
-  dietLabel:
-    "Wolicie tradycyjne dania mięsne, czy raczej skłaniacie się ku potrawom wegetariańskim?",
-  dietOptions: [
-    { value: "vegetarian", label: "Dania wegetariańskie" },
-    { value: "meat", label: "Dania mięsne" },
-    { value: "any", label: "Bez różnicy" },
-  ],
   dietRestrictionsLabel:
     "Czy masz jakieś ograniczenia dietetyczne lub alergie pokarmowe, o których powinniśmy wiedzieć?",
-  withChildrenLabel: "Planujesz zabrać ze sobą dzieci?",
-  withChildrenOptions: [
-    { value: "yes", label: "Tak" },
-    { value: "no", label: "Nie" },
-  ],
-  childrenCountLabel: "Ile dzieci planujesz ze sobą zabrać?",
   submitting: "Wysyłanie...",
   submitCta: "Wyślij odpowiedź",
   submitError: "Nie udało się wysłać odpowiedzi. Spróbuj ponownie.",
@@ -259,8 +241,6 @@ export function EditorialRsvp({
   const isInView = useInView(sectionRef, { once: true, margin: "100px" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [withChildren, setWithChildren] = useState<string | null>(null);
-  const [childrenCount, setChildrenCount] = useState<string>("");
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const endpoint = formAction ?? process.env.NEXT_PUBLIC_RSVP_WEBAPP_URL;
@@ -367,48 +347,12 @@ export function EditorialRsvp({
               delay={0.25}
             />
 
-            <EditorialRadioGroup
-              label={copy.dietLabel}
-              name="diet"
-              options={copy.dietOptions}
-              required
-              defaultValue="any"
-              delay={0.3}
-            />
-
             <EditorialTextarea
               label={copy.dietRestrictionsLabel}
               name="dietRestrictions"
               required={false}
               delay={0.35}
             />
-
-            <EditorialRadioGroup
-              label={copy.withChildrenLabel}
-              name="withChildren"
-              options={copy.withChildrenOptions}
-              required
-              onChange={(value) => {
-                setWithChildren(value);
-                if (value === "no") {
-                  setChildrenCount("");
-                }
-              }}
-              delay={0.4}
-            />
-
-            {withChildren === "yes" && (
-              <EditorialInput
-                label={copy.childrenCountLabel}
-                name="childrenCount"
-                type="number"
-                required
-                value={childrenCount}
-                onValueChange={setChildrenCount}
-                inputProps={{ min: 1, step: 1 }}
-                delay={0.45}
-              />
-            )}
 
             {/* Submit button */}
             <motion.div

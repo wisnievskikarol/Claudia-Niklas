@@ -39,12 +39,7 @@ type RsvpCopy = {
   nameLabel: string;
   attendanceLabel: string;
   attendanceOptions: { value: string; label: string }[];
-  dietLabel: string;
-  dietOptions: { value: string; label: string }[];
   dietRestrictionsLabel: string;
-  withChildrenLabel: string;
-  withChildrenOptions: { value: string; label: string }[];
-  childrenCountLabel: string;
   submitting: string;
   submitCta: string;
   submitError: string;
@@ -209,6 +204,11 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
           answer:
             "Prosimy o potwierdzenie do 15 lipca 2026 roku przez formularz RSVP na tej stronie.",
         },
+        {
+          question: "Czy dzieci są zaproszone na wesele?",
+          answer:
+            "Chcielibyśmy, aby nasz ślub był wyjątkowym i niezapomnianym przeżyciem dla nas wszystkich. Zapraszamy Was z całego serca do wspólnego świętowania i cieszenia się tym dniem bez trosk, robiąc sobie jednocześnie małą przerwę od Waszych najmniejszych skarbów.",
+        },
       ],
     },
 
@@ -339,6 +339,11 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
           answer:
             "Bitte bestätige bis zum 15. Juli 2026 über das Formular auf dieser Seite.",
         },
+        {
+          question: "Sind Kinder zur Hochzeit eingeladen?",
+          answer:
+            "Unsere Hochzeit soll ein unvergesslicher Moment für uns alle werden. Wir laden Euch herzlich ein, diesen besonderen Tag in vollen Zügen unbeschwert mit uns zu genießen und Euch dabei eine kleine Auszeit von Euren kleinen Lieblingen zu gönnen.",
+        },
       ],
     },
 
@@ -353,21 +358,8 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
           { value: "yes", label: "Ja" },
           { value: "no", label: "Nein" },
         ],
-        dietLabel:
-          "Bevorzugst du traditionelle Gerichte mit Fleisch oder vegetarische Optionen?",
-        dietOptions: [
-          { value: "vegetarian", label: "Vegetarische Gerichte" },
-          { value: "meat", label: "Fleischgerichte" },
-          { value: "any", label: "Egal" },
-        ],
         dietRestrictionsLabel:
           "Hast du besondere Ernährungswünsche oder Allergien, die wir beachten sollten?",
-        withChildrenLabel: "Kommst du mit Kindern?",
-        withChildrenOptions: [
-          { value: "yes", label: "Ja" },
-          { value: "no", label: "Nein" },
-        ],
-        childrenCountLabel: "Wie viele Kinder bringst du mit?",
         submitting: "Senden...",
         submitCta: "Antwort senden",
         submitError:
