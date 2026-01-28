@@ -202,26 +202,21 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
       subtitle: "Wszystko, co musisz wiedzieć",
       items: [
         {
-          question: "Czy mogę przyjść z osobą towarzyszącą?",
+          question: "Jak dojechać na miejsce uroczystości?",
           answer:
-            "Tak, oczywiście! Prosimy tylko o wcześniejsze potwierdzenie liczby osób w formularzu RSVP.",
+            "Najwygodniej dotrzeć na miejsce uroczystości samochodem lub taksówką. Istnieje również możliwość dojazdu komunikacją miejską - autobusem do przystanku Dworzec Główny 00, skąd spacer do obiektu zajmuje około 10 minut.",
         },
         {
-          question: "Jaki jest dress code?",
+          question: "Czy na miejscu będzie zapewniony parking dla gości?",
           answer:
-            "Zachęcamy do eleganckiego stroju. Panowie w garniturach, Panie w sukniach wieczorowych lub koktajlowych.",
+            "Tak. Na terenie obiektu dostępny jest bezpłatny parking dla Gości, oferujący około 50 miejsc parkingowych, co zapewnia komfortowy i spokojny udział w uroczystości.",
         },
         {
-          question: "Czy na miejscu będzie parking?",
+          question: "Czy istnieje możliwość zakwaterowania dla gości spoza miasta?",
           answer:
-            "Tak, miejsce uroczystości dysponuje dużym parkingiem dla gości.",
+            "Tak. Aby pobyt w Toruniu był jak najbardziej komfortowy, przygotowaliśmy propozycje noclegów położonych blisko miejsca uroczystości. Szczegóły dostępne są w sekcji „Polecane hotele".",
         },
-        {
-          question: "Do kiedy powinienem potwierdzić obecność?",
-          answer:
-            "Prosimy o potwierdzenie do 15 lipca 2026 roku przez formularz RSVP na tej stronie.",
-        },
-        {
+         {
           question: "Czy dzieci są zaproszone na wesele?",
           answer:
             "Chcielibyśmy, aby nasz ślub był wyjątkowym i niezapomnianym przeżyciem dla nas wszystkich. Zapraszamy Was z całego serca do wspólnego świętowania i cieszenia się tym dniem bez trosk, robiąc sobie jednocześnie małą przerwę od Waszych najmniejszych skarbów.",
@@ -346,26 +341,21 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
       subtitle: "Alles, was du wissen musst",
       items: [
         {
-          question: "Kann ich eine Begleitung mitbringen?",
+          question: "Wie komme ich zum Veranstaltungsort?",
           answer:
-            "Ja, natürlich! Bitte bestätige die Anzahl der Personen vorab im RSVP-Formular.",
+            "Am bequemsten erreichen Sie den Veranstaltungsort mit dem Auto oder Taxi. Es besteht auch die Möglichkeit, mit öffentlichen Verkehrsmitteln anzureisen - mit dem Bus zur Haltestelle Dworzec Główny 00, von wo aus der Fußweg zum Objekt etwa 10 Minuten dauert.",
         },
         {
-          question: "Welcher Dresscode gilt?",
+          question: "Gibt es Parkplätze für Gäste am Veranstaltungsort?",
           answer:
-            "Wir freuen uns über elegante Kleidung. Herren im Anzug, Damen in Abend- oder Cocktailkleidern.",
+            "Ja. Auf dem Gelände steht ein kostenloser Parkplatz für Gäste zur Verfügung, der etwa 50 Parkplätze bietet und eine komfortable und entspannte Teilnahme an der Feier gewährleistet.",
         },
         {
-          question: "Gibt es Parkplätze vor Ort?",
+          question: "Gibt es Unterkunftsmöglichkeiten für auswärtige Gäste?",
           answer:
-            "Ja, der Veranstaltungsort verfügt über einen großen Parkplatz für Gäste.",
+            "Ja. Damit Ihr Aufenthalt in Toruń so angenehm wie möglich wird, haben wir Vorschläge für Unterkünfte in der Nähe des Veranstaltungsortes vorbereitet. Details finden Sie im Abschnitt „Empfohlene Hotels".",
         },
-        {
-          question: "Bis wann soll ich zusagen?",
-          answer:
-            "Bitte bestätige bis zum 15. Juli 2026 über das Formular auf dieser Seite.",
-        },
-        {
+          {
           question: "Sind Kinder zur Hochzeit eingeladen?",
           answer:
             "Unsere Hochzeit soll ein unvergesslicher Moment für uns alle werden. Wir laden Euch herzlich ein, diesen besonderen Tag in vollen Zügen unbeschwert mit uns zu genießen und Euch dabei eine kleine Auszeit von Euren kleinen Lieblingen zu gönnen.",
