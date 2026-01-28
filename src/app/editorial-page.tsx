@@ -212,11 +212,12 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
             "Tak. Na terenie obiektu dostępny jest bezpłatny parking dla Gości, oferujący około 50 miejsc parkingowych, co zapewnia komfortowy i spokojny udział w uroczystości.",
         },
         {
-          question: "Czy istnieje możliwość zakwaterowania dla gości spoza miasta?",
+          question:
+            "Czy istnieje możliwość zakwaterowania dla gości spoza miasta?",
           answer:
-            "Tak. Aby pobyt w Toruniu był jak najbardziej komfortowy, przygotowaliśmy propozycje noclegów położonych blisko miejsca uroczystości. Szczegóły dostępne są w sekcji „Polecane hotele".",
+            "Tak. Aby pobyt w Toruniu był jak najbardziej komfortowy, przygotowaliśmy propozycje noclegów położonych blisko miejsca uroczystości. Szczegóły dostępne są w sekcji „Polecane hotele",
         },
-         {
+        {
           question: "Czy dzieci są zaproszone na wesele?",
           answer:
             "Chcielibyśmy, aby nasz ślub był wyjątkowym i niezapomnianym przeżyciem dla nas wszystkich. Zapraszamy Was z całego serca do wspólnego świętowania i cieszenia się tym dniem bez trosk, robiąc sobie jednocześnie małą przerwę od Waszych najmniejszych skarbów.",
@@ -353,9 +354,9 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
         {
           question: "Gibt es Unterkunftsmöglichkeiten für auswärtige Gäste?",
           answer:
-            "Ja. Damit Ihr Aufenthalt in Toruń so angenehm wie möglich wird, haben wir Vorschläge für Unterkünfte in der Nähe des Veranstaltungsortes vorbereitet. Details finden Sie im Abschnitt „Empfohlene Hotels".",
+            "Ja. Damit Ihr Aufenthalt in Toruń so angenehm wie möglich wird, haben wir Vorschläge für Unterkünfte in der Nähe des Veranstaltungsortes vorbereitet. Details finden Sie im Abschnitt „Empfohlene Hotels",
         },
-          {
+        {
           question: "Sind Kinder zur Hochzeit eingeladen?",
           answer:
             "Unsere Hochzeit soll ein unvergesslicher Moment für uns alle werden. Wir laden Euch herzlich ein, diesen besonderen Tag in vollen Zügen unbeschwert mit uns zu genießen und Euch dabei eine kleine Auszeit von Euren kleinen Lieblingen zu gönnen.",
