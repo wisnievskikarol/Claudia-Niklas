@@ -204,7 +204,7 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
         {
           question: "Jak dojechać na miejsce uroczystości?",
           answer:
-            "Najwygodniej dotrzeć na miejsce uroczystości samochodem lub taksówką. Istnieje również możliwość dojazdu komunikacją miejską - autobusem do przystanku Dworzec Główny, skąd spacer do obiektu zajmuje około 10 minut.",
+            "Najwygodniej dotrzeć na miejsce uroczystości samochodem lub taksówką. Istnieje również możliwość dojazdu komunikacją miejską - autobusem do przystanku Dworzec Główny 00, skąd spacer do obiektu zajmuje około 10 minut.",
         },
         {
           question: "Czy na miejscu będzie zapewniony parking dla gości?",
@@ -344,7 +344,7 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
         {
           question: "Wie komme ich zum Veranstaltungsort?",
           answer:
-            "Am bequemsten erreichen Sie den Veranstaltungsort mit dem Auto oder Taxi. Es besteht auch die Möglichkeit, mit öffentlichen Verkehrsmitteln anzureisen - mit dem Bus zur Haltestelle Dworzec Główny, von wo aus der Fußweg zum Objekt etwa 10 Minuten dauert.",
+            "Am bequemsten erreichen Sie den Veranstaltungsort mit dem Auto oder Taxi. Es besteht auch die Möglichkeit, mit öffentlichen Verkehrsmitteln anzureisen - mit dem Bus zur Haltestelle Dworzec Główny 00, von wo aus der Fußweg zum Objekt etwa 10 Minuten dauert.",
         },
         {
           question: "Gibt es Parkplätze für Gäste am Veranstaltungsort?",
