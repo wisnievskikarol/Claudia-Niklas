@@ -307,7 +307,7 @@ export const componentConfig: ComponentConfig<any>[] = [
           translations: {
             de: {
               title: "Gibt es Übernachtungsmöglichkeiten für auswärtige Gäste?",
-              desc: "Ja. Damit euer Aufenthalt in Toruń möglichst komfortabel ist, haben wir Unterkunftsvorschläge in der Nähe des Veranstaltungsorts vorbereitet. Details findet ihr im Abschnitt ‚Empfohlene Hotels‘.",
+              desc: 'Ja. Damit euer Aufenthalt in Toruń möglichst komfortabel ist, haben wir Unterkunftsvorschläge in der Nähe des Veranstaltungsorts vorbereitet. Details findet ihr im Abschnitt "Empfohlene Hotels".',
             },
           },
         },

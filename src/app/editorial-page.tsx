@@ -215,7 +215,7 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
           question:
             "Czy istnieje możliwość zakwaterowania dla gości spoza miasta?",
           answer:
-            "Tak. Aby pobyt w Toruniu był jak najbardziej komfortowy, przygotowaliśmy propozycje noclegów położonych blisko miejsca uroczystości. Szczegóły dostępne są w sekcji „Polecane hotele",
+            'Tak. Aby pobyt w Toruniu był jak najbardziej komfortowy, przygotowaliśmy propozycje noclegów położonych blisko miejsca uroczystości. Szczegóły dostępne są w sekcji „Polecane hotele"',
         },
         {
           question: "Czy dzieci są zaproszone na wesele?",
@@ -354,7 +354,7 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
         {
           question: "Gibt es Unterkunftsmöglichkeiten für auswärtige Gäste?",
           answer:
-            "Ja. Damit Ihr Aufenthalt in Toruń so angenehm wie möglich wird, haben wir Vorschläge für Unterkünfte in der Nähe des Veranstaltungsortes vorbereitet. Details finden Sie im Abschnitt „Empfohlene Hotels",
+            'Ja. Damit Ihr Aufenthalt in Toruń so angenehm wie möglich wird, haben wir Vorschläge für Unterkünfte in der Nähe des Veranstaltungsortes vorbereitet. Details finden Sie im Abschnitt „Empfohlene Hotels"',
         },
         {
           question: "Sind Kinder zur Hochzeit eingeladen?",
