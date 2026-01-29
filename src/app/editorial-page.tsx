@@ -228,7 +228,7 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
     rsvp: {
       title: "Potwierdź obecność",
       subtitle: "Prosimy o odpowiedź do",
-      deadline: "15 lipca 2026",
+      deadline: "30.06.2026",
       copy: undefined,
     },
   },
@@ -367,7 +367,7 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
     rsvp: {
       title: "Zusagen",
       subtitle: "Bitte antworte bis",
-      deadline: "15. Juli 2026",
+      deadline: "30.06.2026",
       copy: {
         nameLabel: "Bitte gib deinen Vor- und Nachnamen an",
         attendanceLabel: "Wirst du an unserer Hochzeit teilnehmen?",
