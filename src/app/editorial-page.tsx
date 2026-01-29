@@ -147,16 +147,24 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
       subtitle: "Plan naszego wspólnego święta",
       backgroundImage: "/image/hero/WhatsApp-Image-2025-12-13-at-18.33.59.webp",
       items: [
-        { time: "16:00", title: "", description: "Obiad weselny" },
-        { time: "17:30", title: "", description: "Pierwszy taniec" },
-        { time: "18:00", title: "", description: "Zabawa taneczna" },
-        { time: "19:30", title: "", description: "Kolacja" },
-        { time: "21:00", title: "", description: "Tort weselny" },
-        { time: "22:00", title: "", description: "Zabawy weselne" },
-        { time: "00:00", title: "", description: "Oczepiny" },
-        { time: "01:00", title: "", description: "Ciepły posiłek" },
-        { time: "01:30", title: "", description: "Zabawa do białego rana" },
+        {
+          time: "",
+          title: "",
+          description: "Harmonogram zostanie opublikowany wkrótce",
+        },
       ],
+      // TODO: Uncomment when ready
+      // items: [
+      //   { time: "16:00", title: "", description: "Obiad weselny" },
+      //   { time: "17:30", title: "", description: "Pierwszy taniec" },
+      //   { time: "18:00", title: "", description: "Zabawa taneczna" },
+      //   { time: "19:30", title: "", description: "Kolacja" },
+      //   { time: "21:00", title: "", description: "Tort weselny" },
+      //   { time: "22:00", title: "", description: "Zabawy weselne" },
+      //   { time: "00:00", title: "", description: "Oczepiny" },
+      //   { time: "01:00", title: "", description: "Ciepły posiłek" },
+      //   { time: "01:30", title: "", description: "Zabawa do białego rana" },
+      // ],
     },
 
     hotels: {
@@ -286,16 +294,24 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
       subtitle: "Plan unseres gemeinsamen Festes",
       backgroundImage: "/image/hero/WhatsApp-Image-2025-12-13-at-18.33.59.webp",
       items: [
-        { time: "16:00", title: "", description: "Hochzeitsdinner" },
-        { time: "17:30", title: "", description: "Erster Tanz" },
-        { time: "18:00", title: "", description: "Tanzparty" },
-        { time: "19:30", title: "", description: "Abendessen" },
-        { time: "21:00", title: "", description: "Hochzeitstorte" },
-        { time: "22:00", title: "", description: "Hochzeitsspiele" },
-        { time: "00:00", title: "", description: "Mitternachtsrituale" },
-        { time: "01:00", title: "", description: "Warme Speise" },
-        { time: "01:30", title: "", description: "Feier bis zum Morgengrauen" },
+        {
+          time: "",
+          title: "",
+          description: "Der Zeitplan wird in Kürze veröffentlicht",
+        },
       ],
+      // TODO: Uncomment when ready
+      // items: [
+      //   { time: "16:00", title: "", description: "Hochzeitsdinner" },
+      //   { time: "17:30", title: "", description: "Erster Tanz" },
+      //   { time: "18:00", title: "", description: "Tanzparty" },
+      //   { time: "19:30", title: "", description: "Abendessen" },
+      //   { time: "21:00", title: "", description: "Hochzeitstorte" },
+      //   { time: "22:00", title: "", description: "Hochzeitsspiele" },
+      //   { time: "00:00", title: "", description: "Mitternachtsrituale" },
+      //   { time: "01:00", title: "", description: "Warme Speise" },
+      //   { time: "01:30", title: "", description: "Feier bis zum Morgengrauen" },
+      // ],
     },
 
     hotels: {

@@ -111,6 +111,9 @@ export function EditorialSchedule({
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "100px" });
 
+  // Check if this is a placeholder (single item with no time)
+  const isPlaceholder = items.length === 1 && !items[0].time;
+
   // Split items into two columns for desktop
   const midpoint = Math.ceil(items.length / 2);
   const leftItems = items.slice(0, midpoint);
@@ -169,32 +172,90 @@ export function EditorialSchedule({
           </motion.div>
         </motion.div>
 
-        {/* Timeline grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16 xl:gap-20 max-w-5xl mx-auto">
-          {/* Left column */}
-          <div>
-            {leftItems.map((item, index) => (
-              <TimelineItem
-                key={index}
-                item={item}
-                index={index}
-                isLast={index === leftItems.length - 1}
-              />
-            ))}
-          </div>
+        {/* Placeholder message - centered elegant display */}
+        {isPlaceholder ? (
+          <motion.div
+            className="flex flex-col items-center justify-center text-center py-8 sm:py-12 md:py-16"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
+          >
+            {/* Decorative icon */}
+            <motion.div
+              className="mb-6 sm:mb-8"
+              initial={{ scale: 0, rotate: -180 }}
+              animate={isInView ? { scale: 1, rotate: 0 } : {}}
+              transition={{
+                duration: 0.8,
+                delay: 0.5,
+                ease: [0.23, 1, 0.32, 1],
+              }}
+            >
+              <svg
+                className="w-12 h-12 sm:w-16 sm:h-16 text-white/40"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1}
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </motion.div>
 
-          {/* Right column */}
-          <div>
-            {rightItems.map((item, index) => (
-              <TimelineItem
-                key={index + midpoint}
-                item={item}
-                index={index + midpoint}
-                isLast={index === rightItems.length - 1}
-              />
-            ))}
+            {/* Message */}
+            <motion.p
+              className="font-editorial text-xl sm:text-2xl md:text-3xl text-white/90 max-w-md"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              {items[0].description}
+            </motion.p>
+
+            {/* Decorative dots */}
+            <motion.div
+              className="flex items-center gap-2 mt-8"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.8, delay: 0.8 }}
+            >
+              <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
+              <div className="w-1.5 h-1.5 rounded-full bg-white/50" />
+              <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
+            </motion.div>
+          </motion.div>
+        ) : (
+          /* Timeline grid - normal schedule */
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16 xl:gap-20 max-w-5xl mx-auto">
+            {/* Left column */}
+            <div>
+              {leftItems.map((item, index) => (
+                <TimelineItem
+                  key={index}
+                  item={item}
+                  index={index}
+                  isLast={index === leftItems.length - 1}
+                />
+              ))}
+            </div>
+
+            {/* Right column */}
+            <div>
+              {rightItems.map((item, index) => (
+                <TimelineItem
+                  key={index + midpoint}
+                  item={item}
+                  index={index + midpoint}
+                  isLast={index === rightItems.length - 1}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );
