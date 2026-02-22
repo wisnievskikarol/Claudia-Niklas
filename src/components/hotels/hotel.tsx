@@ -12,7 +12,7 @@ interface props {
 function Hotel({ title, phone, description, reservationLink }: props) {
   return (
     <div className={styles.container}>
-      <div className="self-stretch text-center text-xl sm:text-2xl font-['Lustria'] mb-2">
+      <div className="self-stretch text-center text-xl sm:text-2xl font-['Lustria'] mb-2 ">
         {title}
       </div>
       <div className="self-stretch text-base sm:text-lg font-normal font-['Roboto'] my-2 leading-normal">
