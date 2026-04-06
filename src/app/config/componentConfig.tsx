@@ -97,7 +97,7 @@ export const componentConfig: ComponentConfig<any>[] = [
         },
         {
           type: "party",
-          title: "16:00",
+          title: "15:30",
           description: "Obiad weselny",
           translations: { de: { description: "Hochzeitsessen" } },
         },

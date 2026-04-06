@@ -101,7 +101,7 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
         subtitle: "",
         address: "Pałac Widokowy ul. Majdany 1, 87-100 Toruń",
         date: new Date(2026, 7, 8),
-        time: "16:00",
+        time: "15:30",
       },
       heroImage: {
         imageSrc: "/image/hero/WhatsApp-Image-2025-12-13-at-18.33.59.webp",
@@ -132,7 +132,7 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
       title: "Szczegóły uroczystości",
       items: [
         { icon: "calendar" as const, label: "Data", value: "8 sierpnia 2026" },
-        { icon: "clock" as const, label: "Godzina", value: "16:00" },
+        { icon: "clock" as const, label: "Godzina", value: "15:30" },
         {
           icon: "location" as const,
           label: "Miejsce",
@@ -155,7 +155,7 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
       ],
       // TODO: Uncomment when ready
       // items: [
-      //   { time: "16:00", title: "", description: "Obiad weselny" },
+      //   { time: "15:30", title: "", description: "Obiad weselny" },
       //   { time: "17:30", title: "", description: "Pierwszy taniec" },
       //   { time: "18:00", title: "", description: "Zabawa taneczna" },
       //   { time: "19:30", title: "", description: "Kolacja" },
@@ -248,7 +248,7 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
           "Wir können es kaum erwarten, unsere Liebe mit euch zu feiern",
         address: "Pałac Widokowy ul. Majdany 1, 87-100 Toruń",
         date: new Date(2026, 7, 8),
-        time: "16:00",
+        time: "15:30",
       },
       heroImage: {
         imageSrc: "/image/hero/WhatsApp-Image-2025-12-13-at-18.33.59.webp",
@@ -279,7 +279,7 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
       title: "Details zur Feier",
       items: [
         { icon: "calendar" as const, label: "Datum", value: "8. August 2026" },
-        { icon: "clock" as const, label: "Uhrzeit", value: "16:00" },
+        { icon: "clock" as const, label: "Uhrzeit", value: "15:30" },
         {
           icon: "location" as const,
           label: "Ort",
@@ -302,7 +302,7 @@ const pageConfig: Record<SupportedLang, PageConfig> = {
       ],
       // TODO: Uncomment when ready
       // items: [
-      //   { time: "16:00", title: "", description: "Hochzeitsdinner" },
+      //   { time: "15:30", title: "", description: "Hochzeitsdinner" },
       //   { time: "17:30", title: "", description: "Erster Tanz" },
       //   { time: "18:00", title: "", description: "Tanzparty" },
       //   { time: "19:30", title: "", description: "Abendessen" },
