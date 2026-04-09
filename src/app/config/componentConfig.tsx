@@ -89,7 +89,7 @@ export const componentConfig: ComponentConfig<any>[] = [
         },
         {
           type: "party",
-          title: "15:30",
+          title: "15:15",
           description: "Powitanie Pary Młodej na sali weselnej",
           translations: {
             de: { description: "Begrüßung des Brautpaares im Festsaal" },
@@ -97,7 +97,7 @@ export const componentConfig: ComponentConfig<any>[] = [
         },
         {
           type: "party",
-          title: "15:30",
+          title: "15:15",
           description: "Obiad weselny",
           translations: { de: { description: "Hochzeitsessen" } },
         },
